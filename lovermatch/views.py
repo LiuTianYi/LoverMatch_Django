@@ -2,16 +2,26 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.urls import reverse
+<<<<<<< HEAD
 from django.template import RequestContext
 from pymongo import MongoClient
 from django import forms
 from lover import User
 
+=======
+from .models import Employee
+>>>>>>> origin/master
 
 # Create your views here.
 
 
 def index(request):
+    employee = Employee.objects.create(
+        email="pedro.kong@company.com",
+        first_name="Pedro",
+        last_name="Kong"
+    )
+    employee.save()
     return HttpResponse("Hello, world. You are at the lovermatch app's index.")
 
 
