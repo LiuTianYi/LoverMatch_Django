@@ -1,7 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.urls import reverse
+from django.template import RequestContext
+from pymongo import MongoClient
+from django import forms
+from lover import User
+
 
 # Create your views here.
 
@@ -21,13 +26,34 @@ def show_signup_form(request):
 
 def signup(request):
     username = request.POST['username']
+    password = request.POST['password']
+    insertResult = User.insert(username,password)
     # do some database actions
     return HttpResponseRedirect(reverse('lovermatch:results', args=(username,)))
+
+
+# 登录
+def login(req):
+    if req.method == 'POST':
+        # 获取表单用户密码
+        username = request.POST['username']
+        password = request.POST['password']
+
+        # 获取的表单数据与数据库进行比较
+        registerResult = User.find(username, password)
+        if registerResult == "0":
+            # 比较成功，跳转index
+            response = HttpResponseRedirect('/lovermatch/index/')
+            # 将username写入浏览器cookie,失效时间为3600
+            response.set_cookie('username', username, 3600)
+            return response
+        else:
+            # 比较失败，还在login
+            return HttpResponseRedirect('/lovermatch/login/')
+    else:
+        return render_to_response('login.html', context_instance=RequestContext(req))
 
 
 def results(request, username):
     context = {'username': username}
     return render(request, 'lovermatch/signup_results.html', context)
-
-
-
