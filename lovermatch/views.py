@@ -2,11 +2,18 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from .models import Employee
 
 # Create your views here.
 
 
 def index(request):
+    employee = Employee.objects.create(
+        email="pedro.kong@company.com",
+        first_name="Pedro",
+        last_name="Kong"
+    )
+    employee.save()
     return HttpResponse("Hello, world. You are at the lovermatch app's index.")
 
 
