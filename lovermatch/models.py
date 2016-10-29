@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 from mongoengine import *
 from mongoengine.connection import _get_db
 from LoverMatch_Django.settings import data
+from LoverMatch_Django.settings import DATABASES
 
 # Create your models here.
 
