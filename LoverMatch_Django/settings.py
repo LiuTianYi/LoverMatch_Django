@@ -84,7 +84,8 @@ DATABASES = {
         # 'NAME': os.path.join(BASE_DIR, 'db.restaurants'),
     }
 }
-from mongoengine import connect
+data = 'test';
+# from mongoengine import connect
 # connect('employeedb', username='my_username', password='secret_password')
 # connect('test')
 SESSION_ENGINE = 'mongoengine.django.sessions'
