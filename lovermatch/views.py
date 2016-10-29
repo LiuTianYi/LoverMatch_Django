@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
@@ -5,7 +7,7 @@ from django.urls import reverse
 from django.template import RequestContext
 from pymongo import MongoClient
 from django import forms
-from lover import User
+from LoverMatch_Django import User
 
 
 # Create your views here.
@@ -32,7 +34,6 @@ def signup(request):
     return HttpResponseRedirect(reverse('lovermatch:results', args=(username,)))
 
 
-# 登录
 def login(req):
     if req.method == 'POST':
         # 获取表单用户密码
@@ -43,7 +44,7 @@ def login(req):
         registerResult = User.find(username, password)
         if registerResult == "0":
             # 比较成功，跳转index
-            response = HttpResponseRedirect('/lovermatch/index/')
+            response = HttpResponseRedirect('/lovermatch/index')
             # 将username写入浏览器cookie,失效时间为3600
             response.set_cookie('username', username, 3600)
             return response

@@ -1,8 +1,11 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from pymongo import MongoClient
 
-#插入数据
 
-def insert(usr,pw):
+# 插入数据
+
+def insert(usr, pw):
     client = MongoClient()
     db = client.test
     result = db.restaurants.insert_one(
@@ -13,13 +16,14 @@ def insert(usr,pw):
     )
     return result
 
-def find():
+
+def find(usr, pw):
     client = MongoClient()
     db = client.test
     result = db.restaurants.find(
         {
-            "user": "lovermatch",
-            "password": "lovermatch",
+            "user": usr,
+            "password": pw,
         }
     )
     if result.count() == 0:
@@ -27,4 +31,5 @@ def find():
     else:
         return "0"
 
-# print result.inserted_id
+
+# print find("yangyuji", "test")
