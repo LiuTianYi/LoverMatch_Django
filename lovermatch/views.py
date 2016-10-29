@@ -4,14 +4,9 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.urls import reverse
-<<<<<<< HEAD
-=======
 from django.template import RequestContext
 from pymongo import MongoClient
 from django import forms
-from LoverMatch_Django import User
-
->>>>>>> yyj
 
 # Create your views here.
 

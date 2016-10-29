@@ -1,50 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
-<<<<<<< HEAD
-from django.db import models
 from mongoengine import *
-
+from LoverMatch_Django.settings import data
 # Create your models here.
-
 
 class Employee(Document):
     email = StringField(required=True)
     first_name = StringField(max_length=50)
     last_name = StringField(max_length=50)
-=======
-from mongoengine import *
-from mongoengine.connection import _get_db
-from LoverMatch_Django.settings import data
-from LoverMatch_Django.settings import DATABASES
 
-# Create your models here.
 
 connect(data)
-
-
-# def insert(usr, pw):
-#     result = data.restaurants.insert_one(
-#         {
-#             "user": usr,
-#             "password": pw,
-#         }
-#     )
-#     return result
-#
-#
-# def find(usr, pw):
-#     result = .find(
-#         {
-#             "user": usr,
-#             "password": pw,
-#         }
-#     )
-#     if result.count() == 0:
-#         return "-1"
-#     else:
-#         return "0"
 
 class User(Document):
     user = StringField(required=True)
@@ -71,6 +38,3 @@ class User(Document):
 ross = User(user='ross@example.com', password='Ross').save()
 for post in User.objects:
     print post.user
-db = _get_db()
-print db.connection
->>>>>>> yyj
