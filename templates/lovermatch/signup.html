@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+</head>
+<body>
+
+<p>Form to fill in</p>
+<form action="{% url 'lovermatch:signup' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="username" title="Username:"/>
+    <input type="submit" value="Submit" />
+</form>
+
+</body>
+</html>
