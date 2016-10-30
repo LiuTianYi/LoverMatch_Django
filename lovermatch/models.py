@@ -2,16 +2,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from mongoengine import *
-from LoverMatch_Django.settings import data
+# from LoverMatch_Django.settings import data
 # Create your models here.
 
-class Employee(Document):
-    email = StringField(required=True)
-    first_name = StringField(max_length=50)
-    last_name = StringField(max_length=50)
-
-
-connect(data)
 
 class User(Document):
     user = StringField(required=True)

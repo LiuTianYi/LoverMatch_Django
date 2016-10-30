@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sessions',
 ]
 
 MIDDLEWARE = [
@@ -48,7 +47,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
 ]
 
 ROOT_URLCONF = 'LoverMatch_Django.urls'
@@ -75,31 +73,18 @@ WSGI_APPLICATION = 'LoverMatch_Django.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.dummy',
-        # 'NAME': os.path.join(BASE_DIR, 'db.restaurants'),
-    }
-}
-<<<<<<< HEAD
-'''
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.dummy'
     }
 }
-connect('test')
 
-=======
-data = 'lovermatch';
-# from mongoengine import connect
-# connect('employeedb', username='my_username', password='secret_password')
+from mongoengine import connect
+connect('lovermatch')
 # connect('test')
-SESSION_ENGINE = 'mongoengine.django.sessions'
-SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
->>>>>>> yyj
+# SESSION_ENGINE = 'mongoengine.django.sessions'
+# SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
+
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 

@@ -7,17 +7,18 @@ from django.urls import reverse
 from django.template import RequestContext
 from pymongo import MongoClient
 from django import forms
+from lovermatch.models import User
+
 
 # Create your views here.
 
 
 def index(request):
-    employee = Employee.objects.create(
-        email="pedro.kong@company.com",
-        first_name="Pedro",
-        last_name="Kong"
+    user = User.objects.create(
+        user="pedro.kong@company.com",
+        password="Pedro",
     )
-    employee.save()
+    user.save()
     return HttpResponse("Hello, world. You are at the lovermatch app's index.")
 
 
@@ -31,32 +32,35 @@ def show_signup_form(request):
 
 
 def signup(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    insertResult = User.insert(username,password)
+    usr = request.POST['username']
+    pw = request.POST['password']
+    insertResult = User.objects.create(user=usr, password=pw).save()
+
     # do some database actions
-    return HttpResponseRedirect(reverse('lovermatch:results', args=(username,)))
+    return HttpResponseRedirect(reverse('lovermatch:results', args=(usr,)))
 
 
 def login(req):
     if req.method == 'POST':
         # 获取表单用户密码
-        username = request.POST['username']
-        password = request.POST['password']
+        usr = req.POST['username']
+        pw = req.POST['password']
 
         # 获取的表单数据与数据库进行比较
-        registerResult = User.find(username, password)
-        if registerResult == "0":
+        registerResult = User.objects(user=usr, password=pw)
+
+        if len(registerResult) > 0:
             # 比较成功，跳转index
-            response = HttpResponseRedirect('/lovermatch/index')
+            response = HttpResponseRedirect(reverse('lovermatch:results', args=(usr,)))
             # 将username写入浏览器cookie,失效时间为3600
-            response.set_cookie('username', username, 3600)
+            response.set_cookie('username', usr, 3600)
             return response
         else:
             # 比较失败，还在login
-            return HttpResponseRedirect('/lovermatch/login/')
+            return HttpResponseRedirect('lovermatch/login.html')
     else:
-        return render_to_response('login.html', context_instance=RequestContext(req))
+        # return render_to_response('login.html', context_instance=RequestContext(req))
+        return render(req, 'lovermatch/login.html')
 
 
 def results(request, username):
