@@ -28,6 +28,6 @@ class User(Document):
     # loverMatched = MapField(required=False)  # 被匹配对象
     # verified = StringField(required=True)  # 是否被确认
 
-ross = User(user='ross@example.com', password='Ross').save()
+ross = User(user='y', password='y').save()
 for post in User.objects:
     print post.user

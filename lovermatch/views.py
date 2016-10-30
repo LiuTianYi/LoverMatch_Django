@@ -10,6 +10,7 @@ from django import forms
 from lovermatch.models import User
 import json
 from django.http import JsonResponse
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 
 # Create your views here.
@@ -42,6 +43,7 @@ def signup(request):
     return HttpResponseRedirect(reverse('local:results', args=(usr,)))
 
 
+@ensure_csrf_cookie
 def login(req):
     print req.method
     if req.method == 'POST':
@@ -49,23 +51,27 @@ def login(req):
         # 获取表单用户密码
         usr = req.POST['username']
         pw = req.POST['password']
+        print usr
+        print pw
 
         # 获取的表单数据与数据库进行比较
         registerResult = User.objects(user=usr, password=pw)
-
+        print len(registerResult)
         if len(registerResult) > 0:
+            return render(req, 'local/signup_results.html',{'code':0})
+
             # 比较成功，跳转index
             # response = HttpResponseRedirect(reverse('local:results', args=(usr,)))
             # # 将username写入浏览器cookie,失效时间为3600
             # response.set_cookie('username', usr, 3600)
             # return response
-
-            response = JsonResponse({'code': 0})
-            response["Access-Control-Allow-Origin"] = "*"
-            response["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"
-            response["Access-Control-Max-Age"] = "1000"
-            response["Access-Control-Allow-Headers"] = "*"
-            return response
+            # return render(req, 'local/index.html', {})
+            # response = JsonResponse({'code': 0})
+            # response["Access-Control-Allow-Origin"] = "*"
+            # response["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"
+            # response["Access-Control-Max-Age"] = "1000"
+            # response["Access-Control-Allow-Headers"] = "*"
+            # return response
 
         else:  # 比较失败，还在login
             return JsonResponse({'code': -1})

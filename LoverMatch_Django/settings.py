@@ -24,7 +24,7 @@ SECRET_KEY = 'gnmo#2w!6jn2-$j+l@6=-%x(c%)qdi*48@#%lv5w+1_ttvo3u^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+APPEND_SLASH = False
 ALLOWED_HOSTS = []
 
 # Application definition
@@ -45,7 +45,6 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

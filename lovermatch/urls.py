@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^signup_form/$', views.show_signup_form, name='show_signup_form'),
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^(?P<username>[\w]+)/results/$', views.results, name='results'),
-    url(r'^login/', views.login, name='login'),
+    url(r'^login', views.login),
 ]
