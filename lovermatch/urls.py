@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from . import views
 
-app_name = 'lovermatch'
+app_name = 'local'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^test/(?P<some_string>[\w]*)/$', views.helloworld, name='helloworld'),

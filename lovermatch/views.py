@@ -8,6 +8,8 @@ from django.template import RequestContext
 from pymongo import MongoClient
 from django import forms
 from lovermatch.models import User
+import json
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -19,16 +21,16 @@ def index(request):
         password="Pedro",
     )
     user.save()
-    return HttpResponse("Hello, world. You are at the lovermatch app's index.")
+    return HttpResponse("Hello, world. You are at the local app's index.")
 
 
 def helloworld(request, some_string):
     context = {'some_string': some_string}
-    return render(request, 'lovermatch/helloworld.html', context)
+    return render(request, 'local/helloworld.html', context)
 
 
 def show_signup_form(request):
-    return render(request, 'lovermatch/signup.html')
+    return render(request, 'local/signup.html')
 
 
 def signup(request):
@@ -37,11 +39,13 @@ def signup(request):
     insertResult = User.objects.create(user=usr, password=pw).save()
 
     # do some database actions
-    return HttpResponseRedirect(reverse('lovermatch:results', args=(usr,)))
+    return HttpResponseRedirect(reverse('local:results', args=(usr,)))
 
 
 def login(req):
+    print req.method
     if req.method == 'POST':
+
         # 获取表单用户密码
         usr = req.POST['username']
         pw = req.POST['password']
@@ -51,18 +55,29 @@ def login(req):
 
         if len(registerResult) > 0:
             # 比较成功，跳转index
-            response = HttpResponseRedirect(reverse('lovermatch:results', args=(usr,)))
-            # 将username写入浏览器cookie,失效时间为3600
-            response.set_cookie('username', usr, 3600)
+            # response = HttpResponseRedirect(reverse('local:results', args=(usr,)))
+            # # 将username写入浏览器cookie,失效时间为3600
+            # response.set_cookie('username', usr, 3600)
+            # return response
+
+            response = JsonResponse({'code': 0})
+            response["Access-Control-Allow-Origin"] = "*"
+            response["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"
+            response["Access-Control-Max-Age"] = "1000"
+            response["Access-Control-Allow-Headers"] = "*"
             return response
-        else:
-            # 比较失败，还在login
-            return HttpResponseRedirect('lovermatch/login.html')
-    else:
-        # return render_to_response('login.html', context_instance=RequestContext(req))
-        return render(req, 'lovermatch/login.html')
+
+        else:  # 比较失败，还在login
+            return JsonResponse({'code': -1})
+
+            # return HttpResponseRedirect('local/login.html')
+
+    else:  # return render_to_response('login.html', context_instance=RequestContext(req))
+        return JsonResponse({'code': 2})
+
+        # return render(req, 'local/login.html')
 
 
 def results(request, username):
     context = {'username': username}
-    return render(request, 'lovermatch/signup_results.html', context)
+    return render(request, 'local/signup_results.html', context)
