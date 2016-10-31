@@ -22,16 +22,16 @@ def index(request):
         password="Pedro",
     )
     user.save()
-    return HttpResponse("Hello, world. You are at the local app's index.")
+    return HttpResponse("Hello, world. You are at the lovermatch app's index.")
 
 
 def helloworld(request, some_string):
     context = {'some_string': some_string}
-    return render(request, 'local/helloworld.html', context)
+    return render(request, 'lovermatch/helloworld.html', context)
 
 
 def show_signup_form(request):
-    return render(request, 'local/signup.html')
+    return render(request, 'lovermatch/signup.html')
 
 
 def signup(request):
@@ -40,7 +40,7 @@ def signup(request):
     insertResult = User.objects.create(user=usr, password=pw).save()
 
     # do some database actions
-    return HttpResponseRedirect(reverse('local:results', args=(usr,)))
+    return HttpResponseRedirect(reverse('lovermatch:results', args=(usr,)))
 
 
 @ensure_csrf_cookie
@@ -58,14 +58,14 @@ def login(req):
         registerResult = User.objects(user=usr, password=pw)
         print len(registerResult)
         if len(registerResult) > 0:
-            return render(req, 'local/signup_results.html',{'code':0})
+            return render(req, 'lovermatch/signup_results.html',{'code':0})
 
             # 比较成功，跳转index
-            # response = HttpResponseRedirect(reverse('local:results', args=(usr,)))
+            # response = HttpResponseRedirect(reverse('lovermatch:results', args=(usr,)))
             # # 将username写入浏览器cookie,失效时间为3600
             # response.set_cookie('username', usr, 3600)
             # return response
-            # return render(req, 'local/index.html', {})
+            # return render(req, 'lovermatch/index.html', {})
             # response = JsonResponse({'code': 0})
             # response["Access-Control-Allow-Origin"] = "*"
             # response["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"
@@ -76,14 +76,14 @@ def login(req):
         else:  # 比较失败，还在login
             return JsonResponse({'code': -1})
 
-            # return HttpResponseRedirect('local/login.html')
+            # return HttpResponseRedirect('lovermatch/login.html')
 
     else:  # return render_to_response('login.html', context_instance=RequestContext(req))
         return JsonResponse({'code': 2})
 
-        # return render(req, 'local/login.html')
+        # return render(req, 'lovermatch/login.html')
 
 
 def results(request, username):
     context = {'username': username}
-    return render(request, 'local/signup_results.html', context)
+    return render(request, 'lovermatch/signup_results.html', context)

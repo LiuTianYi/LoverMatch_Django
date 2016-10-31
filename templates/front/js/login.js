@@ -45,7 +45,7 @@ $(function () {
         //     }
         // });
 
-        $.post('http://localhost:8018/local/login', {'username': username, 'password': password})
+        $.post('http://localhost:8018/login', {'username': username, 'password': password})
         //$.ajax({ // JQuery ajax function
         //method: "POST", // Submitting Method
         //type: "POST",
