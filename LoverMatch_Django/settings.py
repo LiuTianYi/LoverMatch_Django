@@ -24,7 +24,7 @@ SECRET_KEY = 'gnmo#2w!6jn2-$j+l@6=-%x(c%)qdi*48@#%lv5w+1_ttvo3u^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+APPEND_SLASH = False
 ALLOWED_HOSTS = []
 
 # Application definition
@@ -37,19 +37,33 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
+
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
-ROOT_URLCONF = 'LoverMatch_Django.urls'
+CORS_ORIGIN_ALLOW_ALL = True
+#CORS_ORIGIN_WHITELIST = (
+#    'google.com',
+#    'hostname.example.com',
+#   'localhost:8000',
+#   '127.0.0.1:8108'
+#)
+CORS_ALLOW_METHODS = (
+    'GET',
+    'POST',
+)
+#ROOT_URLCONF = 'LoverMatch_Django.urls'
+ROOT_URLCONF = 'lovermatch.urls'
 
 TEMPLATES = [
     {
@@ -80,7 +94,8 @@ DATABASES = {
 }
 
 from mongoengine import connect
-connect('lovermatch')
+
+connect('local')
 # connect('test')
 # SESSION_ENGINE = 'mongoengine.django.sessions'
 # SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
@@ -119,4 +134,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/lovermatch/'
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
