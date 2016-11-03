@@ -52,17 +52,17 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = (
-    'google.com',
-    'hostname.example.com',
-    'localhost:8000',
-    '127.0.0.1:8108'
-)
+#CORS_ORIGIN_WHITELIST = (
+#    'google.com',
+#    'hostname.example.com',
+#   'localhost:8000',
+#   '127.0.0.1:8108'
+#)
 CORS_ALLOW_METHODS = (
     'GET',
     'POST',
 )
-# ROOT_URLCONF = 'LoverMatch_Django.urls'
+#ROOT_URLCONF = 'LoverMatch_Django.urls'
 ROOT_URLCONF = 'lovermatch.urls'
 
 TEMPLATES = [
@@ -134,4 +134,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/local/'
+STATIC_URL = '/lovermatch/'
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
