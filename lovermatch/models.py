@@ -9,8 +9,9 @@ from mongoengine import *
 class User(Document):
     user = StringField(required=True)
     password = StringField(required=True)
+    name = StringField(required=True)
 
-    # userId = IntField(max_length=11,required=True)  # 手机号
+    # userId = StringField(max_length=50,required=True)  # 邮箱
     # password = StringField(max_length=50,required=True)  # 用户密码
     # name = StringField(max_length=50,required=True)  # 昵称
     # photoAddress = StringField(max_length=100, required=False)  # 照片存储位置
@@ -24,10 +25,18 @@ class User(Document):
     # gradeId = IntField(required=True)  # 年级
     # constellationId = IntField(required=True)  # 星座
     # hobbiesId = ListField(required=True)  # 爱好
-    # loverMatch = MapField(required=True)  # 匹配对象
+    # loverMatch = MapField(required=False)  # 匹配对象
     # loverMatched = MapField(required=False)  # 被匹配对象
-    # verified = StringField(required=True)  # 是否被确认
+    # verified = StringField(required=False)  # 是否被确认
 
-# ross = User(user='y', password='y').save()
+ross = User(user='y', password='y', name='y').save()
+ross = User(user='z', password='z',name='z').save()
+ross = User(user='y', password='y').save()
+ross = User(user='y', password='y').save()
+ross = User(user='y', password='y').save()
+ross = User(user='y', password='y').save()
+ross = User(user='y', password='y').save()
+ross = User(user='y', password='y').save()
+ross = User(user='y', password='y').save()
 for post in User.objects:
     print post.user

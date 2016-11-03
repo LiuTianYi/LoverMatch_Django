@@ -37,7 +37,8 @@ def show_signup_form(request):
 def signup(request):
     usr = request.POST['username']
     pw = request.POST['password']
-    insertResult = User.objects.create(user=usr, password=pw).save()
+    nm = request.POST['name']
+    insertResult = User.objects.create(user=usr, password=pw, name=nm).save()
 
     # do some database actions
     return HttpResponseRedirect(reverse('lovermatch:results', args=(usr,)))
@@ -58,7 +59,7 @@ def login(req):
         registerResult = User.objects(user=usr, password=pw)
         print len(registerResult)
         if len(registerResult) > 0:
-            return render(req, 'lovermatch/signup_results.html',{'code':0})
+            return render(req, 'lovermatch/signup_results.html', {'code': 0})
 
             # 比较成功，跳转index
             # response = HttpResponseRedirect(reverse('lovermatch:results', args=(usr,)))
