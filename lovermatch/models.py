@@ -10,8 +10,9 @@ class UserInfo(Document):
     user = StringField(required=True)
     password = StringField(required=True)
     name = StringField(required=True)
+    email = StringField(required=True)
 
-    # userId = StringField(max_length=50,required=True)  # 邮箱
+    # userId = StringField(max_length=50,required=True)  # 用户ID
     # password = StringField(max_length=50,required=True)  # 用户密码
     # name = StringField(max_length=50,required=True)  # 昵称
     # photoAddress = StringField(max_length=100, required=False)  # 照片存储位置
