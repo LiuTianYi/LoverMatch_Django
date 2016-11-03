@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^(?P<username>[\w]+)/results/$', views.results, name='results'),
     url(r'^login', views.login),
+    url(r'^show', views.showInfo),
     url(r'^hello', views.helloworld),
     # url(r'^signup_form', views.show_signup_form,),
 ]

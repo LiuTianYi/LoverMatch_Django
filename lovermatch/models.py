@@ -6,7 +6,7 @@ from mongoengine import *
 # Create your models here.
 
 
-class User(Document):
+class UserInfo(Document):
     user = StringField(required=True)
     password = StringField(required=True)
     name = StringField(required=True)
@@ -28,15 +28,15 @@ class User(Document):
     # loverMatch = MapField(required=False)  # 匹配对象
     # loverMatched = MapField(required=False)  # 被匹配对象
     # verified = StringField(required=False)  # 是否被确认
-
-ross = User(user='y', password='y', name='y').save()
-ross = User(user='z', password='z',name='z').save()
-ross = User(user='y', password='y').save()
-ross = User(user='y', password='y').save()
-ross = User(user='y', password='y').save()
-ross = User(user='y', password='y').save()
-ross = User(user='y', password='y').save()
-ross = User(user='y', password='y').save()
-ross = User(user='y', password='y').save()
-for post in User.objects:
+#
+# ross = UserInfo(user='y', password='y', name='y').save()
+# ross = User(user='z', password='z',name='z').save()
+# ross = User(user='y', password='y').save()
+# ross = User(user='y', password='y').save()
+# ross = User(user='y', password='y').save()
+# ross = User(user='y', password='y').save()
+# ross = User(user='y', password='y').save()
+# ross = User(user='y', password='y').save()
+# ross = User(user='y', password='y').save()
+for post in UserInfo.objects:
     print post.user

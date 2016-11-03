@@ -52,17 +52,17 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
-#CORS_ORIGIN_WHITELIST = (
+# CORS_ORIGIN_WHITELIST = (
 #    'google.com',
 #    'hostname.example.com',
 #   'localhost:8000',
 #   '127.0.0.1:8108'
-#)
+# )
 CORS_ALLOW_METHODS = (
     'GET',
     'POST',
 )
-#ROOT_URLCONF = 'LoverMatch_Django.urls'
+# ROOT_URLCONF = 'LoverMatch_Django.urls'
 ROOT_URLCONF = 'lovermatch.urls'
 
 TEMPLATES = [
@@ -89,16 +89,17 @@ WSGI_APPLICATION = 'LoverMatch_Django.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.dummy'
+        'ENGINE': 'django.db.backends.dummy',
     }
 }
-
-from mongoengine import connect
-
+# connect('database',host='127.0.0.1',username='username',password='password')
+# from mongoengine import connect
+#
+# connect('local', host='168.63.205.250', username='xp', password='xp')
 connect('local')
 # connect('test')
-# SESSION_ENGINE = 'mongoengine.django.sessions'
-# SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
+SESSION_ENGINE = 'mongoengine.django.sessions'
+SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -137,3 +138,7 @@ USE_TZ = True
 STATIC_URL = '/lovermatch/'
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+AUTHENTICATION_BACKENDS = (
+    'mongoengine.django.auth.MongoEngineBackend'
+)
+SESSION_ENGINE = 'mongoengine.django.sessions'
