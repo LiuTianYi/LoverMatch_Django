@@ -5,16 +5,9 @@ $(function() {
     var password = $("#login-pass").val(); // define password variable
     alert(password)
 
-    if ($('#remember').is(':checked')) {
-            // save username and password
-            localStorage.userName = username;
-            localStorage.password = password;
-            localStorage.checkBoxValidation = $('#remember').val();
-        } else {
-            localStorage.userName = "手机号码";
-            localStorage.password = "密码";
-            localStorage.checkBoxValidation = '';
-        } 
+
+
+
 
   
     $.ajax({ // JQuery ajax function
@@ -23,9 +16,15 @@ $(function() {
       data: {"username":username,"password":password}, // the data that will be sent to php processor
       dataType: "json", // type of returned data
       success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
-      alert(data)
+      //alert(data)
+      var t_data = {"code":0};
+      alert(t_data["code"]);
+      if (data["code"]==0) {
+      	window.location="./index.html"
+      }
       }
      });
     return false;
     });
+  $('#reg-btn').click(function(){window.location="./index.html"});
 });
