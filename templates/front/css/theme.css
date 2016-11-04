@@ -1,0 +1,60 @@
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+
+.theme-dropdown .dropdown-menu {
+  position: static;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.theme-showcase > p > .btn {
+  margin: 5px 0;
+}
+
+.theme-showcase .navbar .container {
+  width: auto;
+}
+
+.entryfield{
+	width: 100%;
+	text-align: left;
+}
+
+.left{
+	width: 95%;
+	margin-left: auto;
+	float: right;
+}
+.right{
+	width: 5%;
+	margin-right: auto;
+	float: left;
+}
+
+.nav_search{
+	width: 50%;
+	margin-top: 10px;
+}
+
+.main-left{
+	width: 50%;
+	float: left;
+}
+
+
+
+.main-right{
+	width: 50%;
+	float: right;
+}
+
+#hover-content{
+	display:none;
+}
+
+#hover-parent:hover #hover-content {
+    display: block;
+}
+
