@@ -1,0 +1,33 @@
+{
+	"matched":
+		[
+			{
+				"name":"李香兰",
+				"profile_pic":"./pic/avatar.jpg",
+				"age":21,
+				"height":163,
+				"weight":54,
+				"hometown":"云南",
+				"university":"清华大学",
+				"major":"金融管理",
+				"year":3,
+				"horoscope":"双子座",
+				"hobbie":["篮球","摄影","码代码"],
+				"verified":"是"
+			},
+			{
+				"name":"范冰冰",
+				"profile_pic":"./pic/avatar.jpg",
+				"age":21,
+				"height":163,
+				"weight":54,
+				"hometown":"云南",
+				"university":"清华大学",
+				"major":"金融管理",
+				"year":3,
+				"horoscope":"双子座",
+				"hobbie":["篮球","摄影","码代码"],
+				"verified":"是"
+			}
+		]
+}

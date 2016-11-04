@@ -1,0 +1,33 @@
+{
+	"province":[
+		{"p_name":"北京",
+		"id":1,
+		"city":[{"c_name":"北京市",
+			"id":1,
+			"county":[]
+
+		}]},
+		{"p_name":"天津",
+		"id":2,
+		"city":[{"c_name":"天津市",
+			"id":1,
+			"county":[{
+				"cc_name":"巩县",
+				"id":1
+			}]
+
+		}]},
+
+
+		{"p_name":"河南",
+		"id":8,
+		"city":[{"c_name":"郑州市",
+			"id":1,
+			"county":[{
+				"cc_name":"巩县",
+				"id":1
+			}]
+
+		}]}
+	]
+}
