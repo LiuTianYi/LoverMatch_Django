@@ -15,9 +15,8 @@ from django.core.mail import send_mail
 import mongoengine
 from django.contrib.auth import authenticate
 
-
 # Create your views here.
-token = Token(django_settings.SECRET_KEY)    # token is used to verify user in email link
+token = Token(django_settings.SECRET_KEY)  # token is used to verify user in email link
 
 
 def index(request):
@@ -39,10 +38,9 @@ def show_signup_form(request):
 
 
 def signup(request):
-
     if request.method == 'POST':
         # assume the data is valid
-        _username = request.POST['username'] # _username is an email address in fact
+        _username = request.POST['username']  # _username is an email address in fact
         _pwd = request.POST['password']
         _nickname = request.POST['name']
 
@@ -84,6 +82,7 @@ def active_user(request, _token):
     context = {'message': message, 'nickname': nickname}
     return render(request, 'lovermatch/signup_results.html', context)
 
+
 def showInfo(request):
     username = request.session.get('user')
     # print "usr: " + username
@@ -95,9 +94,23 @@ def showInfo(request):
     else:
         return JsonResponse({'result': -1})
 
+
 def update(request):
     updateUser = request.POST['update']
     json = demjson.encode(updateUser)
+    userName = json["user"]
+    UserInfo.objects.remove(user:userName)
+    insert_user = UserInfo.objects.create()
+    userName = json["user"]
+    userName = json["user"]
+    userName = json["user"]
+    userName = json["user"]
+    userName = json["user"]
+    userName = json["user"]
+    userName = json["user"]
+    userName = json["user"]
+update_user = UserInfo.objects.create(user=_username, password=_pwd, name=_nickname)
+
 
 @ensure_csrf_cookie
 def login(req):
