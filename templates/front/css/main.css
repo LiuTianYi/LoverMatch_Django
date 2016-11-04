@@ -108,7 +108,20 @@ h1{
 }
 
 
+#hc{
+	display:none;
+}
 
+#hover-parent:hover #hc {
+    display: block;
+}
+.bar{
+	margin: 10px;
+}
+
+.item{
+	margin: 10px;
+}
 
 
 
