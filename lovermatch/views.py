@@ -9,11 +9,16 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from operator import itemgetter
 import demjson
+from .Tools import Token
+from django.conf import settings as django_settings
+from django.core.mail import send_mail
 import mongoengine
 from django.contrib.auth import authenticate
 
 
 # Create your views here.
+token = Token(django_settings.SECRET_KEY)    # token is used to verify user in email link
+
 
 def index(request):
     user = UserInfo.objects.create(
@@ -34,16 +39,50 @@ def show_signup_form(request):
 
 
 def signup(request):
-    usr = request.POST['username']
-    pw = request.POST['password']
-    nm = request.POST['name']
-    insertResult = UserInfo.objects.create(user=usr, password=pw, name=nm).save()
-    print insertResult
-    return JsonResponse({'result': 0, 'data': serializeUser(insertResult)})
 
-    # do some database actions
-    # return HttpResponseRedirect(reverse('lovermatch:results', args=(usr,)))
+    if request.method == 'POST':
+        # assume the data is valid
+        _username = request.POST['username'] # _username is an email address in fact
+        _pwd = request.POST['password']
+        _nickname = request.POST['name']
 
+        insert_user = UserInfo.objects.create(user=_username, password=_pwd, name=_nickname)
+        insert_user.is_active = False  # set false here to wait further verification in email
+        insert_user.save()
+
+        _token = token.generate_validate_token(_nickname)
+        message = "\n".join(['{0},恭喜你完成注册！'.format(_nickname), '请访问该链接，完成用户验证:',
+                             '/'.join([django_settings.DOMAIN, 'activate', _token])])
+        send_mail('注册用户验证信息', message, '2601112836@qq.com', [_username])
+
+        context = {'message': '请尽快登录你的注册邮箱，点击链接进行激活，注意有效期为1个小时', 'nickname': _nickname}
+        return render(request, 'lovermatch/signup_results.html', context)
+        # return HttpResponseRedirect(reverse('lovermatch:results', args=(usr,)))
+
+
+def active_user(request, _token):
+    try:
+        nickname = token.confirm_validate_token(_token)
+    except:
+        nickname = token.remove_validate_token(_token)
+        users = UserInfo.objects.filter(name=nickname)
+        for user in users:
+            user.delete()
+        message = '对不起，验证链接已经过期，请重新<a href=\"' + django_settings.DOMAIN + '/signup_form\">注册</a>'
+        context = {'message': message, 'nickname': nickname}
+        return render(request, 'lovermatch/signup_results.html', context)
+    try:
+        user = UserInfo.objects.get(name=nickname)
+    except UserInfo.DoesNotExist:
+        message = '对不起，用户不存在，请重新<a href=\"' + django_settings.DOMAIN + '/signup_form\">注册</a>'
+        context = {'message': message, 'nickname': nickname}
+        return render(request, 'lovermatch/signup_results.html', context)
+
+    user.is_active = True
+    user.save()
+    message = '验证成功，请进行<a href=\"' + django_settings.DOMAIN + '/login\">登录</a>操作'
+    context = {'message': message, 'nickname': nickname}
+    return render(request, 'lovermatch/signup_results.html', context)
 
 def showInfo(request):
     username = request.session.get('user')
@@ -92,9 +131,9 @@ def serializeUser(userInfo):
         {'user': userInfo.user, 'name': userInfo.name})
 
 
-def results(request, username):
-    context = {'username': username}
-    return render(request, 'lovermatch/signup_results.html', context)
+# def results(request, username):
+#     context = {'username': username}
+#     return render(request, 'lovermatch/signup_results.html', context)
 
 
 def match(request, usr):

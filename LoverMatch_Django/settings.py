@@ -141,4 +141,9 @@ STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 AUTHENTICATION_BACKENDS = (
     'mongoengine.django.auth.MongoEngineBackend'
 )
-SESSION_ENGINE = 'mongoengine.django.sessions'
+
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_HOST_USER = '2601112836@qq.com'
+EMAIL_HOST_PASSWORD = 'xxxxxx'  # replace by password or identifier
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
