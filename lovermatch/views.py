@@ -8,6 +8,7 @@ from lovermatch.models import UserInfo
 from django.http import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from operator import itemgetter
+import demjson
 import mongoengine
 from django.contrib.auth import authenticate
 
@@ -37,14 +38,16 @@ def signup(request):
     pw = request.POST['password']
     nm = request.POST['name']
     insertResult = UserInfo.objects.create(user=usr, password=pw, name=nm).save()
+    print insertResult
+    return JsonResponse({'result': 0, 'data': serializeUser(insertResult)})
 
     # do some database actions
-    return HttpResponseRedirect(reverse('lovermatch:results', args=(usr,)))
+    # return HttpResponseRedirect(reverse('lovermatch:results', args=(usr,)))
 
 
 def showInfo(request):
     username = request.session.get('user')
-    print "usr: " + username
+    # print "usr: " + username
     if username:
         usr = request.session['user']
         cursor = UserInfo.objects(user=usr)
@@ -53,24 +56,10 @@ def showInfo(request):
     else:
         return JsonResponse({'result': -1})
 
+def update(request):
+    updateUser = request.POST['update']
+    json = demjson.encode(updateUser)
 
-# def login(request):
-#     user = authenticate(request.POST['username'],request.POST['password'])
-#     if user is not None:
-#         request.session['user'] = user
-#         if user.is_authenticated:
-#             return HttpResponse(user)
-#     else:
-#         return HttpResponse('login failed')
-#
-# def new_page(request):
-#     try:
-#         user = request.session['user']
-#         if user.is_authenticated:
-#             return HttpResponse('welcome')
-#     except:
-#         return HttpResponse('need be logged in')
-#
 @ensure_csrf_cookie
 def login(req):
     if req.method == 'POST':
