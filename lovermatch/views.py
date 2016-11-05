@@ -15,6 +15,10 @@ from django.core.mail import send_mail
 import mongoengine
 from django.contrib.auth import authenticate
 
+from django.http import HttpResponse
+from mongoengine import *
+from django.contrib.auth import authenticate
+
 # Create your views here.
 token = Token(django_settings.SECRET_KEY)  # token is used to verify user in email link
 
@@ -83,33 +87,47 @@ def active_user(request, _token):
     return render(request, 'lovermatch/signup_results.html', context)
 
 
+@ensure_csrf_cookie
 def showInfo(request):
-    username = request.session.get('user')
-    # print "usr: " + username
+    # print request.session.get_decoded()
+    username = request.COOKIES.get('user')
+    print username
+    # print request.session['user']
     if username:
-        usr = request.session['user']
-        cursor = UserInfo.objects(user=usr)
+
+        # # if request.session.get('user11')==None:
+        #     print request.session.get('user')
+        # else:
+        #     print 'none'
+        # # print request.session[1]
+        # # print request.session[2]
+        # if "user" in request.session:
+
+        # usr = request.session["user"]
+        # if usr:
+        cursor = UserInfo.objects(user=username)
 
         return JsonResponse({'result': 0, 'data': serializeUser(cursor[0])})
     else:
         return JsonResponse({'result': -1})
-
-
-def update(request):
-    updateUser = request.POST['update']
-    json = demjson.encode(updateUser)
-    userName = json["user"]
-    UserInfo.objects.remove(user:userName)
-    insert_user = UserInfo.objects.create()
-    userName = json["user"]
-    userName = json["user"]
-    userName = json["user"]
-    userName = json["user"]
-    userName = json["user"]
-    userName = json["user"]
-    userName = json["user"]
-    userName = json["user"]
-update_user = UserInfo.objects.create(user=_username, password=_pwd, name=_nickname)
+    # else:
+    # return JsonResponse({'result': -2})
+    # result = False
+    # print "usr: " + username  # def update(request):
+#     updateUser = request.POST['update']
+#     json = demjson.encode(updateUser)
+#     userName = json["user"]
+#     UserInfo.objects.remove(user:userName)
+#     insert_user = UserInfo.objects.create()
+#     userName = json["user"]
+#     userName = json["user"]
+#     userName = json["user"]
+#     userName = json["user"]
+#     userName = json["user"]
+#     userName = json["user"]
+#     userName = json["user"]
+#     userName = json["user"]
+# update_user = UserInfo.objects.create(user=_username, password=_pwd, name=_nickname)
 
 
 @ensure_csrf_cookie
@@ -122,11 +140,19 @@ def login(req):
 
         # 获取的表单数据与数据库进行比较
         userinfo = UserInfo.objects(user=usr, password=pw)
+        # print len(userinfo)
         if len(userinfo) > 0:
 
-            req.session['user'] = usr
-            req.session.set_expiry(3600000)  # 1 hour timeout
-            return JsonResponse({'code': 0})
+            # req.session['user'] = usr
+            # del req.session['user']
+            # req.session['user'] = usr
+            # req.session.set_expiry(3600000)  # 1 hour timeout
+            # print req.session['user']
+            # return JsonResponse({'code': 0})
+            response = HttpResponseRedirect('/showInfo')
+            # 将username写入浏览器cookie,失效时间为3600
+            response.set_cookie('user', usr, 3600)
+            return response
 
             # return HttpResponseRedirect('/show')
         else:

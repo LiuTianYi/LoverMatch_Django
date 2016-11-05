@@ -90,6 +90,10 @@ WSGI_APPLICATION = 'LoverMatch_Django.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.dummy',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '',
     }
 }
 # connect('database',host='127.0.0.1',username='username',password='password')
@@ -97,7 +101,6 @@ DATABASES = {
 #
 # connect('local', host='168.63.205.250', username='xp', password='xp')
 connect('local')
-# connect('test')
 SESSION_ENGINE = 'mongoengine.django.sessions'
 SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
 

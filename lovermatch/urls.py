@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^login', views.login),
     url(r'^show', views.showInfo),
     url(r'^hello', views.helloworld),
+    url(r'^showInfo', views.showInfo),
     # url(r'^signup_form', views.show_signup_form,),
 ]
