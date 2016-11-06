@@ -145,6 +145,7 @@ AUTHENTICATION_BACKENDS = (
     'mongoengine.django.auth.MongoEngineBackend'
 )
 
+DOMAIN = 'http://168.63.205.250'
 EMAIL_HOST = 'smtp.qq.com'
 EMAIL_HOST_USER = '2601112836@qq.com'
 EMAIL_HOST_PASSWORD = 'xxxxxx'  # replace by password or identifier
