@@ -14,7 +14,7 @@ from django.conf import settings as django_settings
 from django.core.mail import send_mail
 import mongoengine
 from django.contrib.auth import authenticate
-
+import json
 from django.http import HttpResponse
 from mongoengine import *
 from django.contrib.auth import authenticate
@@ -87,11 +87,14 @@ def active_user(request, _token):
     return render(request, 'lovermatch/signup_results.html', context)
 
 
-@ensure_csrf_cookie
+# @ensure_csrf_cookie
 def showInfo(request):
     # print request.session.get_decoded()
     username = request.COOKIES.get('user')
+    usr = request.session.get('user')
+
     print username
+    print usr
     # print request.session['user']
     if username:
 
@@ -110,27 +113,17 @@ def showInfo(request):
         return JsonResponse({'result': 0, 'data': serializeUser(cursor[0])})
     else:
         return JsonResponse({'result': -1})
-    # else:
-    # return JsonResponse({'result': -2})
-    # result = False
-    # print "usr: " + username  # def update(request):
-#     updateUser = request.POST['update']
-#     json = demjson.encode(updateUser)
-#     userName = json["user"]
-#     UserInfo.objects.remove(user:userName)
-#     insert_user = UserInfo.objects.create()
-#     userName = json["user"]
-#     userName = json["user"]
-#     userName = json["user"]
-#     userName = json["user"]
-#     userName = json["user"]
-#     userName = json["user"]
-#     userName = json["user"]
-#     userName = json["user"]
-# update_user = UserInfo.objects.create(user=_username, password=_pwd, name=_nickname)
+
+def update(request):
+    userUpdate = request.POST
+    usr = userUpdate["user"]
+    pw = userUpdate["password"]
+    nm = userUpdate["name"]
+    UserInfo.objects(user="y").update(user=usr, password=pw, name=nm)
+    return HttpResponse("update")
 
 
-@ensure_csrf_cookie
+# @ensure_csrf_cookie
 def login(req):
     if req.method == 'POST':
 
@@ -151,7 +144,8 @@ def login(req):
             # return JsonResponse({'code': 0})
             response = HttpResponseRedirect('/showInfo')
             # 将username写入浏览器cookie,失效时间为3600
-            response.set_cookie('user', usr, 3600)
+            response.set_cookie('user', usr, 3600 * 1000)
+            # req.session['user'] = usr
             return response
 
             # return HttpResponseRedirect('/show')

@@ -103,7 +103,7 @@ DATABASES = {
 connect('local')
 SESSION_ENGINE = 'mongoengine.django.sessions'
 SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
-
+SESSION_COOKIE_AGE = 3600
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
@@ -140,7 +140,8 @@ USE_TZ = True
 
 STATIC_URL = '/lovermatch/'
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+# STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'templates')
 AUTHENTICATION_BACKENDS = (
     'mongoengine.django.auth.MongoEngineBackend'
 )

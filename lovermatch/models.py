@@ -10,6 +10,7 @@ class UserInfo(Document):
     user = StringField(required=True) # 用户邮箱（作为用户名）
     password = StringField(required=True)
     name = StringField(required=True)
+    # name = ListField(IntField)
 
     # userId = StringField(max_length=50,required=True)  # 用户ID
     # password = StringField(max_length=50,required=True)  # 用户密码
