@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    # 'django.contrib.sessions',#表示将session存储在数据库里
+    'django.contrib.sessions',#表示将session存储在数据库里
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
@@ -100,16 +100,8 @@ DATABASES = {
         'PORT': '',
     }
 }
-# connect('database',host='127.0.0.1',username='username',password='password')
-# from mongoengine import connect
-#
-# connect('local', host='168.63.205.250', username='xp', password='xp')
-connect('local')
-# SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
-# SESSION_COOKIE_AGE = 3600
 
-# Password validation
-# https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
+connect('local')
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -129,9 +121,6 @@ FILE_UPLOAD_HANDLERS = [
     "django.core.files.uploadhandler.MemoryFileUploadHandler",
     "django.core.files.uploadhandler.TemporaryFileUploadHandler"
 ]
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.10/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -158,18 +147,13 @@ STATICFILES_DIRS = (
     # '/path/to/others/static/',  # 用不到的时候可以不写这一行
 )
 
-# AUTHENTICATION_BACKENDS = (
-#     'mongoengine.django.auth.MongoEngineBackend'
-# )
-# AUTHENTICATION_BACKENDS = (
-#     'django.contrib.auth.backends.ModelBackend',
-#     # 'django.core.cache.backends.locmem.LocMemCache'
-# )
-# SESSION_ENGINE = 'mongoengine.django.sessions'
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    # 'django.core.cache.backends.locmem.LocMemCache'
+)
+SESSION_ENGINE = 'mongoengine.django.sessions'
 # SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.RemoteUserBackend',
-]
+
 
 DOMAIN = 'http://168.63.205.250'
 EMAIL_HOST = 'smtp.qq.com'
