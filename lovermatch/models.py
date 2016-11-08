@@ -39,5 +39,11 @@ class UserInfo(Document):
 # ross = User(user='y', password='y').save()
 # ross = User(user='y', password='y').save()
 # ross = User(user='y', password='y').save()
+
+
+def serializeUser(userInfo):
+    return (
+        {'user': userInfo.user, 'name': userInfo.name})
+
 for post in UserInfo.objects:
     print post.user

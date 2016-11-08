@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 Django settings for LoverMatch_Django project.
 
@@ -34,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
+    # 'django.contrib.sessions',#表示将session存储在数据库里
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
@@ -46,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.RemoteUserMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -90,6 +93,7 @@ WSGI_APPLICATION = 'LoverMatch_Django.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.dummy',
+        'NAME': '',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
@@ -101,9 +105,9 @@ DATABASES = {
 #
 # connect('local', host='168.63.205.250', username='xp', password='xp')
 connect('local')
-SESSION_ENGINE = 'mongoengine.django.sessions'
-SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
-SESSION_COOKIE_AGE = 3600
+# SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
+# SESSION_COOKIE_AGE = 3600
+
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
@@ -121,6 +125,10 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+FILE_UPLOAD_HANDLERS = [
+    "django.core.files.uploadhandler.MemoryFileUploadHandler",
+    "django.core.files.uploadhandler.TemporaryFileUploadHandler"
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -135,16 +143,33 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/lovermatch/'
-PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-# STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'templates')
-AUTHENTICATION_BACKENDS = (
-    'mongoengine.django.auth.MongoEngineBackend'
+STATIC_URL = '/static/'
+
+# 当运行 python manage.py collectstatic 的时候
+# STATIC_ROOT 文件夹 是用来将所有STATICFILES_DIRS中所有文件夹中的文件，以及各app中static中的文件都复制过来
+# 把这些文件放到一起是为了用apache等部署的时候更方便
+STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
+
+# 其它 存放静态文件的文件夹，可以用来存放项目中公用的静态文件，里面不能包含 STATIC_ROOT
+# 如果不想用 STATICFILES_DIRS 可以不用，都放在 app 里的 static 中也可以
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "templates"),
+    # '/path/to/others/static/',  # 用不到的时候可以不写这一行
 )
+
+# AUTHENTICATION_BACKENDS = (
+#     'mongoengine.django.auth.MongoEngineBackend'
+# )
+# AUTHENTICATION_BACKENDS = (
+#     'django.contrib.auth.backends.ModelBackend',
+#     # 'django.core.cache.backends.locmem.LocMemCache'
+# )
+# SESSION_ENGINE = 'mongoengine.django.sessions'
+# SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.RemoteUserBackend',
+]
 
 DOMAIN = 'http://168.63.205.250'
 EMAIL_HOST = 'smtp.qq.com'

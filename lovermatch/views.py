@@ -4,7 +4,7 @@ import simplejson
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.urls import reverse
-from lovermatch.models import UserInfo
+from lovermatch.models import UserInfo, serializeUser
 from django.http import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from operator import itemgetter
@@ -18,17 +18,23 @@ import json
 from django.http import HttpResponse
 from mongoengine import *
 from django.contrib.auth import authenticate
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from .forms import ImageUploadForm
+from django.db import models
+from django.contrib.auth import authenticate, login as auth_login, logout
+from django.contrib.auth.models import User
 
 # Create your views here.
 token = Token(django_settings.SECRET_KEY)  # token is used to verify user in email link
 
 
 def index(request):
-    user = UserInfo.objects.create(
-        user="pedro.kong@company.com",
-        password="Pedro",
-    )
-    user.save()
+    # user = UserInfo.objects.create(
+    #     user="pedro.kong@company.com",
+    #     password="Pedro",
+    # )
+    # user.save()
     return HttpResponse("Hello, world. You are at the lovermatch app's index.")
 
 
@@ -90,13 +96,15 @@ def active_user(request, _token):
 # @ensure_csrf_cookie
 def showInfo(request):
     # print request.session.get_decoded()
-    username = request.COOKIES.get('user')
-    usr = request.session.get('user')
+    # username = request.COOKIES.get('user')
+    # usr = request.session.get('user')
+    # usr = request.POST['username']
+    # print username
+    # print usr
 
-    print username
-    print usr
     # print request.session['user']
-    if username:
+    # if usr:
+    if request.user.is_authenticated:
 
         # # if request.session.get('user11')==None:
         #     print request.session.get('user')
@@ -108,19 +116,42 @@ def showInfo(request):
 
         # usr = request.session["user"]
         # if usr:
-        cursor = UserInfo.objects(user=username)
+        # cursor = UserInfo.objects(user=usr)
+        # response = {'result': 0, 'data': serializeUser(cursor[0]), "Access-Control-Allow-Origin": "*",
+        #             "Access-Control-Allow-Methods": "POST, GET, OPTIONS", "Access-Control-Max-Age": "1000",
+        #             "Access-Control-Allow-Headers": "*"}
+        # response = HttpResponse(json.dumps({"key": "value", "key2": "value"}))
+        # response["Access-Control-Allow-Origin"] = "*"
+        # return JsonResponse({'result': 0, 'data': serializeUser(cursor[0])})
+        # return response
+        return JsonResponse({'result': 0})
 
-        return JsonResponse({'result': 0, 'data': serializeUser(cursor[0])})
     else:
         return JsonResponse({'result': -1})
 
-def update(request):
+
+def update_user(request):
     userUpdate = request.POST
     usr = userUpdate["user"]
     pw = userUpdate["password"]
     nm = userUpdate["name"]
     UserInfo.objects(user="y").update(user=usr, password=pw, name=nm)
-    return HttpResponse("update")
+    return HttpResponse("user update success")
+
+
+class ExampleModel(models.Model):
+    model_pic = models.ImageField(upload_to='pic_folder/', default='pic_folder/None/no-img.jpg')
+
+
+def upload_pic(request):
+    if request.method == 'POST':
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            m = ExampleModel.objects.get(pk=form.cleaned_data['title'])
+            m.model_pic = form.cleaned_data['image']
+            m.save()
+            return HttpResponse('image upload success')
+    return HttpResponse('image upload failed')
 
 
 # @ensure_csrf_cookie
@@ -138,13 +169,23 @@ def login(req):
 
             # req.session['user'] = usr
             # del req.session['user']
+            # user = User.objects.create_user(usr, pw)
+            user = authenticate(username=usr, password=pw)
+            if user is not None:
+                auth_login(req, user)
             # req.session['user'] = usr
             # req.session.set_expiry(3600000)  # 1 hour timeout
             # print req.session['user']
             # return JsonResponse({'code': 0})
             response = HttpResponseRedirect('/showInfo')
+            # response["Access-Control-Allow-Origin"] = "*"
+            # response = HttpResponse(json.dumps({"key": "value", "key2": "value"}))
+            # response["Access-Control-Allow-Origin"] = "*"
+            # response["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"
+            # response["Access-Control-Max-Age"] = "1000"
+            # response["Access-Control-Allow-Headers"] = "*"
             # 将username写入浏览器cookie,失效时间为3600
-            response.set_cookie('user', usr, 3600 * 1000)
+            # response.set_cookie('user', usr, 3600 * 1000)
             # req.session['user'] = usr
             return response
 
@@ -159,9 +200,9 @@ def login(req):
         # return HttpResponseRedirect('lovermatch/login.html')
 
 
-def serializeUser(userInfo):
-    return (
-        {'user': userInfo.user, 'name': userInfo.name})
+def logout(request):
+    logout(request)
+    return JsonResponse({'code': 0})
 
 
 # def results(request, username):
