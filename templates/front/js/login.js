@@ -1,9 +1,9 @@
 $(function() {
   $("#login-btn").click(function() { // if submit button is clicked
     var username = $("#login-user").val(); 
-    alert(username)
+    //lert(username)
     var password = $("#login-pass").val(); // define password variable
-    alert(password)
+    //alert(password)
 
 
 
@@ -17,8 +17,8 @@ $(function() {
       dataType: "json", // type of returned data
       success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
       //alert(data)
-      var t_data = {"code":0};
-      alert(t_data["code"]);
+      //var t_data = {"code":0};
+      //alert(t_data["code"]);
       if (data["code"]==0) {
       	window.location="./index.html"
       }
@@ -26,5 +26,5 @@ $(function() {
      });
     return false;
     });
-  $('#reg-btn').click(function(){window.location="./index.html"});
+  $('#reg-btn').click(function(){window.location="./reg.html"});
 });

@@ -1,5 +1,9 @@
 $(function() {
 
+  $("#uploadphoto").click(function(){
+    window.location="./upload_avatar.html"
+  });
+
  $(window).load(function() {
    $.ajax({ // JQuery ajax function
       type: "POST", // Submitting Method
@@ -8,9 +12,6 @@ $(function() {
       dataType: "json", // type of returned data
       success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
       alert(data)
-      
-
-
       }
      });
   });
