@@ -32,6 +32,10 @@ h1{
 .navbar navbar-default{
 
 }
+.uploadphoto{
+	margin : 20px;
+	text-align: center;
+}
 
 .avt_back{
 	height:150px;

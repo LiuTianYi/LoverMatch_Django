@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Love Match</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./img/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="./fonts/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="./css/reg.css" />
+
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./js/reg.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+<div class="page-header">
+    <h1>注册 Love Match 吧 <small>奇妙的旅程从这里开始！</small></h1>
+</div>
+
+<!-- Registration form - START -->
+<div class="container regcon">
+    <div class="row">
+        <form role="form">
+            <div>
+                <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>必填</strong></div>
+                <div class="form-group">
+                    <label for="InputName" id="namelabel">输入昵称</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="InputName" id="InputName" placeholder="little_white" required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="InputEmail" id="email1label">邮箱</label>
+                    <div class="input-group">
+                        <input type="email" class="form-control" id="InputEmailFirst" name="InputEmail" placeholder="little_white@candyland.com" required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="InputEmail" id="email2label">确认邮箱</label>
+                    <div class="input-group">
+                        <input type="email" class="form-control" id="InputEmailSecond" name="InputEmail" placeholder="little_white@candyland.com" required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="InputEmail" id="password1label">输入密码</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="PasswordFirst" name="InputEmail" placeholder="Enter Password" required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="InputEmail" id="password2label">确认密码</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="PasswordSecond" name="InputEmail" placeholder="Confirm Password" required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input  name="submit" id="submit" value="提交" class="btn btn-info pull-right">
+                </div>
+                
+                
+            </div>
+        </form>
+        
+    </div>
+</div>
+<!-- Registration form - END -->
+
+</div>
+
+</body>
+</html>
