@@ -3,25 +3,25 @@ $(function(){
 	$("#hobby").html("");
 	for (var i = 0 ;  i < hobbies["hobby"].length ; i++){
 		var hb = hobbies["hobby"][i];
-		$("#hobby").append('<label class="checkbox-inline" id="hobby-'+i+'"><input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">'+hb+'</label>');
+		$("#hobby").append('<label class="checkbox-inline " id="hobby-'+i+'"><input class="hobbies" type="checkbox" name="checkboxes" id="checkboxes-'+i+'" value="'+i+'">'+hb+'</label>');
 	}
 
     $("#selectcons").html("");
     for (var i = 0 ; i < cons["constellation"].length ; i++){
         var conste = cons["constellation"][i];
-        $("#selectcons").append('<option id=conste'+i+' value="1">'+conste+'</option>');
+        $("#selectcons").append('<option id=conste'+i+' value="'+i+'">'+conste+'</option>');
     }
 
     $("#selectgrade").html("");
     for (var i = 0 ; i < grade["grade"].length ; i++){
         var gradeunit = grade["grade"][i];
-        $("#selectgrade").append('<option id=grade'+i+' value="1">'+gradeunit+'</option>');
+        $("#selectgrade").append('<option id=grade'+i+' value="'+i+'">'+gradeunit+'</option>');
     }
 
     $("#selectschool").html("");
     for (var i = 0 ; i < school["school"].length ; i++){
         var sch = school["school"][i]["name"];
-        $("#selectschool").append('<option id=school'+i+' value="1">'+sch+'</option>');
+        $("#selectschool").append('<option id=school'+i+' value="'+i+'">'+sch+'</option>');
     }
 
 	//load provice
@@ -152,17 +152,92 @@ $(function(){
     });
 
     var m3;
-    $("select#county").change(function(){
-        m3 = $("#county option:selected").val();
+    $("select#selectmajor3").change(function(){
+        m3 = $("#selectmajor3 option:selected").val();
     }); 
+
+
+    var schoolid;
+    $("select#selectschool").change(function(){
+        schoolid = $("#selectschool option:selected").val();
+    }); 
+
+    var sex;
+    $("select#selectsex").change(function(){
+        sex = $("#selectsex option:selected").val();
+    }); 
+
+    var costell;
+    $("select#selectcons").change(function(){
+        costell = $("#selectcons option:selected").val();
+    }); 
+
+    var year ;
+    $("select#selectgrade").change(function(){
+        year = $("#selectgrade option:selected").val();
+    }); 
+
+
+
+
+    
+
+
+
 
     $("#editinfo").click(function(){
         if ( provinceid==null){provinceid=1;};
         if (cityid==null){cityid=1;};
         if ( countyid == null) {countyid=1;}
-        console.log(provinceid+' '+cityid+' '+countyid);
-        console.log("from other js"+test);
+        if ( m1 == null) {m1=1;}
+        if ( m2 == null) {m2=1;}
+        if ( m3 == null) {m3=1;}
+        if ( schoolid == null) {schoolid=1;}
+        if ( sex == null) {sex=1;}
+        if ( costell == null) {costell=1;}
+        if ( year == null) {year=1;}
+        var height = $("#height").val();
+        //console.log(height);
+        var weight = $("#weight").val();
+
+        var age = $("#age").val();
+
+        var un = $("#username").val();
+        console.log(un);
+        if ( height == null || height == '') {height=163;}
+        if ( weight == null || weight =='') {weight=49;}
+        if ( un == null || un =='') {weight=''little49'';}
+        if ( age == null || age =='') {weight=18;}
+        var hb=[];
+
+        $('.hobbies').each(function(){
+            //console.log($(this).is(":checked"));
+            if ($(this).is(":checked")==true){
+
+                hb.push($(this).attr('value'));
+                //console.log(hb.length);
+            }
+
+        })
+
+         $(window).load(function() {
+           $.ajax({ // JQuery ajax function
+              type: "POST", // Submitting Method
+              url: 'http://168.63.205.250/edit',  //这里是你的api名字
+              data: {"name":un,"age":age,"gender":sex,"height":height,"weight":weight,"hometownId":[provinceid,cityid,countyid],"universityId":schoolid,"major1":[m1,m2,m3],"constellationId":costell,"hobbiesId":hb,"features":{}}, // the data that will be sent to php processor
+              dataType: "json", // type of returned data
+              success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
+              alert(data)
+              }
+             });
+          });
+
+        //console.log(provinceid+' '+cityid+' '+countyid+' '+m1+' '+m2+' '+m3+' '+schoolid+' '+sex+' '+costell + ' '+year+ ' '+height+' '+weight+' end');
+        //for (var i = 0 ; i < hb.length ; i++){
+        //    console.log(hb[i]);
+        //}
     });
+
 
 
 });
