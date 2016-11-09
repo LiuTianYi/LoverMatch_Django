@@ -8,6 +8,18 @@ $(function(){
         $("#f-hobby").append('<label class="checkbox-inline " id="f-hobby-'+i+'"><input class="f-hobbies" type="checkbox" name="checkboxes" id="checkboxes-'+i+'" value="'+i+'">'+hb+'</label>');
 	}
 
+	if (ohobby!=null){
+		for (var i = 0 ; i < ohobby.length ; i++){
+			$("#hobby-"+ohobby[i]).attr("checked","true");
+		}
+	}
+
+	if (ofeatuers["hobbiesId"]!=null){
+		for (var i = 0 ; i < ofeatuers["hobbiesId"].length ; i++){
+			$("#hobby-"+ofeatuers["hobbiesId"][i]).attr("checked","true");
+		}
+	}
+
 
 
     $("#selectcons").html("");
@@ -17,6 +29,12 @@ $(function(){
         $("#selectcons").append('<option id=conste'+i+' value="'+i+'">'+conste+'</option>');
         $("#f-selectcons").append('<option id=f-conste'+i+' value="'+i+'">'+conste+'</option>');
     }
+
+    if (oconstellationId!=null){
+		$("conste"+oconstellationId).attr("selected","true");
+	}
+
+
 
     $("#selectgrade").html("");
     $("#f-selectgrade").html("");
@@ -273,6 +291,7 @@ $(function(){
 
 
 
+
     $("#savafeature").click(function(){
         if ( fprovinceid==null){fprovinceid=1;};
         if (fcityid==null){fcityid=1;};
@@ -315,6 +334,24 @@ $(function(){
         var rcon = $("#ratecons").val();
         var rhobby = $("#ratehobby").val();
 
+        var un = oname;
+        var age = oage;
+        var sex = ogender;
+        var height = oheight;
+        var weight = oweight;
+        var provinceid = ohome[0];
+        var cityid = ohome[1];
+        var countyid = ohome[2];
+        var schoolid = ouniversity;
+        var m1 = oschool[0];
+        var m2 = oschool[1];
+        var m3 = oschool[2];
+        var costell = oconstellationId;
+        var hb = ohobby;
+
+
+
+
 
        $.ajax({ // JQuery ajax function
           type: "POST", // Submitting Method
@@ -331,6 +368,7 @@ $(function(){
         //for (var i = 0 ; i < hb.length ; i++){
         //    console.log(hb[i]);
         //}
+        location.reload();
     });
 
     
@@ -339,16 +377,17 @@ $(function(){
 
 
     $("#editinfo").click(function(){
-        if ( provinceid==null){provinceid=1;};
-        if (cityid==null){cityid=1;};
-        if ( countyid == null) {countyid=1;}
-        if ( m1 == null) {m1=1;}
-        if ( m2 == null) {m2=1;}
-        if ( m3 == null) {m3=1;}
-        if ( schoolid == null) {schoolid=1;}
-        if ( sex == null) {sex=1;}
-        if ( costell == null) {costell=1;}
-        if ( year == null) {year=1;}
+
+        if ( provinceid==null){provinceid=ohome[0];};
+        if (cityid==null){cityid=ohome[1];};
+        if ( countyid == null) {countyid=ohome[2];}
+        if ( m1 == null) {m1=oschool[0];}
+        if ( m2 == null) {m2=oschool[1];}
+        if ( m3 == null) {m3=oschool[2];}
+        if ( schoolid == null) {schoolid=oschool;}
+        if ( sex == null) {sex=ogender;}
+        if ( costell == null) {costell=oconstellationId;}
+        if ( year == null) {year=ogradeId;}
         var height = $("#height").val();
         //console.log(height);
         var weight = $("#weight").val();
@@ -357,10 +396,10 @@ $(function(){
 
         var un = $("#username").val();
         console.log(un);
-        if ( height == null || height == '') {height=163;}
-        if ( weight == null || weight =='') {weight=49;}
-        if ( un == null || un =='') {un='littlewhite';}
-        if ( age == null || age =='') {age=18;}
+        if ( height == null || height == '') {height=oheight;}
+        if ( weight == null || weight =='') {weight=oweight;}
+        if ( un == null || un =='') {un=oname;}
+        if ( age == null || age =='') {age=oage;}
         var hb=[];
 
         $('.hobbies').each(function(){
@@ -371,13 +410,40 @@ $(function(){
                 //console.log(hb.length);
             }
 
-        })
+        });
+
+        var rage = opercentage["age"];
+        var rheight = opercentage["height"];
+        var rweight = opercentage["weight"];
+        var rprovince = opercentage["hometownId"];
+
+        var rschool = opercentage["universityId"];
+        var rm1 = opercentage["schoolId"];
+        var rcon = opercentage["constellationId"];
+        var rhobby = opercentage["hobbiesId"];
+
+
+        var fage = ofeatuers["age"];
+        var fheight = ofeatuers["height"];
+        var fweight = ofeatuers["weight"];
+        var fprovinceid = ofeatuers["hometownId"][0];
+        var fcityid = ofeatuers["hometownId"][1];
+        var fcountyid = ofeatuers["hometownId"][2];
+        var fschoolid = ofeatuers["universityId"];
+        var fcostell = ofeatuers["constellationId"];
+        var fhb = ofeatuers["hobbiesId"];
+        var fm1 = ofeatuers["schoolId"][0];
+        var fm2 = ofeatuers["schoolId"][1];
+        var fm3 = ofeatuers["schoolId"][2];
+
+
+
 
 
        $.ajax({ // JQuery ajax function
           type: "POST", // Submitting Method
           url: 'http://168.63.205.250/update_user',  //这里是你的api名字
-          data: {"name":un,"age":age,"gender":sex,"height":height,"weight":weight,"hometownId":[provinceid,cityid,countyid],"universityId":schoolid,"major1":[m1,m2,m3],"constellationId":costell,"hobbiesId":hb,"features":{"age":fage,"height":fheight,"weight":fweight,"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":},"percentage":{"age":rage,"height":rheight,"weight":rweight,"provinceid":rprovince,"cityid":rcity,"countyid":rcounty,"universityId":rschool,"constellationId":ratecons,"hobby":rhobby}},
+          data: {"name":un,"age":age,"gender":sex,"height":height,"weight":weight,"hometownId":[provinceid,cityid,countyid],"universityId":schoolid,"schoolId":[m1,m2,m3],"constellationId":costell,"hobbiesId":hb,"features":{"age":fage,"height":fheight,"weight":fweight,"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]]},"percentage":{"age":rage,"height":rheight,"weight":rweight,"hometownId":rprovince,"universityId":rschool,"constellationId":ratecons,"hobbiesId":rhobby，"schoolId":rm1}}, // the data that will be sent to php processor
           dataType: "json", // type of returned data
           success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
           alert(data)
@@ -390,6 +456,7 @@ $(function(){
         //    console.log(hb[i]);
         //}
     });
+    location.reload();
 
 
 
