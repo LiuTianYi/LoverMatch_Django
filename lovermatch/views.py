@@ -103,29 +103,29 @@ def showInfo(request):
 def update_user(request):
     userUpdate = request.POST
 
-    usr = userUpdate["user"]
-    nm = userUpdate["name"]
-    UserInfo.objects(user=usr).update(name=nm)
-
     # usr = userUpdate["user"]
-    # pw = userUpdate["password"]
     # nm = userUpdate["name"]
-    # ag = userUpdate["age"]
-    # ge = userUpdate["gender"]
-    # hei = userUpdate["height"]
-    # wei = userUpdate["weight"]
-    # ho = userUpdate["hometownId"]
-    # univ = userUpdate["universityId"]
-    # scho = userUpdate["schoolId"]
-    # grad = userUpdate["gradeId"]
-    # cons = userUpdate["constellationId"]
-    # hob = userUpdate["hobbiesId"]
-    # fea = userUpdate["features"]
-    # per = userUpdate["percentage"]
+    # UserInfo.objects(user=usr).update(name=nm)
+
+    usr = userUpdate["user"]
+    pw = userUpdate["password"]
+    nm = userUpdate["name"]
+    ag = userUpdate["age"]
+    ge = userUpdate["gender"]
+    hei = userUpdate["height"]
+    wei = userUpdate["weight"]
+    ho = userUpdate["hometownId"]
+    univ = userUpdate["universityId"]
+    scho = userUpdate["schoolId"]
+    grad = userUpdate["gradeId"]
+    cons = userUpdate["constellationId"]
+    hob = userUpdate["hobbiesId"]
+    fea = userUpdate["features"]
+    per = userUpdate["percentage"]
     #
-    # UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge,height=hei, weight=wei, hometownId=ho, universityId=univ,
-    #                                   schoolId=scho, gradeId=grad, constellationId=cons, hobbiesId=hob, features=fea,
-    #                                   percentage=per)
+    UserInfo.objects(user=usr).update(name=nm, password=pw, age=ag, gender=ge,height=hei, weight=wei, hometownId=ho, universityId=univ,
+                                      schoolId=scho, gradeId=grad, constellationId=cons, hobbiesId=hob, features=fea,
+                                      percentage=per)
 
     return HttpResponse("user update success")
 
