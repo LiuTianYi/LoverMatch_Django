@@ -20,7 +20,7 @@ $(function() {
       //var t_data = {"code":0};
       //alert(t_data["code"]);
       if (data["code"]==0) {
-      	window.location="./regsuccess.html"
+      	window.location="./index.html"
       }
       }
      });
