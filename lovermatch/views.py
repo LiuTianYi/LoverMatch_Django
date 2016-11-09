@@ -111,6 +111,7 @@ def update_user(request):
     # pw = userUpdate["password"]
     # nm = userUpdate["name"]
     # ag = userUpdate["age"]
+    # ge = userUpdate["gender"]
     # hei = userUpdate["height"]
     # wei = userUpdate["weight"]
     # ho = userUpdate["hometownId"]
@@ -122,41 +123,13 @@ def update_user(request):
     # fea = userUpdate["features"]
     # per = userUpdate["percentage"]
     #
-    # UserInfo.objects(user=usr).update(name=nm, age=ag, height=hei, weight=wei, hometownId=ho, universityId=univ,
+    # UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge,height=hei, weight=wei, hometownId=ho, universityId=univ,
     #                                   schoolId=scho, gradeId=grad, constellationId=cons, hobbiesId=hob, features=fea,
     #                                   percentage=per)
 
     return HttpResponse("user update success")
 
 
-#
-# "userName" : "lee@163.com",//邮箱
-# "password" : "lee",//密码
-# "name" : lee , //昵称
-# "photoAddresss" : "/home/lovermatch/lee.jpg" ,//照片存储地址
-# "age" : 24 ,//年龄
-# "gender" : "male" ,//性别
-# "height" : 176 ,//身高
-# "weight" : 69 ,//体重
-# "hometownId" : [02, 13, 45] ,//省、市、县的id
-# "universityId" : 01 ,//大学的对应id
-# "schoolId" : 12 ,//专业id
-# "gradeId" : 2 ,//年级id
-# "constellationId" : 06 ,//星座id
-# "hobbiesId" : [01,03,05,08] ,//爱好id列表
-# "virified" : false ,//是否被确认过
-# "loverMatch" : null ,//匹配信息列表，默认为空
-# "loverMatched" : null ,//被匹配信息列表，默认为空
-# "features" : {//想找的理想对象特征
-# "age" : [18, 24] ,//年龄在18~24岁
-# "gender" : "female" ,//性别为女
-# "height" : [160, 170] ,//身高在160~170之间
-# "weight" : [50, 60] ,//体重在50~60kg之间
-# "hometownId" : [[01,03,12],[01,04,10],[01,02,03]] ,//家乡地址id列表
-# "universityId" : [01,03,04] ,//大学id列表
-# "schoolId" : [01,02,12] ,//专业id列表
-# "constellationId" : [12,13] ,//星座id列表
-# "hobbiesId" : [12,13,15] //爱好id列表
 class ExampleModel(models.Model):
     model_pic = models.ImageField(upload_to='pic_folder/', default='pic_folder/None/no-img.jpg')
 
@@ -187,9 +160,7 @@ def login(req):
             req.session['user'] = usr
             req.session.set_expiry(3600000)  # 1 hour timeout
             print req.session['user']
-            response = HttpResponseRedirect('/showInfo')
-
-            return response
+            return JsonResponse({'code': 0})
 
             # return HttpResponseRedirect('/show')
         else:

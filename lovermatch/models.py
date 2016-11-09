@@ -43,7 +43,7 @@ class UserInfo(Document):
 
 def serializeUser(userInfo):
     return (
-        {'user': userInfo.user, 'name': userInfo.name})
+        {'user': userInfo.user, 'name': userInfo.name, 'name':userInfo.name})
 
 for post in UserInfo.objects:
     print post.user
