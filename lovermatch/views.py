@@ -138,26 +138,11 @@ def login(req):
         # print len(userinfo)
         if len(userinfo) > 0:
 
-            # req.session['user'] = usr
-            # del req.session['user']
-            # user = User.objects.create_user(usr, pw)
-            # user = authenticate(username=usr, password=pw)
-            # if user is not None:
-            #     auth_login(req, user)
             req.session['user'] = usr
             req.session.set_expiry(3600000)  # 1 hour timeout
             print req.session['user']
-            # return JsonResponse({'code': 0})
             response = HttpResponseRedirect('/showInfo')
-            # response["Access-Control-Allow-Origin"] = "*"
-            # response = HttpResponse(json.dumps({"key": "value", "key2": "value"}))
-            # response["Access-Control-Allow-Origin"] = "*"
-            # response["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"
-            # response["Access-Control-Max-Age"] = "1000"
-            # response["Access-Control-Allow-Headers"] = "*"
-            # 将username写入浏览器cookie,失效时间为3600
-            # response.set_cookie('user', usr, 3600 * 1000)
-            # req.session['user'] = usr
+
             return response
 
             # return HttpResponseRedirect('/show')
