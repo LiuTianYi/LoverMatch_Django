@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from mongoengine import *
+from mongoengine.fields import *
 
 
 # from LoverMatch_Django.settings import data
@@ -24,11 +25,11 @@ class UserInfo(Document):
     gradeId = IntField(required=True)  # 年级
     constellationId = IntField(required=True)  # 星座
     hobbiesId = ListField(required=True)  # 爱好
-    loverMatch = MapField(required=False)  # 匹配对象
-    loverMatched = MapField(required=False)  # 被匹配对象
+    loverMatch = StringField(required=False)  # 匹配对象 json
+    loverMatched = StringField(required=False)  # 被匹配对象 json
     verified = StringField(required=False)  # 是否被确认
-    features = fields.JSONField(required=False)
-    percentage = fields.JSONField(required=False)
+    features = StringField(required=False) #json
+    percentage = StringField(required=False) #json
 
 
 #
