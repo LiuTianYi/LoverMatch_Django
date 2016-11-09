@@ -33,12 +33,70 @@ $(function() {
     $("#nav-matched").css({"background-color":"#f8f8f8"});
     $("#nav-match").css({"background-color":"#e7e7e7"});
     $.post('http://localhost:8018/matchlist2',function(data){
-      alert(data);
+      //alert(data);
+      ohome = data["data"]["hometownId"];
+      oschool = data["data"]["hometownId"];
+      ohobby = data["data"]["hometownId"];
+      oname = data["data"]["hometownId"];
+      oweight = data["data"]["hometownId"];
+      ogender = data["data"]["hometownId"];
+      oage = data["data"]["hometownId"];
+      oheight = data["data"]["hometownId"];
+      ophotoAddress = data["data"]["hometownId"];
+      ouniversity = data["data"]["hometownId"];
+      ofeatuers = data["data"]["hometownId"];
+      ouser = data["data"]["hometownId"];
+      oloverMatched = data["data"]["hometownId"];
+      oloverMatch = data["data"]["hometownId"];
+      ogradeId = data["data"]["hometownId"];
+      overified = data["data"]["hometownId"];
+      opercentage = data["data"]["hometownId"];
+      oconstellationId = data["data"]["hometownId"];
+      oschoresultool = data["data"]["hometownId"];
     });
   });
 });
 
 
+var ohome;
+var oschool;
+var ohobby;
+var oname;
+var oweight;
+var ogender;
+var oage;
+var oheight;
+var ophotoAddress;
+var ouniversity;
+var ofeatuers;
+var ouser;
+var oloverMatched;
+var oloverMatch;
+var ogradeId;
+var overified;
+var opercentage;
+var oconstellationId;
+var oresult;
 
-var username = null;
-var password = null;
+
+{"data": 
+  {"hometownId": null, 
+  "schoolId": null, 
+  "hobbiesId": [], 
+  "name": "te", 
+  "weight": null, 
+  "gender": null, 
+  "age": null, 
+  "height": null, 
+  "photoAddress": null, 
+  "universityId": null, 
+  "features": null, 
+  "user": "te", 
+  "loverMatched": null, 
+  "gradeId": null, 
+  "verified": null, 
+  "percentage": null, 
+  "loverMatch": null, 
+  "constellationId": null}, 
+  "result": 0
+}

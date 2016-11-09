@@ -261,19 +261,15 @@ $(function(){
 
 
 
-    $("#rateage").attr("value",5);
-    $("#rateheight").attr("value",5);
-    $("#rateweight").attr("value",5);
-    $("#rateprovince").attr("value",5);
-    $("#ratecity").attr("value",5);
-    $("#ratecounty").attr("value",5);
-    $("#rateschool").attr("value",5);
-    $("#ratem1").attr("value",5);
-    $("#ratem2").attr("value",5);
-    $("#ratem3").attr("value",5);
-    $("#rategrade").attr("value",5);
-    $("#ratecons").attr("value",5);
-    $("#ratehobby").attr("value",5);
+    $("#rateage").attr("value",0);
+    $("#rateheight").attr("value",0);
+    $("#rateweight").attr("value",0);
+    $("#rateprovince").attr("value",0);
+    $("#rateschool").attr("value",0);
+    $("#ratem1").attr("value",0);
+    $("#rategrade").attr("value",0);
+    $("#ratecons").attr("value",0);
+    $("#ratehobby").attr("value",0);
 
 
 
@@ -312,12 +308,9 @@ $(function(){
         var rheight = $("#rateheight").val();
         var rweight = $("#rateweight").val();
         var rprovince = $("#rateprovince").val();
-        var rcity = $("#ratecity").val();
-        var rcounty = $("#ratecounty").val();
+
         var rschool = $("#rateschool").val();
         var rm1 = $("#ratem1").val();
-        var rm2 = $("#ratem2").val();
-        var rm3 = $("#ratem3").val();
         var rgrade = $("#rategrade").val();
         var rcon = $("#ratecons").val();
         var rhobby = $("#ratehobby").val();
@@ -325,8 +318,8 @@ $(function(){
 
        $.ajax({ // JQuery ajax function
           type: "POST", // Submitting Method
-          url: 'http://168.63.205.250/edit',  //这里是你的api名字
-          data: {"name":un,"age":age,"gender":sex,"height":height,"weight":weight,"hometownId":[provinceid,cityid,countyid],"universityId":schoolid,"major1":[m1,m2,m3],"constellationId":costell,"hobbiesId":hb,"features":{"age":fage,"height":fheight,"weight":fweight,"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":},"percentage":{"age":rage,"height":rheight,"weight":rweight,"provinceid":rprovince,"cityid":rcity,"countyid":rcounty,"universityId":rschool,"constellationId":ratecons,"hobby":rhobby}}, // the data that will be sent to php processor
+          url: 'http://168.63.205.250/update',  //这里是你的api名字
+          data: {"name":un,"age":age,"gender":sex,"height":height,"weight":weight,"hometownId":[provinceid,cityid,countyid],"universityId":schoolid,"schoolId":[m1,m2,m3],"constellationId":costell,"hobbiesId":hb,"features":{"age":fage,"height":fheight,"weight":fweight,"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]]},"percentage":{"age":rage,"height":rheight,"weight":rweight,"hometownId":rprovince,"universityId":rschool,"constellationId":ratecons,"hobbiesId":rhobby，"schoolId":rm1}}, // the data that will be sent to php processor
           dataType: "json", // type of returned data
           success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
           alert(data)
@@ -383,7 +376,7 @@ $(function(){
 
        $.ajax({ // JQuery ajax function
           type: "POST", // Submitting Method
-          url: 'http://168.63.205.250/edit',  //这里是你的api名字
+          url: 'http://168.63.205.250/update_user',  //这里是你的api名字
           data: {"name":un,"age":age,"gender":sex,"height":height,"weight":weight,"hometownId":[provinceid,cityid,countyid],"universityId":schoolid,"major1":[m1,m2,m3],"constellationId":costell,"hobbiesId":hb,"features":{"age":fage,"height":fheight,"weight":fweight,"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":},"percentage":{"age":rage,"height":rheight,"weight":rweight,"provinceid":rprovince,"cityid":rcity,"countyid":rcounty,"universityId":rschool,"constellationId":ratecons,"hobby":rhobby}},
           dataType: "json", // type of returned data
           success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
