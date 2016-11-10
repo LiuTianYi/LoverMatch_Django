@@ -171,7 +171,7 @@ def update_feature(request):
     fea["hobbiesId"] = map(int, request.POST.getlist("gradeId[]"))
 
     #
-    if UserInfo.objects(user=usr).update(features=map(int, fea)):
+    if UserInfo.objects(user=usr).update(features=fea):
         return JsonResponse({"code": 0})
     else:
         return JsonResponse({"code": -1})
@@ -192,7 +192,7 @@ def update_percentage(request):
     per["hobbiesId"] = map(int, request.POST.getlist("gradeId[]"))
 
     #
-    if UserInfo.objects(user=usr).update(percentage=map(int, per)):
+    if UserInfo.objects(user=usr).update(percentage=per):
         return JsonResponse({"code": 0})
     else:
         return JsonResponse({"code": -1})
