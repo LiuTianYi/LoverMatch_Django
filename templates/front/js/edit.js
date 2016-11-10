@@ -8,12 +8,6 @@ $(function(){
         $("#f-hobby").append('<label class="checkbox-inline " id="f-hobby-'+i+'"><input class="f-hobbies" type="checkbox" name="checkboxes" id="checkboxes-'+i+'" value="'+i+'">'+hb+'</label>');
 	}
 
-	if (ohobby!=null){
-		for (var i = 0 ; i < ohobby.length ; i++){
-			$("#hobby-"+ohobby[i]).attr("checked","true");
-		}
-	}
-
 
 
 
@@ -330,20 +324,20 @@ $(function(){
         var rcon = $("#ratecons").val();
         var rhobby = $("#ratehobby").val();
 
-        var un = oname;
-        var age = oage;
-        var sex = ogender;
-        var height = oheight;
-        var weight = oweight;
-        var provinceid = ohome[0];
-        var cityid = ohome[1];
-        var countyid = ohome[2];
-        var schoolid = ouniversity;
-        var m1 = oschool[0];
-        var m2 = oschool[1];
-        var m3 = oschool[2];
-        var costell = oconstellationId;
-        var hb = ohobby;
+        var un = 1;
+        var age = 1;
+        var sex = 1;
+        var height = 1;
+        var weight = 1;
+        var provinceid = 1;
+        var cityid = 1;
+        var countyid = 1;
+        var schoolid = 1;
+        var m1 = 1;
+        var m2 = 1;
+        var m3 = 1;
+        var costell = 1;
+        var hb = 1;
 
 
 
@@ -375,16 +369,16 @@ $(function(){
 
     $("#editinfo").click(function(){
 
-        if ( provinceid==null){provinceid=ohome[0];};
-        if (cityid==null){cityid=ohome[1];};
-        if ( countyid == null) {countyid=ohome[2];}
-        if ( m1 == null) {m1=oschool[0];}
-        if ( m2 == null) {m2=oschool[1];}
-        if ( m3 == null) {m3=oschool[2];}
-        if ( schoolid == null) {schoolid=oschool;}
-        if ( sex == null) {sex=ogender;}
-        if ( costell == null) {costell=oconstellationId;}
-        if ( year == null) {year=ogradeId;}
+        if ( provinceid==null){provinceid=1;};
+        if (cityid==null){cityid=1;};
+        if ( countyid == null) {countyid=1;}
+        if ( m1 == null) {m1=1;}
+        if ( m2 == null) {m2=1;}
+        if ( m3 == null) {m3=o1;}
+        if ( schoolid == null) {schoolid=1;}
+        if ( sex == null) {sex=1;}
+        if ( costell == null) {costell=1;}
+        if ( year == null) {year=1;}
         var height = $("#height").val();
         //console.log(height);
         var weight = $("#weight").val();
@@ -393,10 +387,10 @@ $(function(){
 
         var un = $("#username").val();
         console.log(un);
-        if ( height == null || height == '') {height=oheight;}
-        if ( weight == null || weight =='') {weight=oweight;}
-        if ( un == null || un =='') {un=oname;}
-        if ( age == null || age =='') {age=oage;}
+        if ( height == null || height == '') {height=1;}
+        if ( weight == null || weight =='') {weight=1;}
+        if ( un == null || un =='') {un=1;}
+        if ( age == null || age =='') {age=1;}
         var hb=[];
 
         $('.hobbies').each(function(){
