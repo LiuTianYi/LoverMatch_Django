@@ -109,7 +109,7 @@ def showInfo(request):
         return JsonResponse({'result': -1})
 
 
-def update_user(request):
+def update_self(request):
     userUpdate = request.POST
 
     # usr = userUpdate["user"]
@@ -129,12 +129,23 @@ def update_user(request):
     grad = userUpdate["gradeId"]
     cons = userUpdate["constellationId"]
     hob = userUpdate["hobbiesId"]
-    fea = userUpdate["features"]
-    per = userUpdate["percentage"]
     #
     if UserInfo.objects(user=usr).update(name=nm, password=pw, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
                                          universityId=univ,
-                                         schoolId=scho, gradeId=grad, constellationId=cons, hobbiesId=hob, features=fea,
+                                         schoolId=scho, gradeId=grad, constellationId=cons, hobbiesId=hob):
+
+        return HttpResponse("user update success")
+    else:
+        return HttpResponse("user update failed")
+
+def update_other(request):
+    userUpdate = request.POST
+    usr = request.session.get('user')
+    # usr = userUpdate["user"]
+    fea = userUpdate["features"]
+    per = userUpdate["percentage"]
+    #
+    if UserInfo.objects(user=usr).update(features=fea,
                                          percentage=per):
 
         return HttpResponse("user update success")
@@ -168,8 +179,6 @@ def login(req):
         userinfo = UserInfo.objects.get(user=usr, password=pw)
         # print len(userinfo)
         if len(userinfo) > 0:
-            print len(userinfo)
-            print userinfo
             if userinfo.is_active == False:
                 return JsonResponse({'code': -3})
             req.session['user'] = usr
