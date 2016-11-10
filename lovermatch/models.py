@@ -19,12 +19,12 @@ class UserInfo(Document):
     gender = IntField(required=False)  # 性别
     height = IntField(required=False)  # 身高
     weight = IntField(required=False)  # 体重
-    hometownId = ListField(required=False)  # 家乡
+    hometownId = ListField(IntField)  # 家乡
     universityId = IntField(required=False)  # 大学
-    schoolId = ListField(required=False)  # 学院
+    schoolId = ListField(IntField)  # 学院
     gradeId = IntField(required=False)  # 年级
     constellationId = IntField(required=False)  # 星座
-    hobbiesId = ListField(required=False)  # 爱好
+    hobbiesId = ListField(IntField)  # 爱好
     loverMatch = DictField(required=False)  # 匹配对象 json
     loverMatched = DictField(required=False)  # 被匹配对象 json
     verified = BooleanField(required=False)  # 是否被确认
