@@ -160,9 +160,9 @@ def update_other(request):
     userUpdate = request.POST
     usr = request.session.get('user')
     # usr = userUpdate["user"]
-    data = json.loads(request.body)
-    fea = json.loads(data['features'])
-    per = json.loads(data['percentage'])
+    # data = json.loads(request.body)
+    fea = json.loads(request.POST['features'])
+    per = json.loads(request.POST['percentage'])
 
     #
     if UserInfo.objects(user=usr).update(features=fea,
