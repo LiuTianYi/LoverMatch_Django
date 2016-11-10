@@ -374,7 +374,7 @@ $(function(){
         if ( countyid == null) {countyid=1;}
         if ( m1 == null) {m1=1;}
         if ( m2 == null) {m2=1;}
-        if ( m3 == null) {m3=o1;}
+        if ( m3 == null) {m3=1;}
         if ( schoolid == null) {schoolid=1;}
         if ( sex == null) {sex=1;}
         if ( costell == null) {costell=1;}

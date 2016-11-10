@@ -37,9 +37,8 @@
     <div class="container">
 
       <div class="starter-template">
-        <h1>注册没有成功</h1>
-        <p class="lead">对不起你注册不成功</p>
-        <button id="reg-btn" class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+        <h1 id="act" ></h1>
+
       </div>
 
     </div><!-- /.container -->
@@ -73,7 +72,12 @@
             data: {"token":token}, // the data that will be sent to php processor
             dataType: "json", // type of returned data
             success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
-              
+
+              if(data["code"]==0){
+                $("#act").html("注册成功，赶紧去找对象吧")；
+              }else{
+                $("#act").html("没有注册成功，再去试一遍吧")；
+              }
             }
            });
   //      });
