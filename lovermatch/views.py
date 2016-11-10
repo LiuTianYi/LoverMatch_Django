@@ -174,7 +174,7 @@ def update_feature(request):
     else:
         return HttpResponse({"code":-1})
 
-def update_pencentage(request):
+def update_percentage(request):
 
     per = request.POST
     usr = request.session.get('user')

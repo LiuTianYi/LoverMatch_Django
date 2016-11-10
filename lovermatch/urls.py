@@ -19,6 +19,7 @@ urlpatterns = [
                   url(r'^hello', views.helloworld),
                   url(r'^showInfo', views.showInfo),
                   url(r'^update_self', views.update_self),
-                  url(r'^update_other', views.update_other),
+                  url(r'^update_feature', views.update_feature),
+                  url(r'^update_percentage', views.update_percentage),
 
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
