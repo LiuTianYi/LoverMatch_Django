@@ -49,7 +49,10 @@ def signup(request):
         _pwd = request.POST['password']
         _nickname = request.POST['name']
 
-        insert_user = UserInfo.objects.update(user=_username, password=_pwd, name=_nickname)
+        userinfos = UserInfo.objects(user=_username, password=_pwd)
+        if len(userinfos) > 0:
+            return JsonResponse({'code': -1})
+        insert_user = UserInfo.objects.create(user=_username, password=_pwd, name=_nickname)
         insert_user.is_active = False  # set false here to wait further verification in email
         insert_user.save()
 
@@ -58,8 +61,9 @@ def signup(request):
                              '/'.join([django_settings.DOMAIN, 'activate', _token])])
         send_mail('注册用户验证信息', message, '2601112836@qq.com', [_username])
 
-        context = {'message': '请尽快登录你的注册邮箱，点击链接进行激活，注意有效期为1个小时', 'nickname': _nickname}
-        return render(request, 'lovermatch/signup_results.html', context)
+        return JsonResponse({'code': 0})
+        # context = {'message': '请尽快登录你的注册邮箱，点击链接进行激活，注意有效期为1个小时', 'nickname': _nickname}
+        # return render(request, 'lovermatch/signup_results.html', context)
         # return HttpResponseRedirect(reverse('lovermatch:results', args=(usr,)))
 
 
@@ -71,21 +75,24 @@ def active_user(request, _token):
         users = UserInfo.objects.filter(name=nickname)
         for user in users:
             user.delete()
-        message = '对不起，验证链接已经过期，请重新<a href=\"' + django_settings.DOMAIN + '/signup_form\">注册</a>'
-        context = {'message': message, 'nickname': nickname}
-        return render(request, 'lovermatch/signup_results.html', context)
+        return JsonResponse({'code': -1})
+        # message = '对不起，验证链接已经过期，请重新<a href=\"' + django_settings.DOMAIN + '/signup_form\">注册</a>'
+        # context = {'message': message, 'nickname': nickname}
+        # return render(request, 'lovermatch/signup_results.html', context)
     try:
         user = UserInfo.objects.get(name=nickname)
     except UserInfo.DoesNotExist:
-        message = '对不起，用户不存在，请重新<a href=\"' + django_settings.DOMAIN + '/signup_form\">注册</a>'
-        context = {'message': message, 'nickname': nickname}
-        return render(request, 'lovermatch/signup_results.html', context)
+        return JsonResponse({'code': -1})
+        # message = '对不起，用户不存在，请重新<a href=\"' + django_settings.DOMAIN + '/signup_form\">注册</a>'
+        # context = {'message': message, 'nickname': nickname}
+        # return render(request, 'lovermatch/signup_results.html', context)
 
     user.is_active = True
     user.save()
-    message = '验证成功，请进行<a href=\"' + django_settings.DOMAIN + '/login\">登录</a>操作'
-    context = {'message': message, 'nickname': nickname}
-    return render(request, 'lovermatch/signup_results.html', context)
+    return JsonResponse({'code': 0})
+    # message = '验证成功，请进行<a href=\"' + django_settings.DOMAIN + '/login\">登录</a>操作'
+    # context = {'message': message, 'nickname': nickname}
+    # return render(request, 'lovermatch/signup_results.html', context)
 
 
 def showInfo(request):
