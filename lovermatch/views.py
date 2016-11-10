@@ -74,7 +74,7 @@ def active_user(request):
             nickname = token.confirm_validate_token(_token)
         except:
             nickname = token.remove_validate_token(_token)
-            users = UserInfo.objects.filter(name=nickname)
+            users = UserInfo.objects(name=nickname)
             for user in users:
                 user.delete()
             return JsonResponse({'code': -1})
