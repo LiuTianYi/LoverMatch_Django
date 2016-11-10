@@ -132,6 +132,7 @@ def update_self(request):
     # ho = userUpdate["hometownId"]
     ho = userUpdate.getlist("hometownId[]")
     univ = userUpdate.get("universityId")
+    print univ
     scho = userUpdate.getlist("schoolId[]")
     print scho
     # grad = userUpdate["gradeId"]
