@@ -152,8 +152,8 @@ def update_self(request):
 
     else:
         return HttpResponse("user update failed")
-    # except:
-    #     return JsonResponse({"code": -3})
+        # except:
+        #     return JsonResponse({"code": -3})
 
 
 def update_feature(request):
@@ -170,12 +170,12 @@ def update_feature(request):
 
     #
     if UserInfo.objects(user=usr).update(features=fea):
-        return HttpResponse({"code":0})
+        return JsonResponse({"code": 0})
     else:
-        return HttpResponse({"code":-1})
+        return JsonResponse({"code": -1})
+
 
 def update_percentage(request):
-
     per = {}
 
     usr = request.session.get('user')
