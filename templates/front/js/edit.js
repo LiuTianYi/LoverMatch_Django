@@ -347,7 +347,7 @@ $(function(){
        $.ajax({ // JQuery ajax function
           type: "POST", // Submitting Method
           url: 'http://168.63.205.250/update_other',  //这里是你的api名字
-          data: {"features":null,"percentage":null}, // the data that will be sent to php processor
+          data: {"features":{}},"percentage":{}}}, // the data that will be sent to php processor
           dataType: "json", // type of returned data
           success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
           alert(data)
