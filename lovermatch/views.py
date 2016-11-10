@@ -161,8 +161,8 @@ def update_other(request):
     usr = request.session.get('user')
     # usr = userUpdate["user"]
     # data = json.loads(request.body)
-    fea = userUpdate.dict['features']
-    per = userUpdate.dict['percentage']
+    fea = userUpdate.dict('features')
+    per = userUpdate.dict('percentage')
 
     #
     if UserInfo.objects(user=usr).update(features=fea,
