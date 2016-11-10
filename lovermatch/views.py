@@ -165,7 +165,7 @@ def login(req):
         pw = req.POST['password']
 
         # 获取的表单数据与数据库进行比较
-        userinfo = UserInfo.objects(user=usr, password=pw)
+        userinfo = UserInfo.objects.get(user=usr, password=pw)
         # print len(userinfo)
         if len(userinfo) > 0:
             if userinfo.is_active == False:
