@@ -165,7 +165,7 @@ def update_feature(request):
     fea["hometownId"] = map(int,request.POST.getlist("hometownId[]"))
     fea["universityId"] = request.POST.get("universityId")
     fea["constellationId"] = request.POST.get("constellationId")
-    fea["schoolId"] = map(int, request.POST.getlist("schoolId[]"))
+    fea["schoolId"] = request.POST.getlist("schoolId[]")
     fea["gradeId"] = request.POST.get("gradeId")
     fea["hobbiesId"] = map(int, request.POST.getlist("gradeId[]"))
 
@@ -186,7 +186,7 @@ def update_percentage(request):
     per["hometownId"] = map(int, request.POST.getlist("hometownId[]"))
     per["universityId"] = request.POST.get("universityId")
     per["constellationId"] = request.POST.get("constellationId")
-    per["schoolId"] = map(int, request.POST.getlist("schoolId[]"))
+    per["schoolId"] = request.POST.getlist("schoolId[]")
     per["gradeId"] = request.POST.get("gradeId")
     per["hobbiesId"] = map(int, request.POST.getlist("gradeId[]"))
 
