@@ -157,7 +157,7 @@ def update_self(request):
 
 
 def update_feature(request):
-    fea = request.POST
+    fea = {}
     usr = request.session.get('user')
     fea["age"] = request.POST.get("age")
     fea["height"] = request.POST.get("height")
@@ -176,7 +176,8 @@ def update_feature(request):
 
 def update_percentage(request):
 
-    per = request.POST
+    per = {}
+
     usr = request.session.get('user')
     per["age"] = request.POST.get("age")
     per["height"] = request.POST.get("height")
