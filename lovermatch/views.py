@@ -132,10 +132,9 @@ def update_self(request):
         ho = userUpdate["hometownId"]
         univ = userUpdate["universityId"]
         scho = userUpdate["schoolId"]
-        grad = userUpdate["gradeId"]
+        # grad = userUpdate["gradeId"]
         cons = userUpdate["constellationId"]
         hob = userUpdate["hobbiesId"]
-        isative = userUpdate["is_active"]
     except:
         return JsonResponse({"code": -2})
     #
@@ -143,8 +142,7 @@ def update_self(request):
 
         if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
                                              universityId=univ,
-                                             schoolId=scho, gradeId=grad, constellationId=cons, hobbiesId=hob,
-                                             is_ative=isative):
+                                             schoolId=scho, constellationId=cons, hobbiesId=hob):
 
             return HttpResponse("user update success")
 
