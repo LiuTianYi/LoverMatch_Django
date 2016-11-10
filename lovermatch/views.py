@@ -83,7 +83,7 @@ def active_user(request):
             # return render(request, 'lovermatch/signup_results.html', context)
         try:
             user = UserInfo.objects.get(name=nickname)
-        except UserInfo.DoesNotExist, UserInfo.MultipleObjectsReturned:
+        except (UserInfo.DoesNotExist, UserInfo.MultipleObjectsReturned):
             return JsonResponse({'code': -1})
             # message = '对不起，用户不存在，请重新<a href=\"' + django_settings.DOMAIN + '/signup_form\">注册</a>'
             # context = {'message': message, 'nickname': nickname}
