@@ -168,6 +168,8 @@ def login(req):
         userinfo = UserInfo.objects(user=usr, password=pw)
         # print len(userinfo)
         if len(userinfo) > 0:
+            if userinfo.is_active == False:
+                return JsonResponse({'code': -3})
             req.session['user'] = usr
             req.session.set_expiry(3600000)  # 1 hour timeout
             print req.session['user']
