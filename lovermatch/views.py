@@ -156,21 +156,42 @@ def update_self(request):
     #     return JsonResponse({"code": -3})
 
 
-def update_other(request):
-    userUpdate = request.POST
+def update_feature(request):
+    fea = request.POST
     usr = request.session.get('user')
-    # usr = userUpdate["user"]
-    # data = json.loads(request.body)
-    fea = userUpdate.get('features')
-    per = userUpdate.get('percentage')
+    fea["age"] = request.POST.get("age")
+    fea["height"] = request.POST.get("height")
+    fea["weight"] = request.POST.get("weight")
+    fea["hometownId"] = request.POST.getlist("hometownId")
+    fea["universityId"] = request.POST.get("universityId")
+    fea["constellationId"] = request.POST.get("constellationId")
+    fea["schoolId"] = request.POST.getlist("schoolId")
+    fea["gradeId"] = request.POST.get("gradeId")
 
     #
-    if UserInfo.objects(user=usr).update(features=fea,
-                                         percentage=per):
-
-        return HttpResponse("user update success")
+    if UserInfo.objects(user=usr).update(features=fea):
+        return HttpResponse({"code":0})
     else:
-        return HttpResponse("user update failed")
+        return HttpResponse({"code":-1})
+
+def update_pencentage(request):
+
+    per = request.POST
+    usr = request.session.get('user')
+    per["age"] = request.POST.get("age")
+    per["height"] = request.POST.get("height")
+    per["weight"] = request.POST.get("weight")
+    per["hometownId"] = request.POST.getlist("hometownId")
+    per["universityId"] = request.POST.get("universityId")
+    per["constellationId"] = request.POST.get("constellationId")
+    per["schoolId"] = request.POST.getlist("schoolId")
+    per["gradeId"] = request.POST.get("gradeId")
+
+    #
+    if UserInfo.objects(user=usr).update(percentage=per):
+        return HttpResponse({"code": 0})
+    else:
+        return HttpResponse({"code": -1})
 
 
 class ExampleModel(models.Model):
