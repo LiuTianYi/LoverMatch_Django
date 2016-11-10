@@ -1,31 +1,42 @@
 $(function(){
 	//load hobby
 	$("#hobby").html("");
+    $("#f-hobby").html("");
 	for (var i = 0 ;  i < hobbies["hobby"].length ; i++){
 		var hb = hobbies["hobby"][i];
 		$("#hobby").append('<label class="checkbox-inline " id="hobby-'+i+'"><input class="hobbies" type="checkbox" name="checkboxes" id="checkboxes-'+i+'" value="'+i+'">'+hb+'</label>');
+        $("#f-hobby").append('<label class="checkbox-inline " id="f-hobby-'+i+'"><input class="f-hobbies" type="checkbox" name="checkboxes" id="checkboxes-'+i+'" value="'+i+'">'+hb+'</label>');
 	}
 
+
+
     $("#selectcons").html("");
+    $("#f-selectcons").html("");
     for (var i = 0 ; i < cons["constellation"].length ; i++){
         var conste = cons["constellation"][i];
         $("#selectcons").append('<option id=conste'+i+' value="'+i+'">'+conste+'</option>');
+        $("#f-selectcons").append('<option id=f-conste'+i+' value="'+i+'">'+conste+'</option>');
     }
 
     $("#selectgrade").html("");
+    $("#f-selectgrade").html("");
     for (var i = 0 ; i < grade["grade"].length ; i++){
         var gradeunit = grade["grade"][i];
         $("#selectgrade").append('<option id=grade'+i+' value="'+i+'">'+gradeunit+'</option>');
+        $("#f-selectgrade").append('<option id=f-grade'+i+' value="'+i+'">'+gradeunit+'</option>');
     }
 
     $("#selectschool").html("");
+    $("#f-selectschool").html("");
     for (var i = 0 ; i < school["school"].length ; i++){
         var sch = school["school"][i]["name"];
         $("#selectschool").append('<option id=school'+i+' value="'+i+'">'+sch+'</option>');
+        $("#f-selectschool").append('<option id=f-school'+i+' value="'+i+'">'+sch+'</option>');
     }
 
 	//load provice
 	$("#selectprovince").html("");
+    $("#f-selectprovince").html("");
 	//alert(city["province"].length)
 	for (var i = 0 ; i < city["province"].length ; i++){
 
@@ -33,40 +44,95 @@ $(function(){
 		var pid = city["province"][i]["id"];
 
 		$("#selectprovince").append('<option id="province'+pid+'" value="'+pid+'">'+ct+'</option>');
+        $("#f-selectprovince").append('<option id="f-province'+pid+'" value="'+pid+'">'+ct+'</option>');
 	}
 
 	//alert(city["province"][0]["city"][0]["country"].length);
 
-	loadcity(1);
+
+    loadfcity(1);
 	//console.log(city["province"][0]["city"][0]["country"].length)
-	loadcounty(1,1);
+    loadfcounty(1,1);
 	//load city
 
-	var provinceid;
 
-	$("select#selectprovince").change(function(){
-		provinceid = $("#selectprovince option:selected").val();
-		
-		//alert(city["province"][provinceid]["city"][0]["c_name"]);
-		loadcity(provinceid);
-		loadcounty(provinceid,1);
-	});
-
-	var cityid;
+    var fprovinceid;
 
 
-	$("select#city").change(function(){
-		cityid = $("#city option:selected").val();
-		
-		//alert(city["province"][provinceid]["city"][0]["c_name"]);
-		//console.log(cityid);
-		loadcounty(provinceid,cityid);
-	});
+    $("select#f-selectprovince").change(function(){
+        fprovinceid = $("#f-selectprovince option:selected").val();
+        
+        //alert(city["province"][provinceid]["city"][0]["c_name"]);
+        loadfcity(fprovinceid);
+        loadfcounty(fprovinceid,1);
+    });
 
-	var countyid;
-	$("select#county").change(function(){
-		countyid = $("#county option:selected").val();
-	});	
+
+    var fcityid;
+
+
+
+
+    $("select#f-city").change(function(){
+        fcityid = $("#f-city option:selected").val();
+        
+        //alert(city["province"][provinceid]["city"][0]["c_name"]);
+        //console.log(cityid);
+        loadfcounty(fprovinceid,fcityid);
+    });
+
+
+
+    var fcountyid;
+    $("select#f-county").change(function(){
+        fcountyid = $("#f-county option:selected").val();
+    }); 
+
+
+
+    $("#f-selectmajor1").html("");
+    //console.log(major["一级学科"].length);
+    //alert(city["province"].length)
+    for (var i = 0 ; i < major["一级学科"].length ; i++){
+
+        var ct = major["一级学科"][i]["1_name"];
+        var pid = major["一级学科"][i]["id"];
+        //console.log(ct)
+
+        $("#f-selectmajor1").append('<option id="f-major'+pid+'" value="'+pid+'">'+ct+'</option>');
+    }
+
+
+    loadfmajor1(1);
+    //console.log(city["province"][0]["city"][0]["country"].length)
+    loadfmajor2(1,1);
+    //load city
+
+    var fm1;
+
+    $("select#f-selectmajor1").change(function(){
+        fm1 = $("#f-selectmajor1 option:selected").val();
+        
+        //alert(city["province"][provinceid]["city"][0]["c_name"]);
+        loadfmajor1(m1);
+        loadfmajor2(m1,1);
+    });
+
+    var fm2;
+
+
+    $("select#f-selectmajor2").change(function(){
+        fm2 = $("#f-selectmajor2 option:selected").val();
+        
+        //alert(city["province"][provinceid]["city"][0]["c_name"]);
+        //console.log(cityid);
+        loadfmajor2(fm1,fm2);
+    });
+
+    var fm3;
+    $("select#f-selectmajor3").change(function(){
+        fm3 = $("#f-selectmajor3 option:selected").val();
+    }); 
 
 
 
@@ -121,7 +187,7 @@ $(function(){
         var pid = major["一级学科"][i]["id"];
         //console.log(ct)
 
-        $("#selectmajor1").append('<option id="major1'+pid+'" value="'+pid+'">'+ct+'</option>');
+        $("#selectmajor1").append('<option id="major'+pid+'" value="'+pid+'">'+ct+'</option>');
     }
 
 
@@ -156,6 +222,11 @@ $(function(){
         m3 = $("#selectmajor3 option:selected").val();
     }); 
 
+    var fschoolid;
+    $("select#f-selectschool").change(function(){
+        fschoolid = $("#f-selectschool option:selected").val();
+    }); 
+
 
     var schoolid;
     $("select#selectschool").change(function(){
@@ -167,9 +238,20 @@ $(function(){
         sex = $("#selectsex option:selected").val();
     }); 
 
+    var fcostell;
+    $("select#f-selectcons").change(function(){
+        fcostell = $("#f-selectcons option:selected").val();
+    }); 
+
     var costell;
     $("select#selectcons").change(function(){
         costell = $("#selectcons option:selected").val();
+    }); 
+
+
+    var fyear ;
+    $("select#f-selectgrade").change(function(){
+        fyear = $("#f-selectgrade option:selected").val();
     }); 
 
     var year ;
@@ -179,6 +261,84 @@ $(function(){
 
 
 
+    $("#rateage").attr("value",5);
+    $("#rateheight").attr("value",5);
+    $("#rateweight").attr("value",5);
+    $("#rateprovince").attr("value",5);
+    $("#ratecity").attr("value",5);
+    $("#ratecounty").attr("value",5);
+    $("#rateschool").attr("value",5);
+    $("#ratem1").attr("value",5);
+    $("#ratem2").attr("value",5);
+    $("#ratem3").attr("value",5);
+    $("#rategrade").attr("value",5);
+    $("#ratecons").attr("value",5);
+    $("#ratehobby").attr("value",5);
+
+
+
+    $("#savafeature").click(function(){
+        if ( fprovinceid==null){fprovinceid=1;};
+        if (fcityid==null){fcityid=1;};
+        if ( fcountyid == null) {fcountyid=1;}
+        if ( fm1 == null) {fm1=1;}
+        if ( fm2 == null) {fm2=1;}
+        if ( fm3 == null) {fm3=1;}
+        if ( fschoolid == null) {fschoolid=1;}
+        if ( fcostell == null) {fcostell=1;}
+        if ( fyear == null) {fyear=1;}
+        var fheight = $("#height").val();
+        //console.log(height);
+        var fweight = $("#weight").val();
+
+        var fage = $("#age").val();
+
+        if ( fheight == null || fheight == '') {fheight=163;}
+        if ( fweight == null || fweight =='') {fweight=49;}
+        if ( fage == null || fage =='') {fage=18;}
+        var fhb=[];
+
+        $('.f-hobbies').each(function(){
+            console.log($(this).is(":checked"));
+            if ($(this).is(":checked")==true){
+
+                fhb.push($(this).attr('value'));
+                //console.log(hb.length);
+            }
+
+        });
+
+        var rage = $("#rateage").val();
+        var rheight = $("#rateheight").val();
+        var rweight = $("#rateweight").val();
+        var rprovince = $("#rateprovince").val();
+        var rcity = $("#ratecity").val();
+        var rcounty = $("#ratecounty").val();
+        var rschool = $("#rateschool").val();
+        var rm1 = $("#ratem1").val();
+        var rm2 = $("#ratem2").val();
+        var rm3 = $("#ratem3").val();
+        var rgrade = $("#rategrade").val();
+        var rcon = $("#ratecons").val();
+        var rhobby = $("#ratehobby").val();
+
+
+       $.ajax({ // JQuery ajax function
+          type: "POST", // Submitting Method
+          url: 'http://168.63.205.250/edit',  //这里是你的api名字
+          data: {"name":un,"age":age,"gender":sex,"height":height,"weight":weight,"hometownId":[provinceid,cityid,countyid],"universityId":schoolid,"major1":[m1,m2,m3],"constellationId":costell,"hobbiesId":hb,"features":{"age":fage,"height":fheight,"weight":fweight,"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":},"percentage":{"age":rage,"height":rheight,"weight":rweight,"provinceid":rprovince,"cityid":rcity,"countyid":rcounty,"universityId":rschool,"constellationId":ratecons,"hobby":rhobby}}, // the data that will be sent to php processor
+          dataType: "json", // type of returned data
+          success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
+          alert(data)
+          }
+         });
+
+
+        //console.log(provinceid+' '+cityid+' '+countyid+' '+m1+' '+m2+' '+m3+' '+schoolid+' '+sex+' '+costell + ' '+year+ ' '+height+' '+weight+' end');
+        //for (var i = 0 ; i < hb.length ; i++){
+        //    console.log(hb[i]);
+        //}
+    });
 
     
 
@@ -206,12 +366,12 @@ $(function(){
         console.log(un);
         if ( height == null || height == '') {height=163;}
         if ( weight == null || weight =='') {weight=49;}
-        if ( un == null || un =='') {weight=''little49'';}
-        if ( age == null || age =='') {weight=18;}
+        if ( un == null || un =='') {un='littlewhite';}
+        if ( age == null || age =='') {age=18;}
         var hb=[];
 
         $('.hobbies').each(function(){
-            //console.log($(this).is(":checked"));
+            console.log($(this).is(":checked"));
             if ($(this).is(":checked")==true){
 
                 hb.push($(this).attr('value'));
@@ -220,17 +380,17 @@ $(function(){
 
         })
 
-         $(window).load(function() {
-           $.ajax({ // JQuery ajax function
-              type: "POST", // Submitting Method
-              url: 'http://168.63.205.250/edit',  //这里是你的api名字
-              data: {"name":un,"age":age,"gender":sex,"height":height,"weight":weight,"hometownId":[provinceid,cityid,countyid],"universityId":schoolid,"major1":[m1,m2,m3],"constellationId":costell,"hobbiesId":hb,"features":{}}, // the data that will be sent to php processor
-              dataType: "json", // type of returned data
-              success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
-              alert(data)
-              }
-             });
-          });
+
+       $.ajax({ // JQuery ajax function
+          type: "POST", // Submitting Method
+          url: 'http://168.63.205.250/edit',  //这里是你的api名字
+          data: {"name":un,"age":age,"gender":sex,"height":height,"weight":weight,"hometownId":[provinceid,cityid,countyid],"universityId":schoolid,"major1":[m1,m2,m3],"constellationId":costell,"hobbiesId":hb,"features":{"age":fage,"height":fheight,"weight":fweight,"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":},"percentage":{"age":rage,"height":rheight,"weight":rweight,"provinceid":rprovince,"cityid":rcity,"countyid":rcounty,"universityId":rschool,"constellationId":ratecons,"hobby":rhobby}},
+          dataType: "json", // type of returned data
+          success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
+          alert(data)
+          }
+         });
+
 
         //console.log(provinceid+' '+cityid+' '+countyid+' '+m1+' '+m2+' '+m3+' '+schoolid+' '+sex+' '+costell + ' '+year+ ' '+height+' '+weight+' end');
         //for (var i = 0 ; i < hb.length ; i++){
@@ -242,6 +402,37 @@ $(function(){
 
 });
 
+function loadfcity(prid){
+    //alert("province id from function"+prid);
+    $("#f-city").html("");
+    var pid = prid-1;
+    for (var i = 0 ; i < city["province"][pid]["city"].length ; i++){
+        var ct = city["province"][pid]["city"][i]["c_name"];
+        var cid = city["province"][pid]["city"][i]["id"];
+        //alert(ct);
+        $("#f-city").append('<option id="f-city'+cid+'" value="'+cid+'">'+ct+'</option>');
+
+    }
+
+}
+
+function loadfcounty(provinceid,cityid){
+    $("#f-county").html("");
+    var pid = provinceid-1;
+    var cid = cityid-1;
+    //console.log(city["province"][pid]["city"][pid]["country"].length);
+    for (var i = 0 ; i < city["province"][pid]["city"][cid]["country"].length  ; i++){
+        var ct = city["province"][pid]["city"][cid]["country"][i]["cc_name"];
+        var ccid = city["province"][pid]["city"][cid]["country"][i]["id"];
+        //alert(ct);
+        $("#f-county").append('<option id="f-county'+ccid+'" value="'+ccid+'">'+ct+'</option>');
+
+    }
+
+}
+
+
+
 function loadcity(prid){
 	//alert("province id from function"+prid);
 	$("#city").html("");
@@ -250,7 +441,7 @@ function loadcity(prid){
 		var ct = city["province"][pid]["city"][i]["c_name"];
 		var cid = city["province"][pid]["city"][i]["id"];
 		//alert(ct);
-		$("#city").append('<option id="province'+cid+'" value="'+cid+'">'+ct+'</option>');
+		$("#city").append('<option id="city'+cid+'" value="'+cid+'">'+ct+'</option>');
 
 	}
 
@@ -265,7 +456,7 @@ function loadcounty(provinceid,cityid){
 		var ct = city["province"][pid]["city"][cid]["country"][i]["cc_name"];
 		var ccid = city["province"][pid]["city"][cid]["country"][i]["id"];
 		//alert(ct);
-		$("#county").append('<option id="province'+ccid+'" value="'+ccid+'">'+ct+'</option>');
+		$("#county").append('<option id="county'+ccid+'" value="'+ccid+'">'+ct+'</option>');
 
 	}
 
@@ -294,11 +485,42 @@ function loadmajor2(m1id,m2id){
         var ct = major["一级学科"][pid]["二级学科"][cid]["专业"][i]["3_name"];
         var ccid = major["一级学科"][pid]["二级学科"][cid]["专业"][i]["id"];
         //alert(ct);
-        $("#selectmajor3").append('<option id="一级学科'+ccid+'" value="'+ccid+'">'+ct+'</option>');
+        $("#selectmajor3").append('<option id="major2'+ccid+'" value="'+ccid+'">'+ct+'</option>');
 
     }
 
 }
+
+function loadfmajor1(m1id){
+    //alert("province id from function"+prid);
+    $("#f-selectmajor2").html("");
+    var pid = m1id-1;
+    for (var i = 0 ; i < major["一级学科"][pid]["二级学科"].length ; i++){
+        var ct = major["一级学科"][pid]["二级学科"][i]["2_name"];
+        var cid = major["一级学科"][pid]["二级学科"][i]["id"];
+        //alert(ct);
+        $("#f-selectmajor2").append('<option id="f-major1'+cid+'" value="'+cid+'">'+ct+'</option>');
+
+    }
+
+}
+
+function loadfmajor2(m1id,m2id){
+    $("#f-selectmajor3").html("");
+    var pid = m1id-1;
+    var cid = m2id-1;
+    //console.log(city["province"][pid]["city"][pid]["country"].length);
+    for (var i = 0 ; i < major["一级学科"][pid]["二级学科"][cid]["专业"].length  ; i++){
+        var ct = major["一级学科"][pid]["二级学科"][cid]["专业"][i]["3_name"];
+        var ccid = major["一级学科"][pid]["二级学科"][cid]["专业"][i]["id"];
+        //alert(ct);
+        $("#f-selectmajor3").append('<option id="f-major2'+ccid+'" value="'+ccid+'">'+ct+'</option>');
+
+    }
+
+}
+
+
 
 
 var major = {
