@@ -148,12 +148,12 @@ $(function() {
     		$("#password1label").text("密码");
     		$("#password2label").css({"color":"black"});
     		$("#password2label").text("确认密码");
-			$.ajax({ // JQuery ajax function
-		      type: "POST", // Submitting Method
-		      url: 'http://168.63.205.250/signup/',  //这里是你的api名字
-		      data: {"name":un1,"username":em1,"password":pw1}, // the data that will be sent to php processor
-		      dataType: "json", // type of returned data
-		      success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
+			$.ajax({ 
+		      type: "POST", 
+		      url: 'http://168.63.205.250/signup/',  
+		      data: {"name":un1,"username":em1,"password":pw1},
+		      dataType: "json", 
+		      success: function(data) { 
 		      	if (data["code"]==0){
                     window.location="./regsuccess.html"
                 }else{
