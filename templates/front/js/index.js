@@ -16,7 +16,7 @@ $(function() {
 //        ohome = data["data"]["hometownId"];
 //        oschool = data["data"]["schoolId"];
 //        ohobby = data["data"]["hobbiesId"];
- //       oname = data["data"]["name"];
+        oname = data["data"]["name"];
 //        oweight = data["data"]["weight"];
 //        ogender = data["data"]["gender"];
 //        oage = data["data"]["age"];
@@ -24,7 +24,7 @@ $(function() {
  //       ophotoAddress = data["data"]["photoAddress"];
 //        ouniversity = data["data"]["universityId"];
 //        ofeatuers = data["data"]["features"];
-        ouser = data["data"]["user"];
+//        ouser = data["data"]["user"];
 //        oloverMatched = data["data"]["loverMatched"];
 //        oloverMatch = data["data"]["loverMatch"];
 //        ogradeId = data["data"]["gradeId"];
@@ -32,6 +32,7 @@ $(function() {
  //       opercentage = data["data"]["percentage"];
 //        oconstellationId = data["data"]["constellationId"];
 //        oschoresultool = data["data"]["result"];
+          $("#usernamelabel").html(oname)
       }
      });
   });
