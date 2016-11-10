@@ -115,30 +115,39 @@ def update_self(request):
     # usr = userUpdate["user"]
     # nm = userUpdate["name"]
     # UserInfo.objects(user=usr).update(name=nm)
-    usr = request.session.get('user')
+    try:
+        usr = request.session.get('user')
+    except:
+        return JsonResponse({"code": -1})
 
     # usr = userUpdate["user"]
     # pw = userUpdate["password"]
-    nm = userUpdate["name"]
-    ag = userUpdate["age"]
-    ge = userUpdate["gender"]
-    hei = userUpdate["height"]
-    wei = userUpdate["weight"]
-    ho = userUpdate["hometownId"]
-    univ = userUpdate["universityId"]
-    scho = userUpdate["schoolId"]
-    grad = userUpdate["gradeId"]
-    cons = userUpdate["constellationId"]
-    hob = userUpdate["hobbiesId"]
-    isative = userUpdate["is_active"]
+    try:
+
+        nm = userUpdate["name"]
+        ag = userUpdate["age"]
+        ge = userUpdate["gender"]
+        hei = userUpdate["height"]
+        wei = userUpdate["weight"]
+        ho = userUpdate["hometownId"]
+        univ = userUpdate["universityId"]
+        scho = userUpdate["schoolId"]
+        grad = userUpdate["gradeId"]
+        cons = userUpdate["constellationId"]
+        hob = userUpdate["hobbiesId"]
+        isative = userUpdate["is_active"]
+    except:
+        return JsonResponse({"code": -2})
     #
     if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
                                          universityId=univ,
-                                         schoolId=scho, gradeId=grad, constellationId=cons, hobbiesId=hob, is_ative=isative):
+                                         schoolId=scho, gradeId=grad, constellationId=cons, hobbiesId=hob,
+                                         is_ative=isative):
 
         return HttpResponse("user update success")
     else:
         return HttpResponse("user update failed")
+
 
 def update_other(request):
     userUpdate = request.POST
@@ -299,7 +308,7 @@ def constellation_similarity(c1, c2, condition):
 
 def hobbies_similarity(h1, h2, condition):
     flag = False
-    counter= 0
+    counter = 0
     for h in h2:
         if h in condition:
             flag = True
