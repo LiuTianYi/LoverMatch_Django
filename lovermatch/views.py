@@ -139,14 +139,19 @@ def update_self(request):
     except:
         return JsonResponse({"code": -2})
     #
-    if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
-                                         universityId=univ,
-                                         schoolId=scho, gradeId=grad, constellationId=cons, hobbiesId=hob,
-                                         is_ative=isative):
+    try:
 
-        return HttpResponse("user update success")
-    else:
-        return HttpResponse("user update failed")
+        if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
+                                             universityId=univ,
+                                             schoolId=scho, gradeId=grad, constellationId=cons, hobbiesId=hob,
+                                             is_ative=isative):
+
+            return HttpResponse("user update success")
+
+        else:
+            return HttpResponse("user update failed")
+    except:
+        return JsonResponse({"code": -3})
 
 
 def update_other(request):
