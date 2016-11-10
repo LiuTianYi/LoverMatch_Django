@@ -190,9 +190,9 @@ def update_percentage(request):
 
     #
     if UserInfo.objects(user=usr).update(percentage=per):
-        return HttpResponse({"code": 0})
+        return JsonResponse({"code": 0})
     else:
-        return HttpResponse({"code": -1})
+        return JsonResponse({"code": -1})
 
 
 class ExampleModel(models.Model):
