@@ -123,11 +123,14 @@ def update_user(request):
     fea = userUpdate["features"]
     per = userUpdate["percentage"]
     #
-    UserInfo.objects(user=usr).update(name=nm, password=pw, age=ag, gender=ge,height=hei, weight=wei, hometownId=ho, universityId=univ,
-                                      schoolId=scho, gradeId=grad, constellationId=cons, hobbiesId=hob, features=fea,
-                                      percentage=per)
+    if UserInfo.objects(user=usr).update(name=nm, password=pw, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
+                                         universityId=univ,
+                                         schoolId=scho, gradeId=grad, constellationId=cons, hobbiesId=hob, features=fea,
+                                         percentage=per):
 
-    return HttpResponse("user update success")
+        return HttpResponse("user update success")
+    else:
+        return HttpResponse("user update failed")
 
 
 class ExampleModel(models.Model):
