@@ -122,21 +122,21 @@ def update_self(request):
 
     # usr = userUpdate["user"]
     # pw = userUpdate["password"]
-    try:
+    # try:
 
-        nm = userUpdate["name"]
-        ag = userUpdate["age"]
-        ge = userUpdate["gender"]
-        hei = userUpdate["height"]
-        wei = userUpdate["weight"]
-        ho = userUpdate["hometownId"]
-        univ = userUpdate["universityId"]
-        scho = userUpdate["schoolId"]
-        # grad = userUpdate["gradeId"]
-        cons = userUpdate["constellationId"]
-        hob = userUpdate["hobbiesId"]
-    except:
-        return JsonResponse({"code": -2})
+    nm = userUpdate["name"]
+    ag = userUpdate["age"]
+    ge = userUpdate["gender"]
+    hei = userUpdate["height"]
+    wei = userUpdate["weight"]
+    ho = userUpdate["hometownId"]
+    univ = userUpdate["universityId"]
+    scho = userUpdate["schoolId"]
+    # grad = userUpdate["gradeId"]
+    cons = userUpdate["constellationId"]
+    hob = userUpdate["hobbiesId"]
+    # except:
+    #     return JsonResponse({"code": -2})
     #
     try:
 
