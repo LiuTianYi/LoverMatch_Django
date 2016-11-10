@@ -37,8 +37,8 @@
     <div class="container">
 
       <div class="starter-template">
-        <h1 id="act" ></h1>
-
+        <h1>你注册成功了但是没有激活呀</h1>
+        <p class="lead">请你去邮箱激活你的账号，点击邮件中的链接即可。</p>
       </div>
 
     </div><!-- /.container -->
@@ -50,41 +50,6 @@
     <script src="./js/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="./js/jquery.min.js"><\/script>')</script>
     <script src="./js/bootstrap.min.js"></script>
-    <script>
-        function getParameterByName(name, url) {
-            if (!url) {
-              url = window.location.href;
-            }
-            name = name.replace(/[\[\]]/g, "\\$&");
-            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, " "));
-        }
-      $(function() {
-        $(window).load(function(){
-          var token=getParameterByName("token");
-//         alert(token)
-          $.ajax({ // JQuery ajax function
-            type: "POST", // Submitting Method
-            url: 'http://168.63.205.250/active_user',  //这里是你的api名字
-            data: {"token":token}, // the data that will be sent to php processor
-            dataType: "json", // type of returned data
-            success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
-
-              if(data["code"]==0){
-                $("#act").html("激活成功，赶紧去找对象吧");
-              }else{
-                $("#act").html("没有激活成功，再去试一遍吧");
-              }
-            }
-           });
-  //      });
-
-        });
-      });
-    </script>
 
   </body>
 </html>
