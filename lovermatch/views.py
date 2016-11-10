@@ -169,7 +169,7 @@ def update_feature(request):
     fea["gradeId"] = request.POST.get("gradeId")
 
     #
-    if UserInfo.objects(user=usr).update(features=fea):
+    if UserInfo.objects(user=usr).update(features=map(int, fea)):
         return JsonResponse({"code": 0})
     else:
         return JsonResponse({"code": -1})
@@ -189,7 +189,7 @@ def update_percentage(request):
     per["gradeId"] = request.POST.get("gradeId")
 
     #
-    if UserInfo.objects(user=usr).update(percentage=per):
+    if UserInfo.objects(user=usr).update(percentage=map(int, per)):
         return JsonResponse({"code": 0})
     else:
         return JsonResponse({"code": -1})
