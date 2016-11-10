@@ -166,12 +166,10 @@ def login(req):
         userinfo = UserInfo.objects(user=usr, password=pw)
         # print len(userinfo)
         if len(userinfo) > 0:
-
             req.session['user'] = usr
             req.session.set_expiry(3600000)  # 1 hour timeout
             print req.session['user']
             return JsonResponse({'code': 0})
-
             # return HttpResponseRedirect('/show')
         else:
             return JsonResponse({'code': -1})

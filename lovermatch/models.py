@@ -15,16 +15,16 @@ class UserInfo(Document):
     name = StringField(required=True)
 
     photoAddress = StringField(max_length=100, required=False)  # 照片存储位置
-    age = IntField(required=True)  # 年龄
-    gender = IntField(required=True)  # 性别
-    height = IntField(required=True)  # 身高
-    weight = IntField(required=True)  # 体重
-    hometownId = ListField(required=True)  # 家乡
-    universityId = IntField(required=True)  # 大学
-    schoolId = ListField(required=True)  # 学院
-    gradeId = IntField(required=True)  # 年级
-    constellationId = IntField(required=True)  # 星座
-    hobbiesId = ListField(required=True)  # 爱好
+    age = IntField(required=False)  # 年龄
+    gender = IntField(required=False)  # 性别
+    height = IntField(required=False)  # 身高
+    weight = IntField(required=False)  # 体重
+    hometownId = ListField(required=False)  # 家乡
+    universityId = IntField(required=False)  # 大学
+    schoolId = ListField(required=False)  # 学院
+    gradeId = IntField(required=False)  # 年级
+    constellationId = IntField(required=False)  # 星座
+    hobbiesId = ListField(required=False)  # 爱好
     loverMatch = DictField(required=False)  # 匹配对象 json
     loverMatched = DictField(required=False)  # 被匹配对象 json
     verified = BooleanField(required=False)  # 是否被确认
