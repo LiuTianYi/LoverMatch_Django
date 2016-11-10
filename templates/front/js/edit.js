@@ -389,7 +389,7 @@ $(function(){
         if ( age == null || age =='') {age=1;}
         var hb=[];
 
-        $('.hobbies').each(function(this){
+        $('.hobbies').each(function(){
             console.log($(this).is(":checked"));
             if ($(this).is(":checked")==true){
 
