@@ -35,24 +35,25 @@ $(function() {
     $.post('http://localhost:8018/matchlist2',function(data){
       //alert(data);
       ohome = data["data"]["hometownId"];
-      oschool = data["data"]["hometownId"];
-      ohobby = data["data"]["hometownId"];
-      oname = data["data"]["hometownId"];
-      oweight = data["data"]["hometownId"];
-      ogender = data["data"]["hometownId"];
-      oage = data["data"]["hometownId"];
-      oheight = data["data"]["hometownId"];
-      ophotoAddress = data["data"]["hometownId"];
-      ouniversity = data["data"]["hometownId"];
-      ofeatuers = data["data"]["hometownId"];
-      ouser = data["data"]["hometownId"];
-      oloverMatched = data["data"]["hometownId"];
-      oloverMatch = data["data"]["hometownId"];
-      ogradeId = data["data"]["hometownId"];
-      overified = data["data"]["hometownId"];
-      opercentage = data["data"]["hometownId"];
-      oconstellationId = data["data"]["hometownId"];
-      oschoresultool = data["data"]["hometownId"];
+      oschool = data["data"]["schoolId"];
+      ohobby = data["data"]["hobbiesId"];
+      oname = data["data"]["name"];
+      oweight = data["data"]["weight"];
+      ogender = data["data"]["gender"];
+      oage = data["data"]["age"];
+      oheight = data["data"]["height"];
+      ophotoAddress = data["data"]["photoAddress"];
+      ouniversity = data["data"]["universityId"];
+      ofeatuers = data["data"]["features"];
+      ouser = data["data"]["user"];
+      oloverMatched = data["data"]["loverMatched"];
+      oloverMatch = data["data"]["loverMatch"];
+      ogradeId = data["data"]["gradeId"];
+      overified = data["data"]["verified"];
+      opercentage = data["data"]["percentage"];
+      oconstellationId = data["data"]["constellationId"];
+      oschoresultool = data["data"]["result"];
+
     });
   });
 });
@@ -79,24 +80,5 @@ var oconstellationId;
 var oresult;
 
 
-{"data": 
-  {"hometownId": null, 
-  "schoolId": null, 
-  "hobbiesId": [], 
-  "name": "te", 
-  "weight": null, 
-  "gender": null, 
-  "age": null, 
-  "height": null, 
-  "photoAddress": null, 
-  "universityId": null, 
-  "features": null, 
-  "user": "te", 
-  "loverMatched": null, 
-  "gradeId": null, 
-  "verified": null, 
-  "percentage": null, 
-  "loverMatch": null, 
-  "constellationId": null}, 
-  "result": 0
-}
+
+
