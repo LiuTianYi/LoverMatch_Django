@@ -130,14 +130,15 @@ def update_self(request):
     hei = userUpdate.get("height")
     wei = userUpdate.get("weight")
     # ho = userUpdate["hometownId"]
-    ho = userUpdate.getlist("hometownId[]")
+    ho = map(int, userUpdate.getlist("hometownId[]"))
     univ = userUpdate.get("universityId")
     print univ
-    scho = userUpdate.getlist("schoolId[]")
+    scho = map(int, userUpdate.getlist("schoolId[]"))
+    # results = map(int, results)
     print scho
     # grad = userUpdate["gradeId"]
     cons = userUpdate.get("constellationId")
-    hob = userUpdate.getlist("hobbiesId[]")
+    hob = map(int, userUpdate.getlist("hobbiesId[]"))
     # except:
     #     return JsonResponse({"code": -2})
     #
