@@ -49,7 +49,7 @@ def signup(request):
         _pwd = request.POST['password']
         _nickname = request.POST['name']
 
-        userinfos = UserInfo.objects(user=_username, password=_pwd)
+        userinfos = UserInfo.objects(user=_username, password=_pwd, name=_nickname)
         if len(userinfos) > 0:
             return JsonResponse({'code': -1})
         insert_user = UserInfo.objects.create(user=_username, password=_pwd, name=_nickname)
