@@ -168,6 +168,7 @@ def login(req):
         userinfo = UserInfo.objects.get(user=usr, password=pw)
         # print len(userinfo)
         if len(userinfo) > 0:
+            print len(userinfo)
             if userinfo.is_active == False:
                 return JsonResponse({'code': -3})
             req.session['user'] = usr
