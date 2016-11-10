@@ -58,7 +58,7 @@ def signup(request):
 
         _token = token.generate_validate_token(_nickname)
         message = "\n".join(['{0},恭喜你完成注册！'.format(_nickname), '请访问该链接，完成用户验证:',
-                             '/'.join([django_settings.DOMAIN, 'activate', _token])])
+                             '/'.join([django_settings.DOMAIN, 'static', 'front', 'activate.html?token=' + _token])])
         send_mail('注册用户验证信息', message, '2601112836@qq.com', [_username])
 
         return JsonResponse({'code': 0})
