@@ -25,11 +25,11 @@ class UserInfo(Document):
     gradeId = IntField(required=True)  # 年级
     constellationId = IntField(required=True)  # 星座
     hobbiesId = ListField(required=True)  # 爱好
-    loverMatch = StringField(required=False)  # 匹配对象 json
-    loverMatched = StringField(required=False)  # 被匹配对象 json
-    verified = StringField(required=False)  # 是否被确认
-    features = StringField(required=False) #json
-    percentage = StringField(required=False) #json
+    loverMatch = DictField(required=False)  # 匹配对象 json
+    loverMatched = DictField(required=False)  # 被匹配对象 json
+    verified = BooleanField(required=False)  # 是否被确认
+    features = DictField(required=False) #json
+    percentage = DictField(required=False) #json
 
 
 #
