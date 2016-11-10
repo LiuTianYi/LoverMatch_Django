@@ -162,12 +162,12 @@ def update_feature(request):
     fea["age"] = request.POST.get("age")
     fea["height"] = request.POST.get("height")
     fea["weight"] = request.POST.get("weight")
-    fea["hometownId"] = map(int,request.POST.getlist("hometownId"))
+    fea["hometownId"] = map(int,request.POST.getlist("hometownId[]"))
     fea["universityId"] = request.POST.get("universityId")
     fea["constellationId"] = request.POST.get("constellationId")
-    fea["schoolId"] = map(int, request.POST.getlist("schoolId"))
+    fea["schoolId"] = map(int, request.POST.getlist("schoolId[]"))
     fea["gradeId"] = request.POST.get("gradeId")
-    fea["hobbiesId"] = map(int, request.POST.getlist("gradeId"))
+    fea["hobbiesId"] = map(int, request.POST.getlist("gradeId[]"))
 
     #
     if UserInfo.objects(user=usr).update(features=map(int, fea)):
@@ -183,12 +183,12 @@ def update_percentage(request):
     per["age"] = request.POST.get("age")
     per["height"] = request.POST.get("height")
     per["weight"] = request.POST.get("weight")
-    per["hometownId"] = map(int, request.POST.getlist("hometownId"))
+    per["hometownId"] = map(int, request.POST.getlist("hometownId[]"))
     per["universityId"] = request.POST.get("universityId")
     per["constellationId"] = request.POST.get("constellationId")
-    per["schoolId"] = map(int, request.POST.getlist("schoolId"))
+    per["schoolId"] = map(int, request.POST.getlist("schoolId[]"))
     per["gradeId"] = request.POST.get("gradeId")
-    per["hobbiesId"] = map(int, request.POST.getlist("gradeId"))
+    per["hobbiesId"] = map(int, request.POST.getlist("gradeId[]"))
 
     #
     if UserInfo.objects(user=usr).update(percentage=map(int, per)):
