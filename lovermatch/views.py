@@ -49,7 +49,7 @@ def signup(request):
         _pwd = request.POST['password']
         _nickname = request.POST['name']
 
-        insert_user = UserInfo.objects.create(user=_username, password=_pwd, name=_nickname)
+        insert_user = UserInfo.objects.update(user=_username, password=_pwd, name=_nickname)
         insert_user.is_active = False  # set false here to wait further verification in email
         insert_user.save()
 
@@ -186,8 +186,8 @@ def logout(request):
 def match(request, usr):
     """match algorithm for usr to find all users who are similar to him/her based on features and weights"""
     user = UserInfo.objects(user=usr)
-    features_to_match = request.POST['features_to_match']
-    weights = request.POST['weights']
+    features_to_match = request.POST['features']
+    weights = request.POST['percentage']
     n = request.POST['amount']
     matchlist = {}
     for current_user in UserInfo.objects:
@@ -198,12 +198,12 @@ def match(request, usr):
     # return response
 
 
-def height_similarity(h1, h2):
+def height_similarity(h1, h2, condition):
     """h1 is male's height, h2 is female's height"""
-    gap = h1 - h2
-    if gap < 0:
-        return 0.5
-    elif 0 <= gap and gap < 10:
+    if h2 < condition[0] or h2 > condition[1]:
+        return 0.0
+    gap = abs(h1 - h2)
+    if 0 <= gap and gap < 10:
         return 0.8
     elif 10 <= gap and gap < 20:
         return 0.9
@@ -211,24 +211,105 @@ def height_similarity(h1, h2):
         return 1.0
 
 
-def hometown_similarity(hid1, hid2):
-    if hid1 == hid2:
+def age_similarity(a1, a2, condition):
+    if a2 < condition[0] or a2 > condition[1]:
+        return 0.0
+    gap = abs(a1 - a2)
+    if 0 <= gap and gap < 3:
         return 1.0
+    elif 3 <= gap and gap < 6:
+        return 0.8
+    else:
+        return 0.5
+
+
+def hometown_similarity(hid1, hid2, condition):
+    if hid2 not in condition:
+        return 0.0
+    return 1.0
+
+
+def gender_similarity(g1, g2, condition):
+    if g2 != condition:
+        return 0.0
+    return 1.0
+
+
+def weight_similarity(w1, w2, condition):
+    if w2 < condition[0] or w2 > condition[1]:
+        return 0.0
+    gap = abs(w1 - w2)
+    if 0 <= gap and gap < 10:
+        return 1.0
+    elif 10 <= gap and gap < 20:
+        return 0.9
+    else:
+        return 0.8
+
+
+def university_similarity(u1, u2, condition):
+    if u2 not in condition:
+        return 0.0
+    if u1 == u2:
+        return 1.0
+    else:
+        return 0.9
+
+
+def school_similarity(s1, s2, condition):
+    if s2 not in condition:
+        return 0.0
+    if s1 == s2:
+        return 1.0
+    else:
+        return 0.9
+
+
+def constellation_similarity(c1, c2, condition):
+    if c2 not in condition:
+        return 0.0
+    # need constellation knowledge
+    return 1.0
+
+
+def hobbies_similarity(h1, h2, condition):
+    flag = False
+    counter= 0
+    for h in h2:
+        if h in condition:
+            flag = True
+            break
+    if flag:
+        for h in h2:
+            if h in h1:
+                counter += 1.0
+        return counter / (len(h1) * len(h2))
+    else:
+        return 0.0
 
 
 def get_similarity(u1, u2, features_to_match, weights):
     value = 0.0
-    for i in range(len(features_to_match)):
-        feature = features_to_match[i]
-        weight = weights[i]
+    for feature, condition in features_to_match.items():
+        weight = weights[feature]
         if feature == 'height':
-            if u1.gender == 0 and u2.gender == 1:
-                value += weight * height_similarity(u1.height, u2.height)
-            else:
-                value += weight * height_similarity(u2.height, u1.height)
+            value += weight * height_similarity(u1.height, u2.height, condition)
         elif feature == 'hometownId':
-            value += weight * hometown_similarity(u1.hometownId, u2.hometownId)
-            # elif feature == blabla
+            value += weight * hometown_similarity(u1.hometownId, u2.hometownId, condition)
+        elif feature == 'age':
+            value += weight * age_similarity(u1.age, u2.age, condition)
+        elif feature == 'gender':
+            value += weight * gender_similarity(u1.gender, u2.gender, condition)
+        elif feature == 'weight':
+            value += weight * weight_similarity(u1.weight, u2.weight, condition)
+        elif feature == 'universityId':
+            value += weight * university_similarity(u1.universityId, u2.universityId, condition)
+        elif feature == 'schoolId':
+            value += weight * school_similarity(u1.schoolId, u2.schoolId, condition)
+        elif feature == 'constellationId':
+            value += weight * constellation_similarity(u1.constellationId, u2.constellationId, condition)
+        elif feature == 'hobbiesId':
+            value += weight * hobbies_similarity(u1.hobbiesId, u2.hobbiesId, condition)
 
     value = value / sum(weights)
     return value
