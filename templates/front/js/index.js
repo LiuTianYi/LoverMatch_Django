@@ -11,25 +11,27 @@ $(function() {
       //data: {"username":"te"}, // the data that will be sent to php processor
       dataType: "json", // type of returned data
       success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
-        ohome = data["data"]["hometownId"];
-        oschool = data["data"]["schoolId"];
-        ohobby = data["data"]["hobbiesId"];
-        oname = data["data"]["name"];
-        oweight = data["data"]["weight"];
-        ogender = data["data"]["gender"];
-        oage = data["data"]["age"];
-        oheight = data["data"]["height"];
-        ophotoAddress = data["data"]["photoAddress"];
-        ouniversity = data["data"]["universityId"];
-        ofeatuers = data["data"]["features"];
+        if (data["result"]==-1)
+          window.location="./login.html"
+//        ohome = data["data"]["hometownId"];
+//        oschool = data["data"]["schoolId"];
+//        ohobby = data["data"]["hobbiesId"];
+ //       oname = data["data"]["name"];
+//        oweight = data["data"]["weight"];
+//        ogender = data["data"]["gender"];
+//        oage = data["data"]["age"];
+//        oheight = data["data"]["height"];
+ //       ophotoAddress = data["data"]["photoAddress"];
+//        ouniversity = data["data"]["universityId"];
+//        ofeatuers = data["data"]["features"];
         ouser = data["data"]["user"];
-        oloverMatched = data["data"]["loverMatched"];
-        oloverMatch = data["data"]["loverMatch"];
-        ogradeId = data["data"]["gradeId"];
-        overified = data["data"]["verified"];
-        opercentage = data["data"]["percentage"];
-        oconstellationId = data["data"]["constellationId"];
-        oschoresultool = data["data"]["result"];
+//        oloverMatched = data["data"]["loverMatched"];
+//        oloverMatch = data["data"]["loverMatch"];
+//        ogradeId = data["data"]["gradeId"];
+//        overified = data["data"]["verified"];
+ //       opercentage = data["data"]["percentage"];
+//        oconstellationId = data["data"]["constellationId"];
+//        oschoresultool = data["data"]["result"];
       }
      });
   });
