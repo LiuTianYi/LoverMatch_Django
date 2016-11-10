@@ -292,11 +292,11 @@ $(function(){
         if ( fschoolid == null) {fschoolid=1;}
         if ( fcostell == null) {fcostell=1;}
         if ( fyear == null) {fyear=1;}
-        var fheight = $("#height").val();
+        var fheight = $("#f-height").val();
         //console.log(height);
-        var fweight = $("#weight").val();
+        var fweight = $("#f-weight").val();
 
-        var fage = $("#age").val();
+        var fage = $("#f-age").val();
 
         if ( fheight == null || fheight == '') {fheight=163;}
         if ( fweight == null || fweight =='') {fweight=49;}
