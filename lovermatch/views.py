@@ -157,12 +157,12 @@ def update_self(request):
 
 
 def update_other(request):
-    # userUpdate = request.POST
+    userUpdate = request.POST
     usr = request.session.get('user')
     # usr = userUpdate["user"]
     # data = json.loads(request.body)
-    fea = request.POST['features']
-    per = request.POST['percentage']
+    fea = userUpdate.dict['features']
+    per = userUpdate.dict['percentage']
 
     #
     if UserInfo.objects(user=usr).update(features=fea,
