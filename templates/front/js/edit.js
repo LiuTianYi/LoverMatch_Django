@@ -356,10 +356,6 @@ $(function(){
        location.reload();
 
 
-        //console.log(provinceid+' '+cityid+' '+countyid+' '+m1+' '+m2+' '+m3+' '+schoolid+' '+sex+' '+costell + ' '+year+ ' '+height+' '+weight+' end');
-        //for (var i = 0 ; i < hb.length ; i++){
-        //    console.log(hb[i]);
-        //}
     });
 
     

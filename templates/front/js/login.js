@@ -24,6 +24,8 @@ $(function() {
       //alert(t_data["code"]);
       if (data["code"]==0) {
       	window.location="./index.html"
+      }else if (data["code"]==-3){
+        window.location="./regsuccessremind.html"
       }
       }
      });
