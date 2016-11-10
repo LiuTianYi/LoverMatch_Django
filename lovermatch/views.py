@@ -160,14 +160,14 @@ def update_feature(request):
 
     fea = {}
     usr = request.session.get('user')
-    fea["age"] = request.POST.get("age")
-    fea["height"] = request.POST.get("height")
-    fea["weight"] = request.POST.get("weight")
+    fea["age"] = int(request.POST.get("age"))
+    fea["height"] = int(request.POST.get("height"))
+    fea["weight"] = int(request.POST.get("weight"))
     fea["hometownId"] = map(int,request.POST.getlist("hometownId[]"))
-    fea["universityId"] = request.POST.get("universityId")
-    fea["constellationId"] = request.POST.get("constellationId")
+    fea["universityId"] = int(request.POST.get("universityId"))
+    fea["constellationId"] = int(request.POST.get("constellationId"))
     fea["schoolId"] = map(int, request.POST.getlist("schoolId[]"))
-    fea["gradeId"] = request.POST.get("gradeId")
+    fea["gradeId"] = int(request.POST.get("gradeId"))
     fea["hobbiesId"] = map(int, request.POST.getlist("gradeId[]"))
 
     #
@@ -181,14 +181,14 @@ def update_percentage(request):
 
     per = {}
     usr = request.session.get('user')
-    per["age"] = request.POST.get("age")
-    per["height"] = request.POST.get("height")
-    per["weight"] = request.POST.get("weight")
+    per["age"] = int(request.POST.get("age"))
+    per["height"] = int(request.POST.get("height"))
+    per["weight"] = int(request.POST.get("weight"))
     per["hometownId"] = map(int, request.POST.getlist("hometownId[]"))
-    per["universityId"] = request.POST.get("universityId")
-    per["constellationId"] = request.POST.get("constellationId")
+    per["universityId"] = int(request.POST.get("universityId"))
+    per["constellationId"] = int(request.POST.get("constellationId"))
     per["schoolId"] = map(int, request.POST.getlist("schoolId[]"))
-    per["gradeId"] = request.POST.get("gradeId")
+    per["gradeId"] = int(request.POST.get("gradeId"))
     per["hobbiesId"] = map(int, request.POST.getlist("gradeId[]"))
 
     #
