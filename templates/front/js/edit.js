@@ -14,11 +14,7 @@ $(function(){
 		}
 	}
 
-	if (ofeatuers["hobbiesId"]!=null){
-		for (var i = 0 ; i < ofeatuers["hobbiesId"].length ; i++){
-			$("#hobby-"+ofeatuers["hobbiesId"][i]).attr("checked","true");
-		}
-	}
+
 
 
 
@@ -353,22 +349,23 @@ $(function(){
 
 
 
+
        $.ajax({ // JQuery ajax function
           type: "POST", // Submitting Method
           url: 'http://168.63.205.250/update',  //这里是你的api名字
-          data: {"name":un,"age":age,"gender":sex,"height":height,"weight":weight,"hometownId":[provinceid,cityid,countyid],"universityId":schoolid,"schoolId":[m1,m2,m3],"constellationId":costell,"hobbiesId":hb,"features":{"age":fage,"height":fheight,"weight":fweight,"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]]},"percentage":{"age":rage,"height":rheight,"weight":rweight,"hometownId":rprovince,"universityId":rschool,"constellationId":ratecons,"hobbiesId":rhobby，"schoolId":rm1}}, // the data that will be sent to php processor
+          data: {"name":un,"age":age,"gender":sex,"height":height,"weight":weight,"hometownId":[provinceid,cityid,countyid],"universityId":schoolid,"schoolId":[m1,m2,m3],"constellationId":costell,"hobbiesId":hb,"features":{"age":fage,"height":fheight,"weight":fweight,"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]]},"percentage":{"age":rage,"height":rheight,"weight":rweight,"hometownId":rprovince,"universityId":rschool,"constellationId":ratecons,"hobbiesId":rhobby,"schoolId":rm1}}, // the data that will be sent to php processor
           dataType: "json", // type of returned data
           success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
           alert(data)
           }
          });
+       location.reload();
 
 
         //console.log(provinceid+' '+cityid+' '+countyid+' '+m1+' '+m2+' '+m3+' '+schoolid+' '+sex+' '+costell + ' '+year+ ' '+height+' '+weight+' end');
         //for (var i = 0 ; i < hb.length ; i++){
         //    console.log(hb[i]);
         //}
-        location.reload();
     });
 
     
@@ -412,29 +409,29 @@ $(function(){
 
         });
 
-        var rage = opercentage["age"];
-        var rheight = opercentage["height"];
-        var rweight = opercentage["weight"];
-        var rprovince = opercentage["hometownId"];
+        var rage = 1;
+        var rheight = 1;
+        var rweight = 1;
+        var rprovince = 1;
 
-        var rschool = opercentage["universityId"];
-        var rm1 = opercentage["schoolId"];
-        var rcon = opercentage["constellationId"];
-        var rhobby = opercentage["hobbiesId"];
+        var rschool = 1;
+        var rm1 = 1;
+        var rcon = 1;
+        var rhobby = 1;
 
 
-        var fage = ofeatuers["age"];
-        var fheight = ofeatuers["height"];
-        var fweight = ofeatuers["weight"];
-        var fprovinceid = ofeatuers["hometownId"][0];
-        var fcityid = ofeatuers["hometownId"][1];
-        var fcountyid = ofeatuers["hometownId"][2];
-        var fschoolid = ofeatuers["universityId"];
-        var fcostell = ofeatuers["constellationId"];
-        var fhb = ofeatuers["hobbiesId"];
-        var fm1 = ofeatuers["schoolId"][0];
-        var fm2 = ofeatuers["schoolId"][1];
-        var fm3 = ofeatuers["schoolId"][2];
+        var fage = 1;
+        var fheight = 1;
+        var fweight = 1;
+        var fprovinceid = 1;
+        var fcityid = 1;
+        var fcountyid = 1;
+        var fschoolid = 1;
+        var fcostell = 1;
+        var fhb = 1;
+        var fm1 = 1;
+        var fm2 = 1;
+        var fm3 = 1;
 
 
 
@@ -443,12 +440,13 @@ $(function(){
        $.ajax({ // JQuery ajax function
           type: "POST", // Submitting Method
           url: 'http://168.63.205.250/update_user',  //这里是你的api名字
-          data: {"name":un,"age":age,"gender":sex,"height":height,"weight":weight,"hometownId":[provinceid,cityid,countyid],"universityId":schoolid,"schoolId":[m1,m2,m3],"constellationId":costell,"hobbiesId":hb,"features":{"age":fage,"height":fheight,"weight":fweight,"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]]},"percentage":{"age":rage,"height":rheight,"weight":rweight,"hometownId":rprovince,"universityId":rschool,"constellationId":ratecons,"hobbiesId":rhobby，"schoolId":rm1}}, // the data that will be sent to php processor
+          data: {"name":un,"age":age,"gender":sex,"height":height,"weight":weight,"hometownId":[provinceid,cityid,countyid],"universityId":schoolid,"schoolId":[m1,m2,m3],"constellationId":costell,"hobbiesId":hb,"features":{"age":fage,"height":fheight,"weight":fweight,"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]]},"percentage":{"age":rage,"height":rheight,"weight":rweight,"hometownId":rprovince,"universityId":rschool,"constellationId":ratecons,"hobbiesId":rhobby,"schoolId":rm1}}, // the data that will be sent to php processor
           dataType: "json", // type of returned data
           success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
           alert(data)
           }
          });
+       location.reload();
 
 
         //console.log(provinceid+' '+cityid+' '+countyid+' '+m1+' '+m2+' '+m3+' '+schoolid+' '+sex+' '+costell + ' '+year+ ' '+height+' '+weight+' end');
@@ -456,7 +454,7 @@ $(function(){
         //    console.log(hb[i]);
         //}
     });
-    location.reload();
+    
 
 
 

@@ -154,7 +154,11 @@ $(function() {
 		      data: {"name":un1,"username":em1,"password":pw1}, // the data that will be sent to php processor
 		      dataType: "json", // type of returned data
 		      success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
-		      	alert(data);
+		      	if (data["code"]==0){
+                    window.location="./regsuccess.html"
+                }else{
+                    window.location="./regfail.html"
+                }
 		      }
 		     });
     	}
