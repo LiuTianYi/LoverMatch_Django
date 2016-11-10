@@ -161,7 +161,7 @@ def update_other(request):
     usr = request.session.get('user')
     # usr = userUpdate["user"]
     # data = json.loads(request.body)
-    fea = request.POST.get['features']
+    fea = request.POST['features']
     per = request.POST['percentage']
 
     #
