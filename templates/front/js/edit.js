@@ -431,7 +431,7 @@ $(function(){
 
        $.ajax({ // JQuery ajax function
           type: "POST", // Submitting Method
-          url: 'http://168.63.205.250/update_user',  //这里是你的api名字
+          url: 'http://168.63.205.250/update_self',  //这里是你的api名字
           //data: {"name":un},
           data: {"name":un,"age":age,"gender":sex,"height":height,"weight":weight,"hometownId":[provinceid,cityid,countyid],"universityId":schoolid,"schoolId":[m1,m2,m3],"constellationId":costell,"hobbiesId":hb}, // the data that will be sent to php processor
           dataType: "json", // type of returned data
