@@ -115,9 +115,10 @@ def update_self(request):
     # usr = userUpdate["user"]
     # nm = userUpdate["name"]
     # UserInfo.objects(user=usr).update(name=nm)
+    usr = request.session.get('user')
 
-    usr = userUpdate["user"]
-    pw = userUpdate["password"]
+    # usr = userUpdate["user"]
+    # pw = userUpdate["password"]
     nm = userUpdate["name"]
     ag = userUpdate["age"]
     ge = userUpdate["gender"]
@@ -129,10 +130,11 @@ def update_self(request):
     grad = userUpdate["gradeId"]
     cons = userUpdate["constellationId"]
     hob = userUpdate["hobbiesId"]
+    isative = userUpdate["is_active"]
     #
-    if UserInfo.objects(user=usr).update(name=nm, password=pw, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
+    if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
                                          universityId=univ,
-                                         schoolId=scho, gradeId=grad, constellationId=cons, hobbiesId=hob):
+                                         schoolId=scho, gradeId=grad, constellationId=cons, hobbiesId=hob, is_ative=isative):
 
         return HttpResponse("user update success")
     else:

@@ -33,17 +33,6 @@ class UserInfo(Document):
     is_active = BooleanField(required=False,default=False) #是否激活
 
 
-#
-# ross = UserInfo(user='y', password='y', name='y').save()
-# ross = User(user='z', password='z',name='z').save()
-# ross = User(user='y', password='y').save()
-# ross = User(user='y', password='y').save()
-# ross = User(user='y', password='y').save()
-# ross = User(user='y', password='y').save()
-# ross = User(user='y', password='y').save()
-# ross = User(user='y', password='y').save()
-# ross = User(user='y', password='y').save()
-
 
 def serializeUser(userInfo):
     return (
