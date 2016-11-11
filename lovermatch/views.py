@@ -160,15 +160,15 @@ def update_feature(request):
 
     fea = {}
     usr = request.session.get('user')
-    fea["age"] = int(request.POST.get("age"))
-    fea["height"] = int(request.POST.get("height"))
-    fea["weight"] = int(request.POST.get("weight"))
-    fea["hometownId"] = map(int,request.POST.getlist("hometownId[]"))
-    fea["universityId"] = int(request.POST.get("universityId"))
-    fea["constellationId"] = int(request.POST.get("constellationId"))
-    fea["schoolId"] = map(int, request.POST.getlist("schoolId[]"))
-    fea["gradeId"] = int(request.POST.get("gradeId"))
-    fea["hobbiesId"] = map(int, request.POST.getlist("gradeId[]"))
+    fea["age"] = map(float, request.POST.getlist("age"))
+    fea["height"] = map(float, request.POST.getlist("height"))
+    fea["weight"] = map(float, request.POST.getlist("weight"))
+    fea["hometownId"] = map(float,request.POST.getlist("hometownId[]"))
+    fea["universityId"] = float(request.POST.get("universityId"))
+    fea["constellationId"] = float(request.POST.get("constellationId"))
+    fea["schoolId"] = map(float, request.POST.getlist("schoolId[]"))
+    fea["gradeId"] = float(request.POST.get("gradeId"))
+    fea["hobbiesId"] = map(float, request.POST.getlist("gradeId[]"))
 
     #
     if UserInfo.objects(user=usr).update(features=fea):
@@ -181,15 +181,15 @@ def update_percentage(request):
 
     per = {}
     usr = request.session.get('user')
-    per["age"] = int(request.POST.get("age"))
-    per["height"] = int(request.POST.get("height"))
-    per["weight"] = int(request.POST.get("weight"))
-    per["hometownId"] = map(int, request.POST.getlist("hometownId[]"))
-    per["universityId"] = int(request.POST.get("universityId"))
-    per["constellationId"] = int(request.POST.get("constellationId"))
-    per["schoolId"] = map(int, request.POST.getlist("schoolId[]"))
-    per["gradeId"] = int(request.POST.get("gradeId"))
-    per["hobbiesId"] = map(int, request.POST.getlist("gradeId[]"))
+    per["age"] = float(request.POST.get("age"))
+    per["height"] = float(request.POST.get("height"))
+    per["weight"] = float(request.POST.get("weight"))
+    per["hometownId"] = float(request.POST.get("hometownId[]"))
+    per["universityId"] = float(request.POST.get("universityId"))
+    per["constellationId"] = float(request.POST.get("constellationId"))
+    per["schoolId"] = float(request.POST.get("schoolId[]"))
+    per["gradeId"] = float(request.POST.get("gradeId"))
+    per["hobbiesId"] = float(request.POST.get("gradeId[]"))
 
     #
     if UserInfo.objects(user=usr).update(percentage=per):
