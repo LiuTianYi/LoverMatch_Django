@@ -20,9 +20,9 @@ $(function(){
         $("#f-selectcons").append('<option id=f-conste'+i+' value="'+i+'">'+conste+'</option>');
     }
 
-    if (oconstellationId!=null){
-		$("conste"+oconstellationId).attr("selected","true");
-	}
+    //if (oconstellationId!=null){
+	//	$("conste"+oconstellationId).attr("selected","true");
+	//}
 
 
 
