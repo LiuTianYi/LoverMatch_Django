@@ -251,19 +251,20 @@ def logout(request):
 #     return render(request, 'lovermatch/signup_results.html', context)
 
 
-def match(request, usr):
+def match(request):
     """match algorithm for usr to find all users who are similar to him/her based on features and weights"""
+    usr = request.session['user']
     user = UserInfo.objects(user=usr)
-    features_to_match = request.POST['features']
-    weights = request.POST['percentage']
-    n = request.POST['amount']
+    features_to_match = user.features
+    weights = user.percentage
+    n = request.POST['n']
     matchlist = {}
     for current_user in UserInfo.objects:
         sim = get_similarity(user, current_user, features_to_match, weights)
         matchlist[current_user] = sim
     sorted_matchlist = sorted(matchlist.items(), key=itemgetter(1), reverse=True)[0:n]
-    context = {'sortedMatchList': sorted_matchlist}
-    # return response
+    context = {'code': 0, 'list': sorted_matchlist}
+    return JsonResponse(context)
 
 
 def height_similarity(h1, h2, condition):

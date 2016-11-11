@@ -21,5 +21,6 @@ urlpatterns = [
                   url(r'^update_self', views.update_self),
                   url(r'^update_feature', views.update_feature),
                   url(r'^update_percentage', views.update_percentage),
+                  url(r'^match/$', views.match),
 
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

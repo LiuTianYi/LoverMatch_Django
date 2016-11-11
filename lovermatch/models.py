@@ -30,7 +30,7 @@ class UserInfo(Document):
     verified = BooleanField(required=False)  # 是否被确认
     features = DictField(required=False)  # json
     percentage = DictField(required=False)  # json
-    is_active = BooleanField(required=False,default=False) #是否激活
+    is_active = BooleanField(required=False, default=False) #是否激活
 
 
 
