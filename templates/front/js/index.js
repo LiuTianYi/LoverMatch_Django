@@ -6,7 +6,7 @@ $(function() {
 
  $(window).load(function() {
 
-    getmatch();
+    
 
 
    $.ajax({ // JQuery ajax function
@@ -39,6 +39,16 @@ $(function() {
           $("#usernamelabel").html(oname)
       }
      });
+
+    if (ofeatuers == null && opercentage == null){
+      alert("请完善你的个人信息和你希望找到的人！");
+      //location.reload() ;
+
+    }
+
+
+    getmatch();
+
   });
 
   $("#nav-matched").click(function(){
@@ -65,6 +75,7 @@ function getmatch(){
     type: "POST", // Submitting Method
     url: 'http://168.63.205.250/match/',  //这里是你的api名字
     dataType: "json", // type of returned data
+    data: {"n":10},
     success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
       matchli = data
     }
