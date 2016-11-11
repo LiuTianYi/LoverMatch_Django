@@ -559,7 +559,7 @@ function loadfmajor1(m1id){
     for (var i = 0 ; i < major["一级学科"][pid]["二级学科"].length ; i++){
         var ct = major["一级学科"][pid]["二级学科"][i]["2_name"];
         var cid = major["一级学科"][pid]["二级学科"][i]["id"];
-        //alert(ct);
+        alert(ct);
         $("#f-selectmajor2").append('<option id="f-major1'+cid+'" value="'+cid+'">'+ct+'</option>');
 
     }
@@ -574,7 +574,7 @@ function loadfmajor2(m1id,m2id){
     for (var i = 0 ; i < major["一级学科"][pid]["二级学科"][cid]["专业"].length  ; i++){
         var ct = major["一级学科"][pid]["二级学科"][cid]["专业"][i]["3_name"];
         var ccid = major["一级学科"][pid]["二级学科"][cid]["专业"][i]["id"];
-        //alert(ct);
+        alert(ct);
         $("#f-selectmajor3").append('<option id="f-major2'+ccid+'" value="'+ccid+'">'+ct+'</option>');
 
     }
