@@ -160,16 +160,15 @@ def update_feature(request):
 
     fea = {}
     usr = request.session.get('user')
-    fea["age"] = map(float, request.POST.getlist("age"))
-    fea["height"] = map(float, request.POST.getlist("height"))
-    fea["weight"] = map(float, request.POST.getlist("weight"))
+    fea["age"] = map(float, request.POST.getlist("age[]"))
+    fea["height"] = map(float, request.POST.getlist("height[]"))
+    fea["weight"] = map(float, request.POST.getlist("weight[]"))
     fea["hometownId"] = map(float,request.POST.getlist("hometownId[]"))
-    fea["universityId"] = float(request.POST.get("universityId"))
-    fea["constellationId"] = float(request.POST.get("constellationId"))
+    fea["universityId"] = map(float, request.POST.getlist("universityId[]"))
+    fea["constellationId"] = map(float, request.POST.getlist("constellationId[]"))
     fea["schoolId"] = map(float, request.POST.getlist("schoolId[]"))
-    fea["gradeId"] = float(request.POST.get("gradeId"))
-    fea["hobbiesId"] = map(float, request.POST.getlist("gradeId[]"))
-
+    fea["gradeId"] = map(float, request.POST.getlist("gradeId[]"))
+    fea["hobbiesId"] = map(float, request.POST.getlist("hobbiesId[]"))
     #
     if UserInfo.objects(user=usr).update(features=fea):
         return JsonResponse({"code": 0})
