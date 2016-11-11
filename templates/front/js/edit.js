@@ -313,16 +313,16 @@ $(function(){
 
         });
 
-        var rage = $("#rateage").val();
-        var rheight = $("#rateheight").val();
-        var rweight = $("#rateweight").val();
-        var rprovince = $("#rateprovince").val();
+        var rage = parseFloat($("#rateage").val());
+        var rheight = parseFloat($("#rateheight").val());
+        var rweight = parseFloat($("#rateweight").val());
+        var rprovince = parseFloat($("#rateprovince").val());
 
-        var rschool = $("#rateschool").val();
-        var rm1 = $("#ratem1").val();
-        var rgrade = $("#rategrade").val();
-        var rcon = $("#ratecons").val();
-        var rhobby = $("#ratehobby").val();
+        var rschool = parseFloat($("#rateschool").val());
+        var rm1 = parseFloat($("#ratem1").val());
+        var rgrade = parseFloat($("#rategrade").val());
+        var rcon = parseFloat($("#ratecons").val());
+        var rhobby = parseFloat($("#ratehobby").val());
 
         var un = 1;
         var age = 1;
@@ -347,7 +347,7 @@ $(function(){
        $.ajax({ // JQuery ajax function
           type: "POST", // Submitting Method
           url: 'http://168.63.205.250/update_feature',  //这里是你的api名字
-          data: {"age":[fage-2,fage+2],"height":[fheight-2,fheight+2],"weight":[fweight-2,fweight+2],"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":[fschoolid],"constellationId":[fcostell],"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]],"gradeId":[fyear]}, // the data that will be sent to php processor
+          data: {"age":[parseInt(fage)-2,parseInt(fage)+2],"height":[parseInt(fheight)-2,parseInt(fheight)+2],"weight":[parseInt(fweight)-2,parseInt(fweight)+2],"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":[fschoolid],"constellationId":[fcostell],"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]],"gradeId":[fyear]}, // the data that will be sent to php processor
           //data: {"age":[18,23],"height":[176,189],"weight":[45,54],"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]],"gradeId":fyear}, // the data that will be sent to php processor
           dataType: "json", // type of returned data
           success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
