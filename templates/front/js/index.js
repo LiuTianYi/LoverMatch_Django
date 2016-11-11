@@ -66,7 +66,8 @@ function getmatch(){
     url: 'http://168.63.205.250/match/',  //这里是你的api名字
     dataType: "json", // type of returned data
     success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
-    alert(data){function(){matchli = data}}
+    alert(data){function(){
+      matchli = data}
     }
   });
 }
