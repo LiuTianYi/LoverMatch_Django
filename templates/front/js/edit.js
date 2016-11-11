@@ -347,7 +347,7 @@ $(function(){
        $.ajax({ // JQuery ajax function
           type: "POST", // Submitting Method
           url: 'http://168.63.205.250/update_feature',  //这里是你的api名字
-          data: {"age":fage,"height":fheight,"weight":fweight,"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]],"gradeId":fyear}, // the data that will be sent to php processor
+          data: {"age":[fage-2,fage+2],"height":[fheight-2,fheight+2],"weight":[fweight-2,fweight+2],"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":[fschoolid],"constellationId":[fcostell],"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]],"gradeId":[fyear]}, // the data that will be sent to php processor
           //data: {"age":[18,23],"height":[176,189],"weight":[45,54],"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]],"gradeId":fyear}, // the data that will be sent to php processor
           dataType: "json", // type of returned data
           success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
@@ -355,7 +355,7 @@ $(function(){
           }
          });
 
-       var sum = rage+rheight+rweight+rprovince+rschool+rcon+rhobby+rm1+rgrade;
+       var sum = parseFloat(rage)+rheight+rweight+rprovince+rschool+rcon+rhobby+rm1+rgrade;
 
        $.ajax({ // JQuery ajax function
           type: "POST", // Submitting Method
