@@ -184,12 +184,12 @@ def update_percentage(request):
     per["age"] = float(request.POST.get("age"))
     per["height"] = float(request.POST.get("height"))
     per["weight"] = float(request.POST.get("weight"))
-    per["hometownId"] = float(request.POST.get("hometownId[]"))
+    per["hometownId"] = float(request.POST.get("hometownId"))
     per["universityId"] = float(request.POST.get("universityId"))
     per["constellationId"] = float(request.POST.get("constellationId"))
-    per["schoolId"] = float(request.POST.get("schoolId[]"))
+    per["schoolId"] = float(request.POST.get("schoolId"))
     per["gradeId"] = float(request.POST.get("gradeId"))
-    per["hobbiesId"] = float(request.POST.get("gradeId[]"))
+    per["hobbiesId"] = float(request.POST.get("gradeId"))
 
     #
     if UserInfo.objects(user=usr).update(percentage=per):
