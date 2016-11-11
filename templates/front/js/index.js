@@ -42,9 +42,12 @@ $(function() {
 
     if (ofeatuers == null && opercentage == null){
       alert("请完善你的个人信息和你希望找到的人！");
-      location.reload() ;
+      //location.reload() ;
 
     }
+
+
+    getmatch();
 
   });
 
