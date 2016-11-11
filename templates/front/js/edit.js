@@ -347,18 +347,20 @@ $(function(){
        $.ajax({ // JQuery ajax function
           type: "POST", // Submitting Method
           url: 'http://168.63.205.250/update_feature',  //这里是你的api名字
-          //data: {"age":[fage],"height":fheight,"weight":fweight,"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]],"gradeId":fyear}, // the data that will be sent to php processor
-          data: {"age":[18,23],"height":[176,189],"weight":[45,54],"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]],"gradeId":fyear}, // the data that will be sent to php processor
+          data: {"age":[fage],"height":fheight,"weight":fweight,"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]],"gradeId":fyear}, // the data that will be sent to php processor
+          //data: {"age":[18,23],"height":[176,189],"weight":[45,54],"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]],"gradeId":fyear}, // the data that will be sent to php processor
           dataType: "json", // type of returned data
           success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
           //location.reload();
           }
          });
 
+       var sum = rage+rheight+rweight+rprovince+rschool+rcon+rhobby+rm1+rgrade;
+
        $.ajax({ // JQuery ajax function
           type: "POST", // Submitting Method
           url: 'http://168.63.205.250/update_percentage',  //这里是你的api名字
-          data: {"age":rage,"height":rheight,"weight":rweight,"hometownId":rprovince,"universityId":rschool,"constellationId":rcon,"hobbiesId":rhobby,"schoolId":rm1,"gradeId":rgrade}, // the data that will be sent to php processor
+          data: {"age":rage/sum,"height":rheight/sum,"weight":rweight/sum,"hometownId":rprovince/sum,"universityId":rschool/sum,"constellationId":rcon/sum,"hobbiesId":rhobby/sum,"schoolId":rm1/sum,"gradeId":rgrade/sum}, // the data that will be sent to php processor
           dataType: "json", // type of returned data
           success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
           //alert(data)
