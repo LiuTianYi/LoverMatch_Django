@@ -254,7 +254,10 @@ def logout(request):
 def match(request):
     """match algorithm for usr to find all users who are similar to him/her based on features and weights"""
     usr = request.session['user']
-    user = UserInfo.objects(user=usr)
+    try:
+        user = UserInfo.objects.get(user=usr)
+    except (UserInfo.DoesNotExist, UserInfo.MultipleObjectsReturned):
+        return JsonResponse({'code': -1})
     features_to_match = user.features
     weights = user.percentage
     n = request.POST['n']
