@@ -347,10 +347,10 @@ $(function(){
        $.ajax({ // JQuery ajax function
           type: "POST", // Submitting Method
           url: 'http://168.63.205.250/update_feature',  //这里是你的api名字
-          data: {"age":fage,"height":fheight,"weight":fweight,"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":fhb,"schoolId":[fm1,fm2,fm3],"gradeId":fyear}, // the data that will be sent to php processor
+          data: {"age":fage,"height":fheight,"weight":fweight,"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]],"gradeId":fyear}, // the data that will be sent to php processor
           dataType: "json", // type of returned data
           success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
-          alert(data)
+          location.reload();
           }
          });
 
@@ -360,7 +360,8 @@ $(function(){
           data: {"age":rage,"height":rheight,"weight":rweight,"hometownId":rprovince,"universityId":rschool,"constellationId":rcon,"hobbiesId":rhobby,"schoolId":rm1,"gradeId":rgrade}, // the data that will be sent to php processor
           dataType: "json", // type of returned data
           success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
-          alert(data)
+          //alert(data)
+          location.reload();
           }
          });
  
@@ -446,7 +447,7 @@ $(function(){
           data: {"name":un,"age":age,"gender":sex,"height":height,"weight":weight,"hometownId":[provinceid,cityid,countyid],"universityId":schoolid,"schoolId":[m1,m2,m3],"constellationId":costell,"hobbiesId":hb,"gradeId":year}, // the data that will be sent to php processor
           dataType: "json", // type of returned data
           success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
-          alert(data)
+          //alert(data)
           }
          });
        
@@ -559,7 +560,7 @@ function loadfmajor1(m1id){
     for (var i = 0 ; i < major["一级学科"][pid]["二级学科"].length ; i++){
         var ct = major["一级学科"][pid]["二级学科"][i]["2_name"];
         var cid = major["一级学科"][pid]["二级学科"][i]["id"];
-        alert(ct);
+        //alert(ct);
         $("#f-selectmajor2").append('<option id="f-major1'+cid+'" value="'+cid+'">'+ct+'</option>');
 
     }
@@ -574,7 +575,7 @@ function loadfmajor2(m1id,m2id){
     for (var i = 0 ; i < major["一级学科"][pid]["二级学科"][cid]["专业"].length  ; i++){
         var ct = major["一级学科"][pid]["二级学科"][cid]["专业"][i]["3_name"];
         var ccid = major["一级学科"][pid]["二级学科"][cid]["专业"][i]["id"];
-        alert(ct);
+        //alert(ct);
         $("#f-selectmajor3").append('<option id="f-major2'+ccid+'" value="'+ccid+'">'+ct+'</option>');
 
     }
