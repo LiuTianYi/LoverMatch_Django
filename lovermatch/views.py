@@ -185,7 +185,8 @@ def update_percentage(request):
     constellationIdF = float(request.POST.get("constellationId"))
     schoolIdF = float(request.POST.get("schoolId"))
     gradeIdF = float(request.POST.get("gradeId"))
-    hobbiesIdF = float(request.POST.get("gradeId"))
+    hobbiesIdF = float(request.POST.get("hobbiesId"))
+
     per = Percentage.objects(age=ageF, height=heightF, weight=weightF, hometownId=hometownIdF,
                              universityId=universityIdF, constellationId=constellationIdF, schoolId=schoolIdF,
                              gradeId=gradeIdF, hobbiesId=hobbiesIdF)
