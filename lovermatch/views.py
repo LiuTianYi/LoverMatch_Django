@@ -164,9 +164,9 @@ def update_feature(request):
     gradeIdL = map(float, request.POST.getlist("gradeId[]"))
     hobbiesIdL = map(float, request.POST.getlist("hobbiesId[]"))
     #
-    fea = Features.objects(age=ageL, height=heightL, weight=weightL, hometownId=hometownIdL,
-                           universityId=universityIdL, constellationId=constellationIdL, schoolId=schoolIdL,
-                           gradeId=gradeIdL, hobbiesId=hobbiesIdL)
+    fea = Features.objects.create(age=ageL, height=heightL, weight=weightL, hometownId=hometownIdL,
+                                  universityId=universityIdL, constellationId=constellationIdL, schoolId=schoolIdL,
+                                  gradeId=gradeIdL, hobbiesId=hobbiesIdL)
 
     if UserInfo.objects(user=usr).update(features=fea):
         return JsonResponse({"code": 0})
@@ -187,9 +187,9 @@ def update_percentage(request):
     gradeIdF = float(request.POST.get("gradeId"))
     hobbiesIdF = float(request.POST.get("hobbiesId"))
 
-    per = Percentage.objects(age=ageF, height=heightF, weight=weightF, hometownId=hometownIdF,
-                             universityId=universityIdF, constellationId=constellationIdF, schoolId=schoolIdF,
-                             gradeId=gradeIdF, hobbiesId=hobbiesIdF)
+    per = Percentage.objects.create(age=ageF, height=heightF, weight=weightF, hometownId=hometownIdF,
+                                    universityId=universityIdF, constellationId=constellationIdF, schoolId=schoolIdF,
+                                    gradeId=gradeIdF, hobbiesId=hobbiesIdF)
     #
     if UserInfo.objects(user=usr).update(percentage=per):
         return JsonResponse({"code": 0})
