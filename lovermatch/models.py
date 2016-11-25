@@ -17,7 +17,7 @@ class Features(Document):
     schoolId = ListField()  # "schoolId": [01, 02, 12], // 专业id列表
     gradeId = ListField() # "gradeId": [1 ,4]
     constellationId = ListField()  # "constellationId": [12, 13], // 星座id列表
-    hobbiedId = ListField()  # "hobbiesId": [12, 13, 15] // 爱好id列表
+    hobbiesId = ListField()  # "hobbiesId": [12, 13, 15] // 爱好id列表
 
 
 class Percentage(Document):
