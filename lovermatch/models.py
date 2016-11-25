@@ -56,15 +56,15 @@ class UserInfo(Document):
     is_active = BooleanField(required=False, default=False)  # 是否激活
 
 
-def serializeUser(userInfo):
+def serializeUser(UserInfo):
     return (
-        {'user': userInfo.user, 'name': userInfo.name, 'photoAddress': userInfo.photoAddress,
-         'age': userInfo.age, 'gender': userInfo.gender, 'height': userInfo.height, 'weight': userInfo.weight,
-         'hometownId': userInfo.hometownId, 'universityId': userInfo.universityId, 'schoolId': userInfo.schoolId,
-         'gradeId': userInfo.gradeId, 'constellationId': userInfo.constellationId, 'hobbiesId': userInfo.hobbiesId,
-         'loverMatch': userInfo.loverMatch, 'loverMatched': userInfo.loverMatched, 'verified': userInfo.verified,
-         'features': userInfo.features, 'percentage': userInfo.percentage})
+        {'user': UserInfo.user, 'name': UserInfo.name, 'photoAddress': UserInfo.photoAddress,
+         'age': UserInfo.age, 'gender': UserInfo.gender, 'height': UserInfo.height, 'weight': UserInfo.weight,
+         'hometownId': UserInfo.hometownId, 'universityId': UserInfo.universityId, 'schoolId': UserInfo.schoolId,
+         'gradeId': UserInfo.gradeId, 'constellationId': UserInfo.constellationId, 'hobbiesId': UserInfo.hobbiesId,
+         'loverMatch': UserInfo.loverMatch, 'loverMatched': UserInfo.loverMatched, 'verified': UserInfo.verified,
+         'features': UserInfo.features, 'percentage': UserInfo.percentage})
 
 
-for post in UserInfo.objects:
-    print post.user
+# for post in UserInfo.objects:
+#     print post.user
