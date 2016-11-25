@@ -9,27 +9,27 @@ from mongoengine.fields import *
 # Create your models here.
 
 class Features(Document):
-    age = ListField()  # "age": [18, 24], // 年龄在18~24岁
-    height = ListField()  # "height": [160, 170], // 身高在160~170之间
-    weight = ListField()  # "weight": [50, 60], // 体重在50~60kg之间
-    hometownId = ListField(ListField)  # "hometownId": [[01, 03, 12], [01, 04, 10], [01, 02, 03]], // 家乡地址id列表
-    universityId = ListField()  # "universityId": [01, 03, 04], // 大学id列表
-    schoolId = ListField()  # "schoolId": [01, 02, 12], // 专业id列表
-    gradeId = ListField() # "gradeId": [1 ,4]
-    constellationId = ListField()  # "constellationId": [12, 13], // 星座id列表
-    hobbiesId = ListField()  # "hobbiesId": [12, 13, 15] // 爱好id列表
+    age = ListField(required=False)  # "age": [18, 24], // 年龄在18~24岁
+    height = ListField(required=False)  # "height": [160, 170], // 身高在160~170之间
+    weight = ListField(required=False)  # "weight": [50, 60], // 体重在50~60kg之间
+    hometownId = ListField(ListField(required=False))  # "hometownId": [[01, 03, 12], [01, 04, 10], [01, 02, 03]], // 家乡地址id列表
+    universityId = ListField(required=False)  # "universityId": [01, 03, 04], // 大学id列表
+    schoolId = ListField(required=False)  # "schoolId": [01, 02, 12], // 专业id列表
+    gradeId = ListField(required=False) # "gradeId": [1 ,4]
+    constellationId = ListField(required=False)  # "constellationId": [12, 13], // 星座id列表
+    hobbiesId = ListField(required=False)  # "hobbiesId": [12, 13, 15] // 爱好id列表
 
 
 class Percentage(Document):
-    age = FloatField()  # "age": 0.1, // 年龄所占比例为0
-    height = FloatField()  # "height": 0.1,
-    weight = FloatField()  # "weight": 0.1,
-    hometownId = FloatField()  # "hometownId": 0.3,
-    universityId = FloatField()  # "universityId": 0.2,
-    schoolId = FloatField()  # "schoolId": 0,
-    gradeId = FloatField()  # "gradeId" 0
-    constellationId = FloatField()  # "constellationId": 0,
-    hobbiesId = FloatField()  # "hobbiesId": 0
+    age = FloatField(required=False)  # "age": 0.1, // 年龄所占比例为0
+    height = FloatField(required=False)  # "height": 0.1,
+    weight = FloatField(required=False)  # "weight": 0.1,
+    hometownId = FloatField(required=False)  # "hometownId": 0.3,
+    universityId = FloatField(required=False)  # "universityId": 0.2,
+    schoolId = FloatField(required=False)  # "schoolId": 0,
+    gradeId = FloatField(required=False)  # "gradeId" 0
+    constellationId = FloatField(required=False)  # "constellationId": 0,
+    hobbiesId = FloatField(required=False)  # "hobbiesId": 0
 
 
 class UserInfo(Document):
