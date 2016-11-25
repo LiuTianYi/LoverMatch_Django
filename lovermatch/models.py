@@ -28,10 +28,34 @@ class UserInfo(Document):
     loverMatch = DictField(required=False)  # 匹配对象 json
     loverMatched = DictField(required=False)  # 被匹配对象 json
     verified = BooleanField(required=False)  # 是否被确认
-    features = DictField(required=False)  # json
-    percentage = DictField(required=False)  # json
-    is_active = BooleanField(required=False, default=False) #是否激活
+    # features = DictField(required=False)  # json
+    features = EmbeddedDocumentField(Features)  # json
+    # percentage = DictField(required=False)  # json
+    percentage = EmbeddedDocumentField(Percentage)  # json
 
+    is_active = BooleanField(required=False, default=False)  # 是否激活
+
+
+class Features(Document):
+    age = ListField()  # "age": [18, 24], // 年龄在18~24岁
+    height = ListField()  # "height": [160, 170], // 身高在160~170之间
+    weight = ListField()  # "weight": [50, 60], // 体重在50~60kg之间
+    hometownId = ListField(ListField)  # "hometownId": [[01, 03, 12], [01, 04, 10], [01, 02, 03]], // 家乡地址id列表
+    universityId = ListField()  # "universityId": [01, 03, 04], // 大学id列表
+    schoolId = ListField()  # "schoolId": [01, 02, 12], // 专业id列表
+    constellationId = ListField()  # "constellationId": [12, 13], // 星座id列表
+    hobbiedId = ListField()  # "hobbiesId": [12, 13, 15] // 爱好id列表
+
+
+class Percentage(Document):
+    age = FloatField()  # "age": 0.1, // 年龄所占比例为0
+    height = FloatField()  # "height": 0.1,
+    weight = FloatField()  # "weight": 0.1,
+    hometownId = FloatField()  # "hometownId": 0.3,
+    universityId = FloatField()  # "universityId": 0.2,
+    schoolId = FloatField()  # "schoolId": 0,
+    constellationId = FloatField()  # "constellationId": 0,
+    hobbiesId = FloatField()  # "hobbiesId": 0
 
 
 def serializeUser(userInfo):
