@@ -29,9 +29,9 @@ class UserInfo(Document):
     loverMatched = DictField(required=False)  # 被匹配对象 json
     verified = BooleanField(required=False)  # 是否被确认
     # features = DictField(required=False)  # json
-    features = EmbeddedDocumentField(Features)  # json
+    features = ReferenceField(Features)  # json
     # percentage = DictField(required=False)  # json
-    percentage = EmbeddedDocumentField(Percentage)  # json
+    percentage = ReferenceField(Percentage)  # json
 
     is_active = BooleanField(required=False, default=False)  # 是否激活
 
