@@ -4,7 +4,7 @@ import simplejson
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.urls import reverse
-from lovermatch.models import UserInfo, serializeUser
+from lovermatch.models import UserInfo, serializeUser, Features, Percentage
 from django.http import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from operator import itemgetter
@@ -120,10 +120,6 @@ def update_self(request):
     except:
         return JsonResponse({"code": -1})
 
-    # usr = userUpdate["user"]
-    # pw = userUpdate["password"]
-    # try:
-
     nm = userUpdate.get("name")
     ag = userUpdate.get("age")
     ge = userUpdate.get("gender")
@@ -157,19 +153,21 @@ def update_self(request):
 
 
 def update_feature(request):
-
-    fea = {}
     usr = request.session.get('user')
-    fea["age"] = map(float, request.POST.getlist("age[]"))
-    fea["height"] = map(float, request.POST.getlist("height[]"))
-    fea["weight"] = map(float, request.POST.getlist("weight[]"))
-    fea["hometownId"] = map(float,request.POST.getlist("hometownId[]"))
-    fea["universityId"] = map(float, request.POST.getlist("universityId[]"))
-    fea["constellationId"] = map(float, request.POST.getlist("constellationId[]"))
-    fea["schoolId"] = map(float, request.POST.getlist("schoolId[]"))
-    fea["gradeId"] = map(float, request.POST.getlist("gradeId[]"))
-    fea["hobbiesId"] = map(float, request.POST.getlist("hobbiesId[]"))
+    ageL = map(float, request.POST.getlist("age[]"))
+    heightL = map(float, request.POST.getlist("height[]"))
+    weightL = map(float, request.POST.getlist("weight[]"))
+    hometownIdL = map(float, request.POST.getlist("hometownId[]"))
+    universityIdL = map(float, request.POST.getlist("universityId[]"))
+    constellationIdL = map(float, request.POST.getlist("constellationId[]"))
+    schoolIdL = map(float, request.POST.getlist("schoolId[]"))
+    gradeIdL = map(float, request.POST.getlist("gradeId[]"))
+    hobbiesIdL = map(float, request.POST.getlist("hobbiesId[]"))
     #
+    fea = Features.objects(age=ageL, height=heightL, weight=weightL, hometownId=hometownIdL,
+                           universityId=universityIdL, constellationId=constellationIdL, schoolId=schoolIdL,
+                           gradeId=gradeIdL, hobbiesId=hobbiesIdL)
+
     if UserInfo.objects(user=usr).update(features=fea):
         return JsonResponse({"code": 0})
     else:
@@ -177,19 +175,20 @@ def update_feature(request):
 
 
 def update_percentage(request):
-
-    per = {}
     usr = request.session.get('user')
-    per["age"] = float(request.POST.get("age"))
-    per["height"] = float(request.POST.get("height"))
-    per["weight"] = float(request.POST.get("weight"))
-    per["hometownId"] = float(request.POST.get("hometownId"))
-    per["universityId"] = float(request.POST.get("universityId"))
-    per["constellationId"] = float(request.POST.get("constellationId"))
-    per["schoolId"] = float(request.POST.get("schoolId"))
-    per["gradeId"] = float(request.POST.get("gradeId"))
-    per["hobbiesId"] = float(request.POST.get("gradeId"))
 
+    ageF = float(request.POST.get("age"))
+    heightF = float(request.POST.get("height"))
+    weightF = float(request.POST.get("weight"))
+    hometownIdF = float(request.POST.get("hometownId"))
+    universityIdF = float(request.POST.get("universityId"))
+    constellationIdF = float(request.POST.get("constellationId"))
+    schoolIdF = float(request.POST.get("schoolId"))
+    gradeIdF = float(request.POST.get("gradeId"))
+    hobbiesIdF = float(request.POST.get("gradeId"))
+    per = Percentage.objects(age=ageF, height=heightF, weight=weightF, hometownId=hometownIdF,
+                             universityId=universityIdF, constellationId=constellationIdF, schoolId=schoolIdF,
+                             gradeId=gradeIdF, hobbiesId=hobbiesIdF)
     #
     if UserInfo.objects(user=usr).update(percentage=per):
         return JsonResponse({"code": 0})

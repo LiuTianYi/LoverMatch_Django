@@ -7,6 +7,7 @@ from mongoengine.fields import *
 
 # from LoverMatch_Django.settings import data
 # Create your models here.
+
 class Features(Document):
     age = ListField()  # "age": [18, 24], // 年龄在18~24岁
     height = ListField()  # "height": [160, 170], // 身高在160~170之间
@@ -14,6 +15,7 @@ class Features(Document):
     hometownId = ListField(ListField)  # "hometownId": [[01, 03, 12], [01, 04, 10], [01, 02, 03]], // 家乡地址id列表
     universityId = ListField()  # "universityId": [01, 03, 04], // 大学id列表
     schoolId = ListField()  # "schoolId": [01, 02, 12], // 专业id列表
+    gradeId = ListField() # "gradeId": [1 ,4]
     constellationId = ListField()  # "constellationId": [12, 13], // 星座id列表
     hobbiedId = ListField()  # "hobbiesId": [12, 13, 15] // 爱好id列表
 
@@ -25,6 +27,7 @@ class Percentage(Document):
     hometownId = FloatField()  # "hometownId": 0.3,
     universityId = FloatField()  # "universityId": 0.2,
     schoolId = FloatField()  # "schoolId": 0,
+    gradeId = FloatField()  # "gradeId" 0
     constellationId = FloatField()  # "constellationId": 0,
     hobbiesId = FloatField()  # "hobbiesId": 0
 
