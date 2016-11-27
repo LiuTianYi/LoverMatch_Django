@@ -8,7 +8,7 @@ $(function(){
 
 
 	//load hobby
-    $("#username").text(data["name"]);
+    $("#username").text(dat["name"]);
 
 
 	$("#hobby").html("");
