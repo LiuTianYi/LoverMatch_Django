@@ -27,7 +27,7 @@ $(function() {
         features = data['features'];
         percentage = data['percentage'];
         $("#usernamelabel").text(data["name"]);
-        $("#userinfo").text("你是".concat(data['constellationId'],"的，你的身高",data["height"]));
+        $("#userinfo").text("你是".concat(cons["constellation"][data['constellationId']],"的，你的身高",data["height"]));
       }
      });
 
