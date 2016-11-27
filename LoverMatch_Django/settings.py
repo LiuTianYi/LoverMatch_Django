@@ -93,15 +93,17 @@ WSGI_APPLICATION = 'LoverMatch_Django.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.dummy',
-        'NAME': 'local',
+        'NAME': '',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',
     }
 }
-
-# connect('local')
+MONGODB_DATABASES = {
+    'default': {'name': 'local'}
+}
+# connect("local")
 
 AUTH_PASSWORD_VALIDATORS = [
     {
