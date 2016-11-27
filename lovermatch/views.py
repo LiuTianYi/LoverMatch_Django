@@ -304,7 +304,7 @@ def match(request):
         return JsonResponse({'code': -1})
     features_to_match = user.features
     weights = user.percentage
-    n = request.POST['n']
+    n = int(request.POST['n'])
     matchlist = {}
     for current_user in UserInfo.objects:
         sim = get_similarity(user, current_user, features_to_match, weights)
