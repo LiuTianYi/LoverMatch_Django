@@ -1,7 +1,7 @@
 
 
 
-var data;
+var dat;
 var features;
 var percentage;
 
@@ -23,7 +23,7 @@ $(function() {
       dataType: "json", // type of returned data
       success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
         //console.log(data)
-        data = data['data'];
+        dat = data['data'];
         features = data['features'];
         percentage = data['percentage'];
         $("#usernamelabel").text(data["name"]);
@@ -31,7 +31,10 @@ $(function() {
       }
      });
 
-   console.log(data)
+   console.log(dat)
+   console.log(features)
+   console.log(percentage)
+
 
     
 
