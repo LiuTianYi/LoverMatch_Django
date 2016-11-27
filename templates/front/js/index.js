@@ -11,7 +11,7 @@ $(function() {
     window.location="./upload_avatar.html"
   });
 
- $(window).load(function() {
+ 
 
     
 
@@ -31,12 +31,14 @@ $(function() {
       }
      });
 
+   console.log(data)
+
     
 
 
     getmatch();
 
-  });
+  
 
   $("#nav-matched").click(function(){
     //alert("change color");
