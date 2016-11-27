@@ -27,15 +27,11 @@ $(function() {
         features = data['features'];
         percentage = data['percentage'];
         $("#usernamelabel").text(data["name"]);
-        $("#userinfo").text("你是".concat(data['constellationId'],"的，你的身高"，data["height"]));
+        $("#userinfo").text("你是".concat(data['constellationId'],"的，你的身高",data["height"]));
       }
      });
 
-    if (ofeatuers == null && opercentage == null){
-      alert("请完善你的个人信息和你希望找到的人！");
-      //location.reload() ;
-
-    }
+    
 
 
     getmatch();
