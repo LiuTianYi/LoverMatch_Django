@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 from mongoengine import *
 from mongoengine.fields import *
+from django.db import models
 
 
 # from LoverMatch_Django.settings import data
@@ -12,10 +13,11 @@ class Features(Document):
     age = ListField(required=False)  # "age": [18, 24], // 年龄在18~24岁
     height = ListField(required=False)  # "height": [160, 170], // 身高在160~170之间
     weight = ListField(required=False)  # "weight": [50, 60], // 体重在50~60kg之间
-    hometownId = ListField(StringField(required=False))  # "hometownId": [[01, 03, 12], [01, 04, 10], [01, 02, 03]], // 家乡地址id列表
+    hometownId = ListField(
+        StringField(required=False))  # "hometownId": [[01, 03, 12], [01, 04, 10], [01, 02, 03]], // 家乡地址id列表
     universityId = ListField(required=False)  # "universityId": [01, 03, 04], // 大学id列表
     schoolId = ListField(required=False)  # "schoolId": [01, 02, 12], // 专业id列表
-    gradeId = ListField(required=False) # "gradeId": [1 ,4]
+    gradeId = ListField(required=False)  # "gradeId": [1 ,4]
     constellationId = ListField(required=False)  # "constellationId": [12, 13], // 星座id列表
     hobbiesId = ListField(required=False)  # "hobbiesId": [12, 13, 15] // 爱好id列表
 
@@ -32,12 +34,17 @@ class Percentage(Document):
     hobbiesId = FloatField(required=False)  # "hobbiesId": 0
 
 
+class photo(Document):
+    # owner = models.ForeignKey(UserInfo.user, user='上传者')
+    image = models.ImageField(upload_to='photos/', blank=True, null=True)
+
+
 class UserInfo(Document):
     user = StringField(required=True)  # 用户邮箱（作为用户名）
     password = StringField(required=True)
     name = StringField(required=True)
 
-    photoAddress = StringField(max_length=100, required=False)  # 照片存储位置
+    photoAddress = ReferenceField(photo)  # 照片
     age = IntField(required=False)  # 年龄
     gender = IntField(required=False)  # 性别
     height = IntField(required=False)  # 身高
@@ -59,6 +66,10 @@ class UserInfo(Document):
     is_active = BooleanField(required=False, default=False)  # 是否激活
 
 
+def unicode__(self):
+    return '%s %s' % (self.owner, self.image)
+
+
 def serializeUser(UserInfo):
     return (
         {'user': UserInfo.user, 'name': UserInfo.name, 'photoAddress': UserInfo.photoAddress,
@@ -67,7 +78,6 @@ def serializeUser(UserInfo):
          'gradeId': UserInfo.gradeId, 'constellationId': UserInfo.constellationId, 'hobbiesId': UserInfo.hobbiesId,
          'loverMatch': UserInfo.loverMatch, 'loverMatched': UserInfo.loverMatched, 'verified': UserInfo.verified,
          'features': UserInfo.features, 'percentage': UserInfo.percentage})
-
 
 # for post in UserInfo.objects:
 #     print post.user
