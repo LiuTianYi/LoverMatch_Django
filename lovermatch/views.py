@@ -430,5 +430,8 @@ def get_similarity(u1, u2, features_to_match, weights):
         elif feature == 'hobbiesId':
             value += weight * hobbies_similarity(u1.hobbiesId, u2.hobbiesId, condition)
 
-    value = value / sum(weights.__dict__.values())
+    sum_of_weights = 0.0
+    for v in weights.__dict__.values():
+        sum_of_weights += float(v)
+    value = value / sum_of_weights
     return value
