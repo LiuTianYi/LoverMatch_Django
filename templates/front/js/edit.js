@@ -14,7 +14,7 @@ $(function(){
 	for (var i = 0 ;  i < hobbies["hobby"].length ; i++){
 		var hb = hobbies["hobby"][i];
 		$("#hobby").append('<label class="checkbox-inline " id="hobby-'+i+'"><input class="hobbies" type="checkbox" name="checkboxes" id="checkboxes-'+i+'" value="'+i+'">'+hb+'</label>');
-        $("#f-hobby").append('<label class="checkbox-inline " id="f-hobby-'+i+'"><input class="f-hobbies" type="checkbox" name="checkboxes" id="checkboxes-'+i+'" value="'+i+'">'+hb+'</label>');
+        $("#f-hobby").append('<label class="checkbox-inline " id="f-hobby-'+i+'"><input class="f-hobbies" type="checkbox" name="checkboxes" id="f-checkboxes-'+i+'" value="'+i+'">'+hb+'</label>');
 	}
 
     console.log(dat['hobbiesId'])
