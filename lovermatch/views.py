@@ -367,7 +367,7 @@ def hobbies_similarity(h1, h2, condition):
 
 def get_similarity(u1, u2, features_to_match, weights):
     value = 0.0
-    for feature, condition in features_to_match.items():
+    for feature, condition in features_to_match.__dict__.items():
         weight = weights[feature]
         if feature == 'height':
             value += weight * height_similarity(u1.height, u2.height, condition)
