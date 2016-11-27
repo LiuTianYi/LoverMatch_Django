@@ -436,5 +436,7 @@ def get_similarity(u1, u2, features_to_match, weights):
     for v in weights.__dict__.values():
         if isinstance(v, float):
             sum_of_weights += float(v)
+    if sum_of_weights == 0.0:
+        sum_of_weights = 9.0
     value = value / sum_of_weights
     return value
