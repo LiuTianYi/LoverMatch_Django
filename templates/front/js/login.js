@@ -5,7 +5,7 @@ $(function() {
     var password = $("#login-pass").val(); // define password variable
     //alert(password)
 
-
+null
 
 
 
