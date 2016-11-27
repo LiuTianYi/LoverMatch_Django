@@ -31,6 +31,8 @@ $(function() {
       }
      });
 
+   console.log(data)
+
     
 
 
