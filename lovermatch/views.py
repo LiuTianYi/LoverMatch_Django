@@ -414,7 +414,12 @@ def hobbies_similarity(h1, h2, condition):
 def get_similarity(u1, u2, features_to_match, weights):
     value = 0.0
     for feature, condition in features_to_match.__dict__.items():
-        weight = float(weights.__dict__[feature])
+        try:
+            weight = float(weights.__dict__[feature])
+        except:
+            continue
+        else:
+            pass
         if feature == 'height':
             value += weight * height_similarity(u1.height, u2.height, condition)
         elif feature == 'hometownId':
@@ -438,8 +443,13 @@ def get_similarity(u1, u2, features_to_match, weights):
 
     sum_of_weights = 0.0
     for v in weights.__dict__.values():
-        if isinstance(v, float):
-            sum_of_weights += float(v)
+        try:
+            v = float(v)
+        except:
+            continue
+        else:
+            pass
+        sum_of_weights += v
     if sum_of_weights == 0.0:
         sum_of_weights = 9.0
     value = value / sum_of_weights
