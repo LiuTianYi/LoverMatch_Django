@@ -4,7 +4,7 @@ import simplejson
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.urls import reverse
-from lovermatch.models import UserInfo, serializeUser, Features, Percentage
+from lovermatch.models import UserInfo, serializeUser, Features, serializeFeatures, Percentage, serializePercentage
 from django.http import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from operator import itemgetter
@@ -20,10 +20,13 @@ from mongoengine import *
 from django.contrib.auth import authenticate
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from .forms import ImageUploadForm
+from .models import photo
+from .forms import photoForm
 from django.db import models
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib.auth.models import User
+
+# from django.shortcuts import get_object_or_404
 
 # Create your views here.
 token = Token(django_settings.SECRET_KEY)  # token is used to verify user in email link
@@ -40,6 +43,14 @@ def helloworld(request, some_string):
 
 def show_signup_form(request):
     return render(request, 'lovermatch/signup.html')
+
+
+def show_login_form(request):
+    return render(request, 'lovermatch/login.html')
+
+
+def show_upload_photo_form(request):
+    return render(request, 'lovermatch/upload_photo.html')
 
 
 def signup(request):
@@ -103,13 +114,13 @@ def active_user(request):
 def showInfo(request):
     usr = request.session.get('user')
     if usr:
-
         cursor = UserInfo.objects(user=usr)
 
-        return JsonResponse({'result': 0, 'data': serializeUser(cursor[0])})
+        return JsonResponse({'code': 0, 'data': serializeUser(cursor[0]), "features": serializeFeatures(
+            cursor[0].features), "percentage": serializePercentage(cursor[0].percentage)})
 
     else:
-        return JsonResponse({'result': -1})
+        return JsonResponse({'code': -1})
 
 
 def update_self(request):
@@ -131,10 +142,10 @@ def update_self(request):
     # ho = userUpdate["hometownId"]
     ho = map(int, userUpdate.getlist("hometownId[]"))
     univ = userUpdate.get("universityId")
-    print univ
+    # print univ
     scho = map(int, userUpdate.getlist("schoolId[]"))
     # results = map(int, results)
-    print scho
+    # print scho
     # grad = userUpdate["gradeId"]
     cons = userUpdate.get("constellationId")
     hob = map(int, userUpdate.getlist("hobbiesId[]"))
@@ -200,19 +211,48 @@ def update_percentage(request):
         return JsonResponse({"code": -1})
 
 
-class ExampleModel(models.Model):
-    model_pic = models.ImageField(upload_to='pic_folder/', default='pic_folder/None/no-img.jpg')
+# class ExampleModel(models.Model):
+#     model_pic = models.ImageField(upload_to='pic_folder/', default='pic_folder/None/no-img.jpg')
+#
+#
+# def upload_pic(request):
+#     if request.method == 'POST':
+#         form = ImageUploadForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             m = ExampleModel.objects.get(pk=form.cleaned_data['title'])
+#             m.model_pic = form.cleaned_data['image']
+#             m.save()
+#             return HttpResponse('image upload success')
+#     return HttpResponse('image upload failed')
 
 
-def upload_pic(request):
+def upload_photo(request):
     if request.method == 'POST':
-        form = ImageUploadForm(request.POST, request.FILES)
+        form = photoForm(request.POST, request.FILES)
         if form.is_valid():
-            m = ExampleModel.objects.get(pk=form.cleaned_data['title'])
-            m.model_pic = form.cleaned_data['image']
-            m.save()
-            return HttpResponse('image upload success')
-    return HttpResponse('image upload failed')
+            # 判断是否上传了文件
+
+            usr = request.session.get('user')
+            print usr
+            print request.FILES
+            if 'img' in request.FILES:
+                image = request.FILES["img"]
+
+                # 修改文件名字
+                image.name = str(usr) + '.jpg'
+                # s = photo(owner=request.user, image=image)
+                s = photo(image=image)
+                s.save()
+                return HttpResponse('上传成功')
+            else:
+                # 没有上传文件直接点了上传就重定向到上传页面
+                return HttpResponseRedirect('/upload_photo/')
+        else:
+
+            image = None
+            return HttpResponse('上传失败')
+    else:
+        return render(request, 'lovermatch/upload_photo.html')
 
 
 def login(req):
@@ -224,6 +264,8 @@ def login(req):
 
         # 获取的表单数据与数据库进行比较
         userinfo = UserInfo.objects.get(user=usr, password=pw)
+        # userinfo = get_object_or_404(UserInfo, user=usr, password=pw)
+
         # print len(userinfo)
         if len(userinfo) > 0:
             if userinfo.is_active == False:

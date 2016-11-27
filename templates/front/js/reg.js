@@ -156,7 +156,20 @@ $(function() {
 		      success: function(data) { 
 		      	if (data["code"]==0){
                     window.location="./regsuccess.html"
-                }else{
+                }else if(data['code']==-1){
+                	$("#InputEmailFirst").css({"border-color":"red"});
+			    	$("#InputEmailSecond").css({"border-color":"red"});
+			    	$("#email1label").css({"color":"red"});
+			    	$("#email1label").text("邮箱已经注册了");
+			    	$("#email2label").css({"color":"red"});
+			    	$("#email2label").text("邮箱已经注册了");
+                }else if(data['code']==-2){
+                	$("#namelabel").css({"color":"red"});
+			    	$("#namelabel").text("昵称已经使用了！");
+			    	$("#InputName").css({"border-color":"red"});
+			    	$("#InputName").focus();
+                }
+                else{
                     window.location="./regfail.html"
                 }
 		      }
