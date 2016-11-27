@@ -429,9 +429,12 @@ def get_similarity(u1, u2, features_to_match, weights):
             value += weight * constellation_similarity(u1.constellationId, u2.constellationId, condition)
         elif feature == 'hobbiesId':
             value += weight * hobbies_similarity(u1.hobbiesId, u2.hobbiesId, condition)
+        else:
+            pass
 
     sum_of_weights = 0.0
     for v in weights.__dict__.values():
-        sum_of_weights += float(v)
+        if isinstance(v, float):
+            sum_of_weights += float(v)
     value = value / sum_of_weights
     return value
