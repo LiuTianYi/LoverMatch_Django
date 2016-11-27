@@ -20,7 +20,7 @@ $(function(){
     console.log(dat['hobbiesId'])
 
     for (var i = 0 ; i < dat['hobbiesId'].length ; i++){
-        $("#checkboxes-"+i).attr("checked","checked");
+        $("#checkboxes-"+dat['hobbiesId'][i]).attr("checked","checked");
     }
 
 
