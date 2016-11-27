@@ -18,6 +18,7 @@ urlpatterns = [
                   url(r'^login', views.login),
                   url(r'^hello', views.helloworld),
                   url(r'^showInfo', views.showInfo),
+                  url(r'^show', views.showInfo),
                   url(r'^update_self', views.update_self),
                   url(r'^update_feature', views.update_feature),
                   url(r'^update_percentage', views.update_percentage),
