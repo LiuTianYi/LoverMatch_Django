@@ -413,6 +413,7 @@ def hobbies_similarity(h1, h2, condition):
 
 def get_similarity(u1, u2, features_to_match, weights):
     value = 0.0
+    print 'initial value = %f' % value
     for feature, condition in features_to_match.__dict__.items():
         try:
             weight = float(weights.__dict__[feature])
@@ -440,8 +441,11 @@ def get_similarity(u1, u2, features_to_match, weights):
             value += weight * hobbies_similarity(u1.hobbiesId, u2.hobbiesId, condition)
         else:
             pass
+        print 'now value = %f' % value
 
+    print 'final value = %f' % value
     sum_of_weights = 0.0
+    print 'initial sum_of_weights = %f' % sum_of_weights
     for v in weights.__dict__.values():
         try:
             v = float(v)
@@ -450,7 +454,10 @@ def get_similarity(u1, u2, features_to_match, weights):
         else:
             pass
         sum_of_weights += v
+        print 'now sum_of_weights = %f' % sum_of_weights
     if sum_of_weights == 0.0:
         sum_of_weights = 9.0
+    print 'final sum_of_weights = %f' % sum_of_weights
     value = value / sum_of_weights
+    print 'after computation, value = &f' % value
     return value
