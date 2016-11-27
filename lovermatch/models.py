@@ -12,7 +12,7 @@ class Features(Document):
     age = ListField(required=False)  # "age": [18, 24], // 年龄在18~24岁
     height = ListField(required=False)  # "height": [160, 170], // 身高在160~170之间
     weight = ListField(required=False)  # "weight": [50, 60], // 体重在50~60kg之间
-    hometownId = ListField(ListField(required=False))  # "hometownId": [[01, 03, 12], [01, 04, 10], [01, 02, 03]], // 家乡地址id列表
+    hometownId = ListField(StringField(required=False))  # "hometownId": [[01, 03, 12], [01, 04, 10], [01, 02, 03]], // 家乡地址id列表
     universityId = ListField(required=False)  # "universityId": [01, 03, 04], // 大学id列表
     schoolId = ListField(required=False)  # "schoolId": [01, 02, 12], // 专业id列表
     gradeId = ListField(required=False) # "gradeId": [1 ,4]
@@ -42,7 +42,7 @@ class UserInfo(Document):
     gender = IntField(required=False)  # 性别
     height = IntField(required=False)  # 身高
     weight = IntField(required=False)  # 体重
-    hometownId = ListField()  # 家乡
+    hometownId = StringField()  # 家乡
     universityId = IntField(required=False)  # 大学
     schoolId = ListField()  # 学院
     gradeId = IntField(required=False)  # 年级
