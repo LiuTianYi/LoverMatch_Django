@@ -33,9 +33,9 @@ $(function() {
       async: false
      });
 
-   console.log(dat)
-   console.log(features)
-   console.log(percentage)
+   //console.log(dat)
+   //console.log(features)
+   //console.log(percentage)
 
 
     
