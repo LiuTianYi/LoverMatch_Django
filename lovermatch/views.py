@@ -4,7 +4,7 @@ import simplejson
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.urls import reverse
-from lovermatch.models import UserInfo, serializeUser, Features, Percentage
+from lovermatch.models import UserInfo, serializeUser, Features, serializeFeatures, Percentage, serializePercentage
 from django.http import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from operator import itemgetter
@@ -25,6 +25,7 @@ from .forms import photoForm
 from django.db import models
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib.auth.models import User
+
 # from django.shortcuts import get_object_or_404
 
 # Create your views here.
@@ -109,10 +110,10 @@ def active_user(request):
 def showInfo(request):
     usr = request.session.get('user')
     if usr:
-
         cursor = UserInfo.objects(user=usr)
 
-        return JsonResponse({'result': 0, 'data': serializeUser(cursor[0])})
+        return JsonResponse({'result': 0, 'data': serializeUser(cursor[0]), "features": serializeFeatures(
+            cursor[0].features), "percentage":serializePercentage(cursor[0].percentage)})
 
     else:
         return JsonResponse({'result': -1})

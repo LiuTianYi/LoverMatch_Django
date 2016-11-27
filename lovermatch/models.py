@@ -5,6 +5,7 @@ from mongoengine import *
 from mongoengine.fields import *
 from django.db import models
 
+
 # connect('local')
 
 # from LoverMatch_Django.settings import data
@@ -77,8 +78,31 @@ def serializeUser(UserInfo):
          'age': UserInfo.age, 'gender': UserInfo.gender, 'height': UserInfo.height, 'weight': UserInfo.weight,
          'hometownId': UserInfo.hometownId, 'universityId': UserInfo.universityId, 'schoolId': UserInfo.schoolId,
          'gradeId': UserInfo.gradeId, 'constellationId': UserInfo.constellationId, 'hobbiesId': UserInfo.hobbiesId,
-         'loverMatch': UserInfo.loverMatch, 'loverMatched': UserInfo.loverMatched, 'verified': UserInfo.verified,
-         'features': UserInfo.features, 'percentage': UserInfo.percentage})
+         'loverMatch': UserInfo.loverMatch, 'loverMatched': UserInfo.loverMatched, 'verified': UserInfo.verified})
+
+
+def serializeFeatures(Features):
+    return (
+        {
+            'age': Features.age, 'height': Features.height, 'weight': Features.weight,
+            'hometownId': Features.hometownId, 'universityId': Features.universityId,
+            'schoolId': Features.schoolId, 'gradeId': Features.gradeId, 'constellationId': Features.constellationId,
+            'hobbiesId': Features.hobbiesId
+        }
+    )
+
+
+def serializePercentage(Percentage):
+    return (
+        {
+            'age': Percentage.age, 'height': Percentage.height, 'weight': Percentage.weight,
+            'hometownId': Percentage.hometownId, 'universityId': Percentage.universityId,
+            'schoolId': Percentage.schoolId, 'gradeId': Percentage.gradeId,
+            'constellationId': Percentage.constellationId,
+            'hobbiesId': Percentage.hobbiesId
+        }
+    )
+
 
 # for post in UserInfo.objects:
 #     print post.user
