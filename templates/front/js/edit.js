@@ -17,8 +17,10 @@ $(function(){
         $("#f-hobby").append('<label class="checkbox-inline " id="f-hobby-'+i+'"><input class="f-hobbies" type="checkbox" name="checkboxes" id="checkboxes-'+i+'" value="'+i+'">'+hb+'</label>');
 	}
 
+    console.log(dat['hobbiesId'])
+
     for (var i = 0 ; i < dat['hobbiesId'].length ; i++){
-        $("checkboxes-"+i).attr("checked","checked");
+        $("#checkboxes-"+i).attr("checked","checked");
     }
 
 
