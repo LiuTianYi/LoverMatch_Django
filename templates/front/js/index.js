@@ -1,7 +1,7 @@
 
 
 
-var data;
+var dat;
 var features;
 var percentage;
 
@@ -23,15 +23,20 @@ $(function() {
       dataType: "json", // type of returned data
       success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
         //console.log(data)
-        data = data['data'];
+        dat = data['data'];
         features = data['features'];
         percentage = data['percentage'];
-        $("#usernamelabel").text(data["name"]);
-        $("#userinfo").text("你是".concat(cons["constellation"][data['constellationId']],"的，你的身高",data["height"]));
-      }
+        $("#usernamelabel").text(dat["name"]);
+        $("#userinfo").text("你是".concat(cons["constellation"][dat['constellationId']],"的，你的身高",dat["height"]));
+
+      },
+      async: false
      });
 
-   console.log(data)
+   console.log(dat)
+   console.log(features)
+   console.log(percentage)
+
 
     
 
