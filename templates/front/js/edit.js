@@ -1,6 +1,4 @@
-var data;
-var features;
-var percentage;
+
 
 $(function(){
 
@@ -18,6 +16,10 @@ $(function(){
 		$("#hobby").append('<label class="checkbox-inline " id="hobby-'+i+'"><input class="hobbies" type="checkbox" name="checkboxes" id="checkboxes-'+i+'" value="'+i+'">'+hb+'</label>');
         $("#f-hobby").append('<label class="checkbox-inline " id="f-hobby-'+i+'"><input class="f-hobbies" type="checkbox" name="checkboxes" id="checkboxes-'+i+'" value="'+i+'">'+hb+'</label>');
 	}
+
+    for (var i = 0 ; i < dat['hobbiesId'].length ; i++){
+        $("checkboxes-"+i).attr("checked","checked");
+    }
 
 
 
