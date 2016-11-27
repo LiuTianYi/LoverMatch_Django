@@ -414,11 +414,14 @@ def hobbies_similarity(h1, h2, condition):
 def get_similarity(u1, u2, features_to_match, weights):
     value = 0.0
     print 'initial value = %f' % value
-    for feature, condition in features_to_match.__dict__.items():
+    for feature in dir(features_to_match):
         try:
             print 'feature = %s, type = %s' % (feature, type(feature))
-            print 'condition = %s, type = %s' % (condition, type(condition))
-            weight = float(weights.__dict__[feature])
+            if hasattr(features_to_match, feature):
+                condition = getattr(features_to_match, feature)
+                print 'condition = %s, type = %s' % (condition, type(condition))
+            if hasattr(weights, feature):
+                weight = float(getattr(weights, feature))
         except:
             continue
         else:
@@ -448,9 +451,11 @@ def get_similarity(u1, u2, features_to_match, weights):
     print 'final value = %f' % value
     sum_of_weights = 0.0
     print 'initial sum_of_weights = %f' % sum_of_weights
-    for v in weights.__dict__.values():
+    for v in dir(weights):
         try:
-            v = float(v)
+            if hasattr(weights, v):
+                v = getattr(weights, v)
+                v = float(v)
         except:
             continue
         else:
