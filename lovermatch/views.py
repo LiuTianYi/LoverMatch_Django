@@ -416,6 +416,8 @@ def get_similarity(u1, u2, features_to_match, weights):
     print 'initial value = %f' % value
     for feature, condition in features_to_match.__dict__.items():
         try:
+            print 'feature = %s, type = %s' % (feature, type(feature))
+            print 'condition = %s, type = %s' % (condition, type(condition))
             weight = float(weights.__dict__[feature])
         except:
             continue
@@ -459,5 +461,5 @@ def get_similarity(u1, u2, features_to_match, weights):
         sum_of_weights = 9.0
     print 'final sum_of_weights = %f' % sum_of_weights
     value = value / sum_of_weights
-    print 'after computation, value = &f' % value
+    print 'after computation, value = %f' % value
     return value
