@@ -42,7 +42,7 @@ class photo(Document):
 
 
 class UserInfo(Document):
-    user = StringField(required=True)  # 用户邮箱（作为用户名）
+    user = StringField(required=True,primary_key=True)  # 用户邮箱（作为用户名）
     password = StringField(required=True)
     name = StringField(required=True)
 

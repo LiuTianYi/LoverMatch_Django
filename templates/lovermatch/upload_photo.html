@@ -2,21 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>上传</title>
+    <title>Upload picture</title>
 </head>
 <body>
+
+<p>Form to fill in</p>
 <form action="{% url 'upload_photo' %}" method="post">
     {% csrf_token %}
+    <input type="file" name="img"/>
 
-<fieldset>
+    <input type="submit" value="Submit"/>
+</form>
 
-<legend>上传文件</legend>
+</body>
+</html>
 
-<input type="file" name="docfile" />
 
-<input type="submit" value="上传"/>
 
-</fieldset>
 
 </form>
 </body>

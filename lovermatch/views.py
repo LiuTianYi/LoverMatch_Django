@@ -45,6 +45,10 @@ def show_signup_form(request):
     return render(request, 'lovermatch/signup.html')
 
 
+def show_login_form(request):
+    return render(request, 'lovermatch/login.html')
+
+
 def show_upload_photo_form(request):
     return render(request, 'lovermatch/upload_photo.html')
 
@@ -112,11 +116,11 @@ def showInfo(request):
     if usr:
         cursor = UserInfo.objects(user=usr)
 
-        return JsonResponse({'result': 0, 'data': serializeUser(cursor[0]), "features": serializeFeatures(
-            cursor[0].features), "percentage":serializePercentage(cursor[0].percentage)})
+        return JsonResponse({'code': 0, 'data': serializeUser(cursor[0]), "features": serializeFeatures(
+            cursor[0].features), "percentage": serializePercentage(cursor[0].percentage)})
 
     else:
-        return JsonResponse({'result': -1})
+        return JsonResponse({'code': -1})
 
 
 def update_self(request):
@@ -138,10 +142,10 @@ def update_self(request):
     # ho = userUpdate["hometownId"]
     ho = map(int, userUpdate.getlist("hometownId[]"))
     univ = userUpdate.get("universityId")
-    print univ
+    # print univ
     scho = map(int, userUpdate.getlist("schoolId[]"))
     # results = map(int, results)
-    print scho
+    # print scho
     # grad = userUpdate["gradeId"]
     cons = userUpdate.get("constellationId")
     hob = map(int, userUpdate.getlist("hobbiesId[]"))
@@ -229,8 +233,10 @@ def upload_photo(request):
             # 判断是否上传了文件
 
             usr = request.session.get('user')
-            if 'docfile' in request.FILES:
-                image = request.FILES["docfile"]
+            print usr
+            print request.FILES
+            if 'img' in request.FILES:
+                image = request.FILES["img"]
 
                 # 修改文件名字
                 image.name = str(usr) + '.jpg'
@@ -246,7 +252,7 @@ def upload_photo(request):
             image = None
             return HttpResponse('上传失败')
     else:
-        return render(request, 'upload_photo.html')
+        return render(request, 'lovermatch/upload_photo.html')
 
 
 def login(req):
