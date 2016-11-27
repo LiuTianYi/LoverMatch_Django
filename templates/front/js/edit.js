@@ -23,6 +23,14 @@ $(function(){
         $("#checkboxes-"+dat['hobbiesId'][i]).attr("checked","checked");
     }
 
+    for (var i = 0 ; i < dat['hobbiesId'].length ; i++){
+        $("#checkboxes-"+dat['hobbiesId'][i]).attr("checked","checked");
+    }
+
+    for (var i = 0 ; i < features['hobbiesId'].length ; i++){
+        $("#f-checkboxes-"+features['hobbiesId'][i]).attr("checked","checked");
+    }
+
 
 
 
@@ -34,6 +42,8 @@ $(function(){
         $("#selectcons").append('<option id=conste'+i+' value="'+i+'">'+conste+'</option>');
         $("#f-selectcons").append('<option id=f-conste'+i+' value="'+i+'">'+conste+'</option>');
     }
+
+    $("")
 
     //if (oconstellationId!=null){
 	//	$("conste"+oconstellationId).attr("selected","true");
