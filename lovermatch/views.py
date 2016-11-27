@@ -314,7 +314,7 @@ def match(request):
     for u, sim in sorted_matchlist:
         info = {'name': u.name, 'age': u.age, 'gender': u.gender, 'height': u.height, 'weight': u.weight, 'hometownId': u.hometownId, 'universityId': u.universityId, 'schoolId': u.schoolId, 'gradeId': u.gradeId, 'constellationId': u.constellationId, 'hobbiesId': u.hobbiesId}
         return_matchlist.append((info, sim))
-    context = {'code': 0, 'list': sorted_matchlist}
+    context = {'code': 0, 'list': return_matchlist}
     return JsonResponse(context)
 
 
