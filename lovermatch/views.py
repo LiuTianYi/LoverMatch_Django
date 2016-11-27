@@ -300,7 +300,10 @@ def age_similarity(a1, a2, condition):
 def hometown_similarity(hid1, hid2, condition):
     if hid2 not in condition:
         return 0.0
-    return 1.0
+    if hid1 == hid2:
+        return 0.9
+    else:
+        return 1.0
 
 
 def gender_similarity(g1, g2, condition):
@@ -325,18 +328,18 @@ def university_similarity(u1, u2, condition):
     if u2 not in condition:
         return 0.0
     if u1 == u2:
-        return 1.0
-    else:
         return 0.9
+    else:
+        return 1.0
 
 
 def school_similarity(s1, s2, condition):
     if s2 not in condition:
         return 0.0
     if s1 == s2:
-        return 1.0
-    else:
         return 0.9
+    else:
+        return 1.0
 
 
 def constellation_similarity(c1, c2, condition):
