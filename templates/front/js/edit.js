@@ -8,7 +8,7 @@ $(function(){
 
 
 	//load hobby
-    $("#username").text(dat["name"]);
+    $("#username").attr("placeholder",dat["name"]);
 
 
 	$("#hobby").html("");
