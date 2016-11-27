@@ -100,10 +100,10 @@ DATABASES = {
         'PORT': '',
     }
 }
-MONGODB_DATABASES = {
-    'default': {'name': 'local'}
-}
-# connect("local")
+# MONGODB_DATABASES = {
+#     'default': {'name': 'local'}
+# }
+connect("local")
 
 AUTH_PASSWORD_VALIDATORS = [
     {

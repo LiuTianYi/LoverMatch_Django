@@ -5,6 +5,7 @@ from mongoengine import *
 from mongoengine.fields import *
 from django.db import models
 
+# connect('local')
 
 # from LoverMatch_Django.settings import data
 # Create your models here.
