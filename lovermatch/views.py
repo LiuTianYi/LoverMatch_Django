@@ -25,7 +25,7 @@ from .forms import photoForm
 from django.db import models
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404
+# from django.shortcuts import get_object_or_404
 
 # Create your views here.
 token = Token(django_settings.SECRET_KEY)  # token is used to verify user in email link
@@ -256,8 +256,8 @@ def login(req):
         pw = req.POST['password']
 
         # 获取的表单数据与数据库进行比较
-        # userinfo = UserInfo.objects.get(user=usr, password=pw)
-        userinfo = get_object_or_404(UserInfo, user=usr, password=pw)
+        userinfo = UserInfo.objects.get(user=usr, password=pw)
+        # userinfo = get_object_or_404(UserInfo, user=usr, password=pw)
 
         # print len(userinfo)
         if len(userinfo) > 0:
