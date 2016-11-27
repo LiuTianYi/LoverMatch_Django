@@ -26,6 +26,10 @@ $(function() {
       	window.location="./index.html"
       }else if (data["code"]==-3){
         window.location="./regsuccessremind.html"
+      }else if (data['code' == -1]){
+      	alert('去注册吧，你还没有注册呢')
+      }else{
+      	alert('尴尬，出错了，请联系工作人员吧。')
       }
       }
      });
