@@ -11,7 +11,7 @@ $(function() {
     window.location="./upload_avatar.html"
   });
 
- $(window).load(function() {
+ 
 
     
 
@@ -38,7 +38,7 @@ $(function() {
 
     getmatch();
 
-  });
+  
 
   $("#nav-matched").click(function(){
     //alert("change color");
