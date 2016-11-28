@@ -238,6 +238,8 @@ def upload_photo(request):
         image_path = "/home/yyj/LoverMatch_Django/templates/photos/" + str(
             usr) + ".jpg"
 
+        store_path = "168.63.205.250/static/photos/" + str(usr) + ".jpg"
+
         # image_path = "/Users/yangyuji/Documents/Coding/PycharmProjects/LoverMatch_Django/LoverMatch/" + str(
         #     usr) + ".jpg"
         img.save(image_path)  # 保存图片
@@ -250,7 +252,7 @@ def upload_photo(request):
         # img.save(image_path)
 
 
-        if UserInfo.objects(user=usr).update(photoAddress=str(image_path), upsert=True):
+        if UserInfo.objects(user=usr).update(photoAddress=str(store_path), upsert=True):
             return JsonResponse({"code": 0})
         else:
             return JsonResponse({"code": -1})
