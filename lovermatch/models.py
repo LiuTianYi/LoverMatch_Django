@@ -15,8 +15,7 @@ class Features(Document):
     age = ListField(required=False)  # "age": [18, 24], // 年龄在18~24岁
     height = ListField(required=False)  # "height": [160, 170], // 身高在160~170之间
     weight = ListField(required=False)  # "weight": [50, 60], // 体重在50~60kg之间
-    hometownId = ListField(
-        StringField(required=False))  # "hometownId": [[01, 03, 12], [01, 04, 10], [01, 02, 03]], // 家乡地址id列表
+    hometownId = ListField(StringField(required=False))  # "hometownId": [010312, 010410, 010203], // 家乡地址id列表
     universityId = ListField(required=False)  # "universityId": [01, 03, 04], // 大学id列表
     schoolId = ListField(required=False)  # "schoolId": [01, 02, 12], // 专业id列表
     gradeId = ListField(required=False)  # "gradeId": [1 ,4]
@@ -35,18 +34,19 @@ class Percentage(Document):
     constellationId = FloatField(required=False)  # "constellationId": 0,
     hobbiesId = FloatField(required=False)  # "hobbiesId": 0
 
-
-class photo(Document):
-    # owner = models.ForeignKey(UserInfo.user, user='上传者')
-    image = models.ImageField(upload_to='photos/', blank=True, null=True)
+#
+# class photoModel(models.Model):
+#     # owner = models.ForeignKey(UserInfo.user, user='上传者')
+#     image = models.ImageField(upload_to='photos/', default='photos/None/no-img.jpg', blank=True, null=True)
+#     # name = models.CharField(max_length=255)
 
 
 class UserInfo(Document):
-    user = StringField(required=True,primary_key=True)  # 用户邮箱（作为用户名）
+    user = StringField(required=True, primary_key=True)  # 用户邮箱（作为用户名）
     password = StringField(required=True)
     name = StringField(required=True)
 
-    photoAddress = ReferenceField(photo)  # 照片
+    photoAddress = StringField(required=False)  # 照片地址
     age = IntField(required=False)  # 年龄
     gender = IntField(required=False)  # 性别
     height = IntField(required=False)  # 身高
@@ -102,7 +102,6 @@ def serializePercentage(Percentage):
             'hobbiesId': Percentage.hobbiesId
         }
     )
-
 
 # for post in UserInfo.objects:
 #     print post.user
