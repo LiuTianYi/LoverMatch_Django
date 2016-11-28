@@ -76,7 +76,7 @@ function getmatch(){
     success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
       $("#match_spot").html("");
       for (var i = 0 ; i < data["lovermatch"].length ; i++ )
-      	$("#match_spot").append('<li class="list-group-item item" id="hover-parent"><span class="badge">'+toString(parseInt(data["lovermatch"][i][0])*100)+'</span>'+data["lovermatch"][i][0]['name']+'<div class="match-avt" style="background-image: url('+data["lovermatch"][i][0]['photoAddress']+')"></div><div id="hc"><p>他的身高是163cm</p><p>他的体重是53kg</p></div><div class="progress bar"><div class="progress-bar" role="progressbar" aria-valuenow="'+toString(parseInt(data["lovermatch"][i][0])*100)+'" aria-valuemin="0" aria-valuemax="100" style="width: '+toString(parseInt(data["lovermatch"][0])*100)+'%;"></div></li>')
+      	$("#match_spot").append('<li class="list-group-item item" id="hover-parent"><span class="badge">'+toString(parseFloat(data["lovermatch"][i][0])*100)+'</span>'+data["lovermatch"][i][0]['name']+'<div class="match-avt" style="background-image: url('+data["lovermatch"][i][0]['photoAddress']+')"></div><div id="hc"><p>他的身高是163cm</p><p>他的体重是53kg</p></div><div class="progress bar"><div class="progress-bar" role="progressbar" aria-valuenow="'+toString(parseFloat(data["lovermatch"][i][0])*100)+'" aria-valuemin="0" aria-valuemax="100" style="width: '+toString(parseFloat(data["lovermatch"][0])*100)+'%;"></div></li>')
     }
   });
 }
