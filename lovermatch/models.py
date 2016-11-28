@@ -87,10 +87,10 @@ def serializeFeatures(Features):
 
         return (
             {
-                'age': None, 'height': None, 'weight': None,
-                'hometownId': None, 'universityId': None,
-                'schoolId': None, 'gradeId': None, 'constellationId': None,
-                'hobbiesId': None
+                'age': [], 'height': [], 'weight': [],
+                'hometownId': [], 'universityId': [],
+                'schoolId': [], 'gradeId': [], 'constellationId': [],
+                'hobbiesId': []
             })
     else:
         return (
