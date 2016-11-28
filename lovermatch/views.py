@@ -320,8 +320,10 @@ def match(request):
     usr = request.session['user']
     try:
         user = UserInfo.objects.get(user=usr)
-    except (UserInfo.DoesNotExist, UserInfo.MultipleObjectsReturned):
+    except UserInfo.DoesNotExist:
         return JsonResponse({'code': -1})
+    except UserInfo.MultipleObjectsReturned:
+        return JsonResponse({'code': -2})
     n = int(request.POST['n'])
     lovermatch = user.loverMatch
     lovermatched = user.loverMatched
