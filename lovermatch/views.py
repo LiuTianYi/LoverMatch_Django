@@ -27,6 +27,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib.auth.models import User
 from django.core.files.storage import default_storage
 from PIL import Image, ImageFile
+
 # Create your views here.
 token = Token(django_settings.SECRET_KEY)  # token is used to verify user in email link
 
@@ -227,40 +228,33 @@ def update_percentage(request):
 
 def upload_photo(request):
     if request.method == 'POST':
-        # form = photoForm(request.POST, request.FILES)
-        # if form.is_valid():
-        # image = form.save()
         usr = request.session.get('user')
-        # image.name = str(usr) + '.jpg'
-        print usr
-        print request.FILES
-        # print form
         try:
             image = request.FILES['photo']
-            img = Image.open(image)
-            img.thumbnail((500, 500), Image.ANTIALIAS)  # 对图片进行等比缩放
-            image_path = "/home/yyj/LoverMatch_Django/templates/photos/" + str(
-                usr) + ".jpg"
+        except:
+            return JsonResponse({"code": -2})
+        img = Image.open(image)
+        img.thumbnail((500, 500), Image.ANTIALIAS)  # 对图片进行等比缩放
+        image_path = "/home/yyj/LoverMatch_Django/templates/photos/" + str(
+            usr) + ".jpg"
 
-            # image_path = "/Users/yangyuji/Documents/Coding/PycharmProjects/LoverMatch_Django/LoverMatch/" + str(
-            #     usr) + ".jpg"
-            img.save(image_path)  # 保存图片
-            # parser = ImageFile.Parser()
-            # for chunk in image.chunks():
-            #     parser.feed(chunk)
-            # img = parser.close()
-            # 在img被保存之前，可以进行图片的各种操作，在各种操作完成后，在进行一次写操作
-            # img.save(image_path)
-            if UserInfo.objects(user=usr).update(photoAddress=str(image_path), upsert=True):
-                return JsonResponse({"code": 0})
-            else:
-                return JsonResponse({"code": -1})
+        # image_path = "/Users/yangyuji/Documents/Coding/PycharmProjects/LoverMatch_Django/LoverMatch/" + str(
+        #     usr) + ".jpg"
+        img.save(image_path)  # 保存图片
 
-        except Exception, e:
-            return HttpResponse("Error %s" % e)  # 异常，查看报错信息
-            # else:
-            #     没有上传文件直接点了上传就重定向到上传页面
-            # return JsonResponse({"code": -2})
+        # parser = ImageFile.Parser()
+        # for chunk in image.chunks():
+        #     parser.feed(chunk)
+        # img = parser.close()
+        # 在img被保存之前，可以进行图片的各种操作，在各种操作完成后，在进行一次写操作
+        # img.save(image_path)
+
+
+        if UserInfo.objects(user=usr).update(photoAddress=str(image_path), upsert=True):
+            return JsonResponse({"code": 0})
+        else:
+            return JsonResponse({"code": -1})
+
     else:
 
         return JsonResponse({"code": -3})
