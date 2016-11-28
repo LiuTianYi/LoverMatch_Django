@@ -8,7 +8,7 @@ var percentage;
 $(function() {
 
   $("#uploadphoto").click(function(){
-    window.location="../lovermatch/photo_form.html"
+    window.location="photo_form.html"
   });
 
  
