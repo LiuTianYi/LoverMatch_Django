@@ -294,15 +294,15 @@ $(function(){
 
 
 
-    $("#rateage").attr("value",0);
-    $("#rateheight").attr("value",0);
-    $("#rateweight").attr("value",0);
-    $("#rateprovince").attr("value",0);
-    $("#rateschool").attr("value",0);
-    $("#ratem1").attr("value",0);
-    $("#rategrade").attr("value",0);
-    $("#ratecons").attr("value",0);
-    $("#ratehobby").attr("value",0);
+    $("#rateage").attr("value",percentage["age"]);
+    $("#rateheight").attr("value",percentage["height"]);
+    $("#rateweight").attr("value",percentage["weight"]);
+    $("#rateprovince").attr("value",percentage["hometownId"]);
+    $("#rateschool").attr("value",percentage["universityId"]);
+    $("#ratem1").attr("value",percentage["schoolId"]);
+    $("#rategrade").attr("value",percentage[]);
+    $("#ratecons").attr("value",percentage["constellationId"]);
+    $("#ratehobby").attr("value",percentage["hobbiesId"]);
 
 
 
@@ -372,7 +372,7 @@ $(function(){
        $.ajax({ // JQuery ajax function
           type: "POST", // Submitting Method
           url: 'http://168.63.205.250/update_feature',  //这里是你的api名字
-          data: {"age":[parseInt(fage)-2,parseInt(fage)+2],"height":[parseInt(fheight)-2,parseInt(fheight)+2],"weight":[parseInt(fweight)-2,parseInt(fweight)+2],"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":[fschoolid],"constellationId":[fcostell],"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]],"gradeId":[fyear]}, // the data that will be sent to php processor
+          data: {"age":[parseInt(fage)-2,parseInt(fage)+2],"height":[parseInt(fheight)-2,parseInt(fheight)+2],"weight":[parseInt(fweight)-2,parseInt(fweight)+2],"hometownId":[toString(fprovinceid).concat(toString(fcityid),toString(fcountyid))],"universityId":[fschoolid],"constellationId":[fcostell],"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]],"gradeId":[fyear]}, // the data that will be sent to php processor
           //data: {"age":[18,23],"height":[176,189],"weight":[45,54],"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]],"gradeId":fyear}, // the data that will be sent to php processor
           dataType: "json", // type of returned data
           success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
@@ -472,7 +472,7 @@ $(function(){
           type: "POST", // Submitting Method
           url: 'http://168.63.205.250/update_self',  //这里是你的api名字
           //data: {"name":un},
-          data: {"name":un,"age":age,"gender":sex,"height":height,"weight":weight,"hometownId":[provinceid,cityid,countyid],"universityId":schoolid,"schoolId":[m1,m2,m3],"constellationId":costell,"hobbiesId":hb,"gradeId":year}, // the data that will be sent to php processor
+          data: {"name":un,"age":age,"gender":sex,"height":height,"weight":weight,"hometownId":toString(provinceid).concat(toString(cityid),toString(countyid)),"universityId":schoolid,"schoolId":[m1,m2,m3],"constellationId":costell,"hobbiesId":hb,"gradeId":year}, // the data that will be sent to php processor
           dataType: "json", // type of returned data
           success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
           //alert(data)
