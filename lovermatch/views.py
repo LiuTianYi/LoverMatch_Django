@@ -135,6 +135,11 @@ def update_self(request):
         return JsonResponse({"code": -1})
 
     nm = userUpdate.get("name")
+    try:
+        user = UserInfo.objects.get(name=nm)
+    except (UserInfo.DoesNotExist, UserInfo.MultipleObjectsReturned):
+        return JsonResponse({'code': -2})
+
     ag = userUpdate.get("age")
     ge = userUpdate.get("gender")
     hei = userUpdate.get("height")
