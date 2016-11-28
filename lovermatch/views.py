@@ -239,18 +239,18 @@ def upload_photo(request):
             image = request.FILES['photo']
             img = Image.open(image)
             img.thumbnail((500, 500), Image.ANTIALIAS)  # 对图片进行等比缩放
-            image_path = "/home/yyj/LoverMatch_Django/templates/photos" + str(
+            image_path = "/home/yyj/LoverMatch_Django/templates/photos/" + str(
                 usr) + ".jpg"
 
             # image_path = "/Users/yangyuji/Documents/Coding/PycharmProjects/LoverMatch_Django/LoverMatch/" + str(
             #     usr) + ".jpg"
             img.save(image_path)  # 保存图片
-            parser = ImageFile.Parser()
-            for chunk in image.chunks():
-                parser.feed(chunk)
-            img = parser.close()
+            # parser = ImageFile.Parser()
+            # for chunk in image.chunks():
+            #     parser.feed(chunk)
+            # img = parser.close()
             # 在img被保存之前，可以进行图片的各种操作，在各种操作完成后，在进行一次写操作
-            img.save(image_path)
+            # img.save(image_path)
             if UserInfo.objects(user=usr).update(photoAddress=str(image_path), upsert=True):
                 return JsonResponse({"code": 0})
             else:
