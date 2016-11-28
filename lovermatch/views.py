@@ -228,31 +228,34 @@ def update_percentage(request):
 
 def upload_photo(request):
     if request.method == 'POST':
-        form = photoForm(request.POST, request.FILES)
-        if form.is_valid():
-            # image = form.save()
-            usr = request.session.get('user')
-            # image.name = str(usr) + '.jpg'
-            print usr
-            print request.FILES
-            print form
-            try:
-                image = request.FILES['photo']
-                img = Image.open(image)
-                img.thumbnail((500, 500), Image.ANTIALIAS)  # 对图片进行等比缩放
-                image_path = "/home/yyj/LoverMatch_Django/templates/photos" + str(
-                    usr) + ".jpg"
-                img.save(image_path)  # 保存图片
-                if UserInfo.objects(user=usr).update(photoAddress=str(image_path), upsert=True):
-                    return JsonResponse({"code": 0})
-                else:
-                    return JsonResponse({"code": -1})
+        # form = photoForm(request.POST, request.FILES)
+        # if form.is_valid():
+        # image = form.save()
+        usr = request.session.get('user')
+        # image.name = str(usr) + '.jpg'
+        print usr
+        print request.FILES
+        # print form
+        try:
+            image = request.FILES['photo']
+            img = Image.open(image)
+            img.thumbnail((500, 500), Image.ANTIALIAS)  # 对图片进行等比缩放
+            image_path = "/home/yyj/LoverMatch_Django/templates/photos" + str(
+                usr) + ".jpg"
+            #
+            # image_path = "/Users/yangyuji/Documents/Coding/PycharmProjects/LoverMatch_Django/LoverMatch/" + str(
+            #     usr) + ".jpg"
+            img.save(image_path)  # 保存图片
+            if UserInfo.objects(user=usr).update(photoAddress=str(image_path), upsert=True):
+                return JsonResponse({"code": 0})
+            else:
+                return JsonResponse({"code": -1})
 
-            except Exception, e:
-                return HttpResponse("Error %s" % e)  # 异常，查看报错信息
-        else:
-            # 没有上传文件直接点了上传就重定向到上传页面
-            return JsonResponse({"code": -2})
+        except Exception, e:
+            return HttpResponse("Error %s" % e)  # 异常，查看报错信息
+            # else:
+            #     没有上传文件直接点了上传就重定向到上传页面
+            # return JsonResponse({"code": -2})
     else:
 
         return JsonResponse({"code": -3})
@@ -315,7 +318,9 @@ def match(request):
     sorted_matchlist = sorted(matchlist.items(), key=itemgetter(1), reverse=True)[0:n]
     return_matchlist = []
     for u, sim in sorted_matchlist:
-        info = {'name': u.name, 'age': u.age, 'gender': u.gender, 'height': u.height, 'weight': u.weight, 'hometownId': u.hometownId, 'universityId': u.universityId, 'schoolId': u.schoolId, 'gradeId': u.gradeId, 'constellationId': u.constellationId, 'hobbiesId': u.hobbiesId}
+        info = {'name': u.name, 'age': u.age, 'gender': u.gender, 'height': u.height, 'weight': u.weight,
+                'hometownId': u.hometownId, 'universityId': u.universityId, 'schoolId': u.schoolId,
+                'gradeId': u.gradeId, 'constellationId': u.constellationId, 'hobbiesId': u.hobbiesId}
         return_matchlist.append((info, sim))
     context = {'code': 0, 'list': return_matchlist}
     return JsonResponse(context)
