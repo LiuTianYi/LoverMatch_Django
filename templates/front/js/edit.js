@@ -43,7 +43,7 @@ $(function(){
         $("#f-selectcons").append('<option id=f-conste'+i+' value="'+i+'">'+conste+'</option>');
     }
 
-    $("")
+    $("#conste"+dat["constellationId"]).attr("selected","true");
 
     //if (oconstellationId!=null){
 	//	$("conste"+oconstellationId).attr("selected","true");
