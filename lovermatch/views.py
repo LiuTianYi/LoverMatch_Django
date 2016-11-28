@@ -135,12 +135,16 @@ def update_self(request):
         return JsonResponse({"code": -1})
 
     nm = userUpdate.get("name")
-    try:
-        print nm
-        user = UserInfo.objects(name=nm)
-        print len(user)
-    except (UserInfo.DoesNotExist, UserInfo.MultipleObjectsReturned):
-        return JsonResponse({'code': -2})
+    user_self = UserInfo.objects(user=usr,name=nm)
+    if len(user_self) == 0:
+        user_all = UserInfo.objects(name=nm)
+        if len(user_all) >= 1:
+            return JsonResponse({'code': -2})
+    elif len(user_self) == 1:
+        user_all = UserInfo.objects(name=nm)
+        if len(user_all) > 1:
+            return JsonResponse({'code': -2})
+
 
     ag = userUpdate.get("age")
     ge = userUpdate.get("gender")
