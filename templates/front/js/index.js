@@ -28,6 +28,7 @@ $(function() {
         percentage = data['percentage'];
         $("#usernamelabel").text(dat["name"]);
         $("#userinfo").text("你是".concat(cons["constellation"][dat['constellationId']],"的，你的身高",dat["height"]));
+        $("#user_profile_pic").css({"background-image":"url("+dat['photoAddress']+")"});
 
       },
       async: false
