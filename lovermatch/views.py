@@ -26,8 +26,7 @@ from django.db import models
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib.auth.models import User
 from django.core.files.storage import default_storage
-from PIL import Image
-
+from PIL import Image, ImageFile
 # Create your views here.
 token = Token(django_settings.SECRET_KEY)  # token is used to verify user in email link
 
@@ -242,10 +241,16 @@ def upload_photo(request):
             img.thumbnail((500, 500), Image.ANTIALIAS)  # 对图片进行等比缩放
             image_path = "/home/yyj/LoverMatch_Django/templates/photos" + str(
                 usr) + ".jpg"
-            #
+
             # image_path = "/Users/yangyuji/Documents/Coding/PycharmProjects/LoverMatch_Django/LoverMatch/" + str(
             #     usr) + ".jpg"
             img.save(image_path)  # 保存图片
+            parser = ImageFile.Parser()
+            for chunk in image.chunks():
+                parser.feed(chunk)
+            img = parser.close()
+            # 在img被保存之前，可以进行图片的各种操作，在各种操作完成后，在进行一次写操作
+            img.save(image_path)
             if UserInfo.objects(user=usr).update(photoAddress=str(image_path), upsert=True):
                 return JsonResponse({"code": 0})
             else:
