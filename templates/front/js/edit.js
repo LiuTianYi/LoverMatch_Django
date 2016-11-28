@@ -300,7 +300,7 @@ $(function(){
     $("#rateprovince").attr("value",percentage["hometownId"]);
     $("#rateschool").attr("value",percentage["universityId"]);
     $("#ratem1").attr("value",percentage["schoolId"]);
-    $("#rategrade").attr("value",percentage[]);
+    $("#rategrade").attr("value",percentage["gradeId"]);
     $("#ratecons").attr("value",percentage["constellationId"]);
     $("#ratehobby").attr("value",percentage["hobbiesId"]);
 
