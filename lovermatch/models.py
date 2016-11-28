@@ -34,6 +34,7 @@ class Percentage(Document):
     constellationId = FloatField(required=False)  # "constellationId": 0,
     hobbiesId = FloatField(required=False)  # "hobbiesId": 0
 
+
 #
 # class photoModel(models.Model):
 #     # owner = models.ForeignKey(UserInfo.user, user='上传者')
@@ -82,26 +83,46 @@ def serializeUser(UserInfo):
 
 
 def serializeFeatures(Features):
-    return (
-        {
-            'age': Features.age, 'height': Features.height, 'weight': Features.weight,
-            'hometownId': Features.hometownId, 'universityId': Features.universityId,
-            'schoolId': Features.schoolId, 'gradeId': Features.gradeId, 'constellationId': Features.constellationId,
-            'hobbiesId': Features.hobbiesId
-        }
-    )
+    if Features is None:
+
+        return (
+            {
+                'age': None, 'height': None, 'weight': None,
+                'hometownId': None, 'universityId': None,
+                'schoolId': None, 'gradeId': None, 'constellationId': None,
+                'hobbiesId': None
+            })
+    else:
+        return (
+            {
+                'age': Features.age, 'height': Features.height, 'weight': Features.weight,
+                'hometownId': Features.hometownId, 'universityId': Features.universityId,
+                'schoolId': Features.schoolId, 'gradeId': Features.gradeId, 'constellationId': Features.constellationId,
+                'hobbiesId': Features.hobbiesId
+            }
+        )
 
 
 def serializePercentage(Percentage):
-    return (
-        {
-            'age': Percentage.age, 'height': Percentage.height, 'weight': Percentage.weight,
-            'hometownId': Percentage.hometownId, 'universityId': Percentage.universityId,
-            'schoolId': Percentage.schoolId, 'gradeId': Percentage.gradeId,
-            'constellationId': Percentage.constellationId,
-            'hobbiesId': Percentage.hobbiesId
-        }
-    )
+    if Percentage is None:
+
+        return (
+            {
+                'age': None, 'height': None, 'weight': None,
+                'hometownId': None, 'universityId': None,
+                'schoolId': None, 'gradeId': None, 'constellationId': None,
+                'hobbiesId': None
+            })
+    else:
+        return (
+            {
+                'age': Percentage.age, 'height': Percentage.height, 'weight': Percentage.weight,
+                'hometownId': Percentage.hometownId, 'universityId': Percentage.universityId,
+                'schoolId': Percentage.schoolId, 'gradeId': Percentage.gradeId,
+                'constellationId': Percentage.constellationId,
+                'hobbiesId': Percentage.hobbiesId
+            }
+        )
 
 # for post in UserInfo.objects:
 #     print post.user
