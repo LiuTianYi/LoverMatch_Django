@@ -140,7 +140,7 @@ def update_self(request):
     hei = userUpdate.get("height")
     wei = userUpdate.get("weight")
     # ho = userUpdate["hometownId"]
-    ho = map(int, userUpdate.getlist("hometownId[]"))
+    ho = userUpdate.get("hometownId")
     univ = userUpdate.get("universityId")
     # print univ
     scho = map(int, userUpdate.getlist("schoolId[]"))
