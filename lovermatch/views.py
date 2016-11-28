@@ -302,26 +302,38 @@ def logout(request):
 
 def match(request):
     """match algorithm for usr to find all users who are similar to him/her based on features and weights"""
+    calculate_match_at_backend()
+
     usr = request.session['user']
     try:
         user = UserInfo.objects.get(user=usr)
     except (UserInfo.DoesNotExist, UserInfo.MultipleObjectsReturned):
         return JsonResponse({'code': -1})
-    features_to_match = user.features
-    weights = user.percentage
     n = int(request.POST['n'])
-    matchlist = {}
-    for current_user in UserInfo.objects:
-        sim = get_similarity(user, current_user, features_to_match, weights)
-        matchlist[current_user] = sim
-    sorted_matchlist = sorted(matchlist.items(), key=itemgetter(1), reverse=True)[0:n]
-    return_matchlist = []
-    for u, sim in sorted_matchlist:
+    lovermatch = user.loverMatch
+    lovermatched = user.loverMatched
+    sorted_lovermatch = sorted(lovermatch.items(), key=itemgetter(1), reverse=True)[0:n]
+    sorted_lovermatched = sorted(lovermatched.items(), key=itemgetter(1), reverse=True)[0:n]
+    return_lovermatch = []
+    return_lovermatched = []
+
+    for nickname, sim in sorted_lovermatch:
+        u = UserInfo.objects.get(name=nickname)
         info = {'name': u.name, 'age': u.age, 'gender': u.gender, 'height': u.height, 'weight': u.weight,
                 'hometownId': u.hometownId, 'universityId': u.universityId, 'schoolId': u.schoolId,
-                'gradeId': u.gradeId, 'constellationId': u.constellationId, 'hobbiesId': u.hobbiesId}
-        return_matchlist.append((info, sim))
-    context = {'code': 0, 'list': return_matchlist}
+                'gradeId': u.gradeId, 'constellationId': u.constellationId, 'hobbiesId': u.hobbiesId,
+                'photoAddress': u.photoAddress}
+        return_lovermatch.append((info, sim))
+
+    for nickname, sim in sorted_lovermatched:
+        u = UserInfo.objects.get(name=nickname)
+        info = {'name': u.name, 'age': u.age, 'gender': u.gender, 'height': u.height, 'weight': u.weight,
+                'hometownId': u.hometownId, 'universityId': u.universityId, 'schoolId': u.schoolId,
+                'gradeId': u.gradeId, 'constellationId': u.constellationId, 'hobbiesId': u.hobbiesId,
+                'photoAddress': u.photoAddress}
+        return_lovermatched.append((info, sim))
+
+    context = {'code': 0, 'lovermatch': return_lovermatch, 'lovermatched': return_lovermatched}
     return JsonResponse(context)
 
 
@@ -475,3 +487,32 @@ def get_similarity(u1, u2, features_to_match, weights):
     value = value / sum_of_weights
     print 'after computation, value = %f' % value
     return value
+
+
+def calculate_match_at_backend():
+    """Calculate lovermatch list and lovermatched list for every user in database at backend by a thread"""
+
+    # Calculate lovermatch list for each user
+    user_set = UserInfo.objects
+    for u1 in user_set:
+        matchlist = {}
+        for u2 in user_set:
+            if u1 != u2:
+                features_to_match = u1.features
+                weights = u1.percentage
+                sim = get_similarity(u1, u2, features_to_match, weights)
+                matchlist[u2.name] = sim
+        u1.loverMatch = matchlist
+        u1.save()
+
+    # Calculate lovermatched list for each user
+    user_set = UserInfo.objects
+    for u1 in user_set:
+        matchedlist = {}
+        for u2 in user_set:
+            if u1 != u2:
+                if u1.name in u2.loverMatch.keys():
+                    matchedlist[u2.name] = u2.loverMatch[u1.name]
+        u1.loverMatched = matchedlist
+        u1.save()
+
