@@ -8,7 +8,7 @@ var percentage;
 $(function() {
 
   $("#uploadphoto").click(function(){
-    window.location="photo_form.html"
+    window.location="http://168.63.205.250/photo_form.html"
   });
 
  
