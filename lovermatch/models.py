@@ -51,7 +51,7 @@ class UserInfo(Document):
     gender = IntField(required=False)  # 性别
     height = IntField(required=False)  # 身高
     weight = IntField(required=False)  # 体重
-    hometownId = StringField()  # 家乡
+    hometownId = StringField(required=False)  # 家乡
     universityId = IntField(required=False)  # 大学
     schoolId = ListField()  # 学院
     gradeId = IntField(required=False)  # 年级
