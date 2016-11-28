@@ -72,8 +72,11 @@ function getmatch(){
     type: "POST", // Submitting Method
     url: 'http://168.63.205.250/match/',  //这里是你的api名字
     dataType: "json", // type of returned data
-    data: {"n":1},
+    data: {"n":2},
     success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
+      var infostring = "";
+      //infostring.concat("<p></p>")
+
       $("#match_spot").html("");
       for (var i = 0 ; i < data["lovermatch"].length ; i++ )
       	$("#match_spot").append('<li class="list-group-item item" id="hover-parent"><span class="badge">'+String(parseFloat(data["lovermatch"][i][1])*100)+'</span>'+data["lovermatch"][i][0]['name']+'<div class="match-avt" style="background-image: url('+data["lovermatch"][i][0]['photoAddress']+')"></div><div id="hc"><p>他的身高是163cm</p><p>他的体重是53kg</p></div><div class="progress bar"><div class="progress-bar" role="progressbar" aria-valuenow="'+String(parseFloat(data["lovermatch"][i][1])*100)+'" aria-valuemin="0" aria-valuemax="100" style="width: '+String(parseFloat(data["lovermatch"][i][1])*100)+'%;"></div></li>')
