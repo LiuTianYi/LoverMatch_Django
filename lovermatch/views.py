@@ -137,6 +137,8 @@ def update_self(request):
     nm = userUpdate.get("name")
     try:
         user = UserInfo.objects.get(name=nm)
+        print nm
+        print len(user)
     except (UserInfo.DoesNotExist, UserInfo.MultipleObjectsReturned):
         return JsonResponse({'code': -2})
 
