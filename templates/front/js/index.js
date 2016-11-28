@@ -77,8 +77,22 @@ function getmatch(){
       var infostring = "";
       //infostring.concat("<p></p>")
 
+
       $("#match_spot").html("");
       for (var i = 0 ; i < data["lovermatch"].length ; i++ )
+      	infostring = "";
+        if (data["lovermatch"][i][0]["height"] != null){
+        	infostring.concat("<p>他的身高是"+String(data["lovermatch"][i][0]["height"])+".</p>");
+        }
+        if (data["lovermatch"][i][0]["weight"] != null){
+        	infostring.concat("<p>他的体重是"+String(data["lovermatch"][i][0]["weight"])+".</p>");
+        }
+        if (data["lovermatch"][i][0]["age"] != null){
+        	infostring.concat("<p>他的今年"+String(data["lovermatch"][i][0]["age"])+".</p>");
+        }
+        if (data["lovermatch"][i][0]["gradeId"] != null){
+        	infostring.concat("<p>他现在在上"+grade["grade"][parseInt(data["lovermatch"][i][0]["gradeId"])]+".</p>");
+        }
       	$("#match_spot").append('<li class="list-group-item item" id="hover-parent"><span class="badge">'+String(parseFloat(data["lovermatch"][i][1])*100)+'</span>'+data["lovermatch"][i][0]['name']+'<div class="match-avt" style="background-image: url('+data["lovermatch"][i][0]['photoAddress']+')"></div><div id="hc"><p>他的身高是163cm</p><p>他的体重是53kg</p></div><div class="progress bar"><div class="progress-bar" role="progressbar" aria-valuenow="'+String(parseFloat(data["lovermatch"][i][1])*100)+'" aria-valuemin="0" aria-valuemax="100" style="width: '+String(parseFloat(data["lovermatch"][i][1])*100)+'%;"></div></li>')
     }
   });
