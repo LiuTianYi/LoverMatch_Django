@@ -407,13 +407,13 @@ $(function(){
         if ( provinceid==null){provinceid=1;};
         if (cityid==null){cityid=1;};
         if ( countyid == null) {countyid=1;}
-        if ( m1 == null) {m1=1;}
-        if ( m2 == null) {m2=1;}
-        if ( m3 == null) {m3=1;}
-        if ( schoolid == null) {schoolid=1;}
-        if ( sex == null) {sex=1;}
-        if ( costell == null) {costell=1;}
-        if ( year == null) {year=1;}
+        if ( m1 == null) {m1=dat['schoolId'][0];}
+        if ( m2 == null) {m2=dat['schoolId'][1];}
+        if ( m3 == null) {m3=dat['schoolId'][2];}
+        if ( schoolid == null) {schoolid=dat['universityId'];}
+        if ( sex == null) {sex=dat['gender'];}
+        if ( costell == null) {costell=dat['constellationId'];}
+        if ( year == null) {year=dat['gradeId'];}
         var height = $("#height").val();
         //console.log(height);
         var weight = $("#weight").val();
@@ -422,10 +422,10 @@ $(function(){
 
         var un = $("#username").val();
         console.log(un);
-        if ( height == null || height == '') {height=1;}
-        if ( weight == null || weight =='') {weight=1;}
+        if ( height == null || height == '') {height=dat['height'];}
+        if ( weight == null || weight =='') {weight=dat['weight'];}
         if ( un == null || un =='') {un=dat['name'];}
-        if ( age == null || age =='') {age=1;}
+        if ( age == null || age =='') {age=dat['age'];}
         var hb=[];
 
         $('.hobbies').each(function(){
@@ -462,7 +462,7 @@ $(function(){
         var fm2 = 1;
         var fm3 = 1;
 
-        console.log("post");
+        //console.log("post");
 
 
 
@@ -476,6 +476,7 @@ $(function(){
           dataType: "json", // type of returned data
           success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
           //alert(data)
+          alert('已经更新信息了')
           }
          });
        
