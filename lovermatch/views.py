@@ -490,11 +490,11 @@ def get_similarity(u1, u2, features_to_match, weights):
             if hasattr(weights, v):
                 v = getattr(weights, v)
                 v = float(v)
+                sum_of_weights += v
         except:
             continue
         else:
             pass
-        sum_of_weights += v
         print 'now sum_of_weights = %f' % sum_of_weights
     if sum_of_weights == 0.0:
         sum_of_weights = 9.0
