@@ -158,7 +158,7 @@ def update_self(request):
     hob = map(int, userUpdate.getlist("hobbiesId[]"))
 
     if isinstance(ag, unicode) and isinstance(ge, unicode) and isinstance(hei, unicode) and isinstance(wei, unicode) and isinstance(ho,
-                                                                                                                    int) and isinstance(
+                                                                                                                    unicode) and isinstance(
         univ, unicode) and isinstance(scho, list) and isinstance(grad, unicode) and isinstance(cons, unicode) and isinstance(hob,
                                                                                                                  list):
 
