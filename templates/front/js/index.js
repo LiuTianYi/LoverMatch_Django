@@ -94,8 +94,8 @@ function getmatch(){
         if (data["lovermatch"][parseInt(i)][0]["gradeId"] != null){
         	infostring = infostring.concat("<p>他现在在上"+grade["grade"][parseInt(data["lovermatch"][parseInt(i)][0]["gradeId"])]+".</p>");
         }
-        if (data['lovermatch'][i][0]['schoolId'] != null){
-        	infostring = infostring.concat("<p>他现在"+school["school"][parseInt(data["lovermatch"][parseInt(i)][0]["schoolId"])]['name']+"上学.</p>");
+        if (data['lovermatch'][i][0]['universityId'] != null){
+        	infostring = infostring.concat("<p>他现在"+school["school"][parseInt(data["lovermatch"][parseInt(i)][0]["universityId"])]['name']+"上学.</p>");
         }
         if (data['lovermatch'][i][0]['constellationId'] != null){
         	infostring = infostring.concat("<p>他是"+cons["constellation"][parseInt(data["lovermatch"][parseInt(i)][0]["constellationId"])]+"星座的.</p>");
