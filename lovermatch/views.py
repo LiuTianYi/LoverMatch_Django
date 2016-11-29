@@ -157,9 +157,9 @@ def update_self(request):
     cons = userUpdate.get("constellationId")
     hob = map(int, userUpdate.getlist("hobbiesId[]"))
 
-    if isinstance(ag, int) and isinstance(ge, int) and isinstance(hei, int) and isinstance(wei, int) and isinstance(ho,
+    if isinstance(ag, unicode) and isinstance(ge, unicode) and isinstance(hei, unicode) and isinstance(wei, unicode) and isinstance(ho,
                                                                                                                     int) and isinstance(
-        univ, int) and isinstance(scho, list) and isinstance(grad, int) and isinstance(cons, int) and isinstance(hob,
+        univ, unicode) and isinstance(scho, list) and isinstance(grad, unicode) and isinstance(cons, unicode) and isinstance(hob,
                                                                                                                  list):
 
         if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
@@ -171,7 +171,7 @@ def update_self(request):
         else:
             return JsonResponse({"code": -3})
     else:
-        return JsonResponse({"code": str(type(ag))})
+        return JsonResponse({"code": str(type(scho))})
 
 
 def update_feature(request):
