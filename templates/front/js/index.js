@@ -114,7 +114,10 @@ function getmatch(){
 
 
       }
-    }
+    },error: function (xhr, ajaxOptions, thrownError) {
+        alert(xhr.status);
+        alert(thrownError);
+      }
   });
 }
 
@@ -165,7 +168,11 @@ function getmatch2(){
 
 
       }
-    }
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+        alert(xhr.status);
+        alert(thrownError);
+      }
   });
 }
 
