@@ -300,7 +300,7 @@ $(function(){
     $("#rateprovince").attr("value",percentage["hometownId"]);
     $("#rateschool").attr("value",percentage["universityId"]);
     $("#ratem1").attr("value",percentage["schoolId"]);
-    $("#rategrade").attr("value",percentage[]);
+    $("#rategrade").attr("value",percentage["gradeId"]);
     $("#ratecons").attr("value",percentage["constellationId"]);
     $("#ratehobby").attr("value",percentage["hobbiesId"]);
 
@@ -407,13 +407,13 @@ $(function(){
         if ( provinceid==null){provinceid=1;};
         if (cityid==null){cityid=1;};
         if ( countyid == null) {countyid=1;}
-        if ( m1 == null) {m1=1;}
-        if ( m2 == null) {m2=1;}
-        if ( m3 == null) {m3=1;}
-        if ( schoolid == null) {schoolid=1;}
-        if ( sex == null) {sex=1;}
-        if ( costell == null) {costell=1;}
-        if ( year == null) {year=1;}
+        if ( m1 == null) {m1=dat['schoolId'][0];}
+        if ( m2 == null) {m2=dat['schoolId'][1];}
+        if ( m3 == null) {m3=dat['schoolId'][2];}
+        if ( schoolid == null) {schoolid=dat['universityId'];}
+        if ( sex == null) {sex=dat['gender'];}
+        if ( costell == null) {costell=dat['constellationId'];}
+        if ( year == null) {year=dat['gradeId'];}
         var height = $("#height").val();
         //console.log(height);
         var weight = $("#weight").val();
@@ -422,10 +422,10 @@ $(function(){
 
         var un = $("#username").val();
         console.log(un);
-        if ( height == null || height == '') {height=1;}
-        if ( weight == null || weight =='') {weight=1;}
-        if ( un == null || un =='') {un=1;}
-        if ( age == null || age =='') {age=1;}
+        if ( height == null || height == '') {height=dat['height'];}
+        if ( weight == null || weight =='') {weight=dat['weight'];}
+        if ( un == null || un =='') {un=dat['name'];}
+        if ( age == null || age =='') {age=dat['age'];}
         var hb=[];
 
         $('.hobbies').each(function(){
@@ -462,7 +462,7 @@ $(function(){
         var fm2 = 1;
         var fm3 = 1;
 
-        console.log("post");
+        //console.log("post");
 
 
 
@@ -472,10 +472,11 @@ $(function(){
           type: "POST", // Submitting Method
           url: 'http://168.63.205.250/update_self',  //这里是你的api名字
           //data: {"name":un},
-          data: {"name":un,"age":age,"gender":sex,"height":height,"weight":weight,"hometownId":toString(provinceid).concat(toString(cityid),toString(countyid)),"universityId":schoolid,"schoolId":[m1,m2,m3],"constellationId":costell,"hobbiesId":hb,"gradeId":year}, // the data that will be sent to php processor
+          data: {"name":un,"age":age,"gender":sex,"height":height,"weight":weight,"hometownId":format2(2)+format2(5)+format2(7),"universityId":schoolid,"schoolId":[m1,m2,m3],"constellationId":costell,"hobbiesId":hb,"gradeId":year}, // the data that will be sent to php processor
           dataType: "json", // type of returned data
           success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
           //alert(data)
+          alert('已经更新信息了')
           }
          });
        
@@ -611,3 +612,10 @@ function loadfmajor2(m1id,m2id){
 }
 
 
+function format2(num) {
+    var r = "" + num;
+    while (r.length < 2) {
+        r = "0" + r;
+    }
+    return r;
+}
