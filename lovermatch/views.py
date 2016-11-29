@@ -171,7 +171,7 @@ def update_self(request):
         else:
             return JsonResponse({"code": -3})
     else:
-        return JsonResponse({"code": -4})
+        return JsonResponse({"code": isinstance(ag, int)})
 
 
 def update_feature(request):
