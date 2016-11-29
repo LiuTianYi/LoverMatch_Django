@@ -147,8 +147,8 @@ $(function(){
         fm1 = $("#f-selectmajor1 option:selected").val();
         
         //alert(city["province"][provinceid]["city"][0]["c_name"]);
-        loadfmajor1(m1);
-        loadfmajor2(m1,1);
+        loadfmajor1(fm1);
+        loadfmajor2(fm1,1);
     });
 
     var fm2;
