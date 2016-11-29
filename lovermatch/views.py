@@ -179,7 +179,7 @@ def update_feature(request):
     ageL = map(float, request.POST.getlist("age[]"))
     heightL = map(float, request.POST.getlist("height[]"))
     weightL = map(float, request.POST.getlist("weight[]"))
-    hometownIdL = map(float, request.POST.getlist("hometownId[]"))
+    hometownIdL = map(str, request.POST.getlist("hometownId[]"))
     universityIdL = map(float, request.POST.getlist("universityId[]"))
     constellationIdL = map(float, request.POST.getlist("constellationId[]"))
     schoolIdL = map(float, request.POST.getlist("schoolId[]"))
