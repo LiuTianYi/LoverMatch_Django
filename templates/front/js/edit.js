@@ -424,7 +424,7 @@ $(function(){
         console.log(un);
         if ( height == null || height == '') {height=1;}
         if ( weight == null || weight =='') {weight=1;}
-        if ( un == null || un =='') {un=1;}
+        if ( un == null || un =='') {un=dat['name'];}
         if ( age == null || age =='') {age=1;}
         var hb=[];
 
