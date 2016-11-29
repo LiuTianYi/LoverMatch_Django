@@ -96,7 +96,7 @@ function getmatch(){
         }
         if (data["lovermatch"][i][0]["hobbiesId"].length != 0){
         	infostring = infostring.concat("<p>他的兴趣爱好有：")
-        	for (var j = 0 ; j < data["lovermatch"][i][0]["hobbiesId"].length , j++){
+        	for (var j = 0 ; j < data["lovermatch"][i][0]["hobbiesId"].length ; j++){
         		infostring = infostring.concat(hobbies['hobby'][j]+"  ")
         	}
         	infostring = infostring.concat('</p>')
