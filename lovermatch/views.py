@@ -66,7 +66,8 @@ def signup(request):
         userinfos = UserInfo.objects(name=_nickname)
         if len(userinfos) > 0:
             return JsonResponse({'code': -2})
-        insert_user = UserInfo.objects.create(user=_username, password=_pwd, name=_nickname, photoAddress = "http://168.63.205.250/static/photos/default.jpg")
+        insert_user = UserInfo.objects.create(user=_username, password=_pwd, name=_nickname,
+                                              photoAddress="http://168.63.205.250/static/photos/default.jpg")
         insert_user.is_active = False  # set false here to wait further verification in email
         insert_user.save()
 
@@ -135,7 +136,7 @@ def update_self(request):
         return JsonResponse({"code": -1})
 
     nm = userUpdate.get("name")
-    user_self = UserInfo.objects(user=usr,name=nm)
+    user_self = UserInfo.objects(user=usr, name=nm)
     if len(user_self) == 0:
         user_all = UserInfo.objects(name=nm)
         if len(user_all) >= 1:
@@ -145,36 +146,32 @@ def update_self(request):
         if len(user_all) > 1:
             return JsonResponse({'code': -2})
 
-
     ag = userUpdate.get("age")
     ge = userUpdate.get("gender")
     hei = userUpdate.get("height")
     wei = userUpdate.get("weight")
-    # ho = userUpdate["hometownId"]
     ho = userUpdate.get("hometownId")
     univ = userUpdate.get("universityId")
-    # print univ
     scho = map(int, userUpdate.getlist("schoolId[]"))
-    # results = map(int, results)
-    # print scho
-    # grad = userUpdate["gradeId"]
+    grad = userUpdate.get("gradeId")
     cons = userUpdate.get("constellationId")
     hob = map(int, userUpdate.getlist("hobbiesId[]"))
-    # except:
-    #     return JsonResponse({"code": -2})
-    #
-    # try:
 
-    if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
-                                         universityId=univ,
-                                         schoolId=scho, constellationId=cons, hobbiesId=hob):
+    if isinstance(ag, int) and isinstance(ge, str) and isinstance(hei, str) and isinstance(wei, str) and isinstance(ho,
+                                                                                                                    str) and isinstance(
+        univ, int) and isinstance(scho, list) and isinstance(grad, str) and isinstance(cons, int) and isinstance(hob,
+                                                                                                                 list):
 
-        return HttpResponse("user update success")
+        if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
+                                             universityId=univ,
+                                             schoolId=scho, gradeId=grad, constellationId=cons, hobbiesId=hob):
 
+            return JsonResponse({"code": 0})
+
+        else:
+            return JsonResponse({"code": -3})
     else:
-        return HttpResponse("user update failed")
-        # except:
-        #     return JsonResponse({"code": -3})
+        return JsonResponse({"code": -4})
 
 
 def update_feature(request):
@@ -283,11 +280,9 @@ def login(req):
         # 获取的表单数据与数据库进行比较
         try:
             userinfo = UserInfo.objects.get(user=usr, password=pw)
-        # userinfo = get_object_or_404(UserInfo, user=usr, password=pw)
         except:
             return JsonResponse({'code': -1})
 
-        # print len(userinfo)
         if len(userinfo) > 0:
             if userinfo.is_active == False:
                 return JsonResponse({'code': -3})
@@ -302,8 +297,6 @@ def login(req):
 
     else:  # 比较失败，还在login
         return JsonResponse({'code': -2})
-
-        # return HttpResponseRedirect('lovermatch/login.html')
 
 
 def logout(request):
@@ -533,4 +526,3 @@ def calculate_match_at_backend():
                     matchedlist[u2.name] = u2.loverMatch[u1.name]
         u1.loverMatched = matchedlist
         u1.save()
-
