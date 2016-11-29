@@ -85,7 +85,7 @@ $(function(){
     var a1 = 1;
     var a2 = 1;
     var a3 = 1;
-    if (dat[hometownId] != null){
+    if (dat['hometownId'] != null){
         a1 = int(dat['hometownId'].slice(0,2))
         a2 = int(dat['hometownId'].slice(2,4))
         a3 = int(dat['hometownId'].slice(4,6))
