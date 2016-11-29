@@ -157,9 +157,9 @@ def update_self(request):
     cons = userUpdate.get("constellationId")
     hob = map(int, userUpdate.getlist("hobbiesId[]"))
 
-    if isinstance(ag, str) and isinstance(ge, str) and isinstance(hei, str) and isinstance(wei, str) and isinstance(ho,
-                                                                                                                    str) and isinstance(
-        univ, int) and isinstance(scho, list) and isinstance(grad, str) and isinstance(cons, str) and isinstance(hob,
+    if isinstance(ag, int) and isinstance(ge, int) and isinstance(hei, int) and isinstance(wei, int) and isinstance(ho,
+                                                                                                                    int) and isinstance(
+        univ, int) and isinstance(scho, list) and isinstance(grad, int) and isinstance(cons, int) and isinstance(hob,
                                                                                                                  list):
 
         if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
