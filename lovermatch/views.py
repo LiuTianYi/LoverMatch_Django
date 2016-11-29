@@ -281,8 +281,11 @@ def login(req):
         pw = req.POST['password']
 
         # 获取的表单数据与数据库进行比较
-        userinfo = UserInfo.objects.get(user=usr, password=pw)
+        try:
+            userinfo = UserInfo.objects.get(user=usr, password=pw)
         # userinfo = get_object_or_404(UserInfo, user=usr, password=pw)
+        except:
+            return JsonResponse({'code': -1})
 
         # print len(userinfo)
         if len(userinfo) > 0:
