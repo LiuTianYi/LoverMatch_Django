@@ -79,10 +79,10 @@ function getmatch(){
 
 
       $("#match_spot").html("");
-      for (var i = 0 ; i < data["lovermatch"].length ; i++ )
+      for (var i = 0 ; i < data["lovermatch"].length ; i++ ){
       	infostring = "";
-      console.log(data["lovermatch"][0][0]["height"])
-        if (data["lovermatch"][parseInt(i)][0]["height"] != null){
+      //console.log(data["lovermatch"][0][0]["height"])
+        if (data["lovermatch"][i][0]["height"] != null){
         	infostring.concat("<p>他的身高是"+String(data["lovermatch"][parseInt(i)][0]["height"])+".</p>");
         }
         if (data["lovermatch"][parseInt(i)][0]["weight"] != null){
@@ -95,6 +95,9 @@ function getmatch(){
         	infostring.concat("<p>他现在在上"+grade["grade"][parseInt(data["lovermatch"][parseInt(i)][0]["gradeId"])]+".</p>");
         }
       	$("#match_spot").append('<li class="list-group-item item" id="hover-parent"><span class="badge">'+String(parseFloat(data["lovermatch"][i][1])*100)+'</span>'+data["lovermatch"][i][0]['name']+'<div class="match-avt" style="background-image: url('+data["lovermatch"][i][0]['photoAddress']+')"></div><div id="hc">'+infostring+'</div><div class="progress bar"><div class="progress-bar" role="progressbar" aria-valuenow="'+String(parseFloat(data["lovermatch"][i][1])*100)+'" aria-valuemin="0" aria-valuemax="100" style="width: '+String(parseFloat(data["lovermatch"][i][1])*100)+'%;"></div></li>')
+
+
+      }
     }
   });
 }
