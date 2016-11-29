@@ -94,6 +94,13 @@ function getmatch(){
         if (data["lovermatch"][parseInt(i)][0]["gradeId"] != null){
         	infostring = infostring.concat("<p>他现在在上"+grade["grade"][parseInt(data["lovermatch"][parseInt(i)][0]["gradeId"])]+".</p>");
         }
+        if (data['lovermatch'][i][0]['schoolId'] != null){
+        	infostring = infostring.concat("<p>他现在"+school["school"][parseInt(data["lovermatch"][parseInt(i)][0]["schoolId"])]['name']+"上学.</p>");
+        }
+        if (data['lovermatch'][i][0]['constellationId'] != null){
+        	infostring = infostring.concat("<p>他是"+cons["constellation"][parseInt(data["lovermatch"][parseInt(i)][0]["constellationId"])]+"星座的.</p>");
+        }
+
         if (data["lovermatch"][i][0]["hobbiesId"].length != 0){
         	infostring = infostring.concat("<p>他的兴趣爱好有：")
         	for (var j = 0 ; j < data["lovermatch"][i][0]["hobbiesId"].length ; j++){
@@ -101,6 +108,7 @@ function getmatch(){
         	}
         	infostring = infostring.concat('</p>')
         }
+
         console.log(infostring)
       	$("#match_spot").append('<li class="list-group-item item" id="hover-parent"><span class="badge">'+String(parseFloat(data["lovermatch"][i][1])*100)+'</span>'+data["lovermatch"][i][0]['name']+'<div class="match-avt" style="background-image: url('+data["lovermatch"][i][0]['photoAddress']+')"></div><div id="hc">'+infostring+'</div><div class="progress bar"><div class="progress-bar" role="progressbar" aria-valuenow="'+String(parseFloat(data["lovermatch"][i][1])*100)+'" aria-valuemin="0" aria-valuemax="100" style="width: '+String(parseFloat(data["lovermatch"][i][1])*100)+'%;"></div></li>')
 
