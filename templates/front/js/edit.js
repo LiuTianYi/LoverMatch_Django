@@ -293,16 +293,74 @@ $(function(){
     }); 
 
 
+    var tage;
+    var theight;
+    var tweight;
+    var tprovince; 
+    var tschool;
+    var tm1;
+    var tgrade;
+    var tcon;
+    var thobby;
 
-    $("#rateage").attr("value",percentage["age"]);
-    $("#rateheight").attr("value",percentage["height"]);
-    $("#rateweight").attr("value",percentage["weight"]);
-    $("#rateprovince").attr("value",percentage["hometownId"]);
-    $("#rateschool").attr("value",percentage["universityId"]);
-    $("#ratem1").attr("value",percentage["schoolId"]);
-    $("#rategrade").attr("value",percentage["gradeId"]);
-    $("#ratecons").attr("value",percentage["constellationId"]);
-    $("#ratehobby").attr("value",percentage["hobbiesId"]);
+
+        if(percentage["age"] == null) {
+            tage = 10;
+        }else{
+            tage = parseInt(percentage["age"] *10);
+        }
+        if(percentage["height"] == null) {
+            theight = 10;
+        }else{
+            theight = parseInt(percentage["height"] *10);
+        }
+        if(percentage["weight"] == null) {
+            tweight = 10;
+        }else{
+            tweight = parseInt(percentage["weight"] *10);
+        }
+        if(percentage["hometownId"] == null) {
+            tprovince = 10;
+        }else{
+            tprovince = parseInt(percentage["hometownId"] *10);
+        }
+        if(percentage["universityId"] == null) {
+            tschool = 10;
+        }else{
+            tschool = parseInt(percentage["universityId"] *10);
+        }
+        if(percentage["schoolId"] == null) {
+            tm1 = 10;
+        }else{
+            tm1 = parseInt(percentage["schoolId"] *10);
+        }
+        if(percentage["gradeId"] == null) {
+            tgrade = 10;
+        }else{
+            tgrade = parseInt(percentage["gradeId"] *10);
+        }
+        if(percentage["constellationId"] == null) {
+            tcon = 10;
+        }else{
+            tcon = parseInt(percentage["constellationId"] *10);
+        }
+        if(percentage["hobbiesId"] == null) {
+            thobby = 10;
+        }else{
+            thobby = parseInt(percentage["hobbiesId"] *10);
+        }
+
+
+
+    $("#rateage").attr("value",tage);
+    $("#rateheight").attr("value",theight);
+    $("#rateweight").attr("value",tweight);
+    $("#rateprovince").attr("value",tprovince);
+    $("#rateschool").attr("value",tschool);
+    $("#ratem1").attr("value",tm1]);
+    $("#rategrade").attr("value",tgrade);
+    $("#ratecons").attr("value",tcon);
+    $("#ratehobby").attr("value",thobby);
 
 
 
@@ -338,16 +396,80 @@ $(function(){
 
         });
 
-        var rage = parseFloat($("#rateage").val());
-        var rheight = parseFloat($("#rateheight").val());
-        var rweight = parseFloat($("#rateweight").val());
-        var rprovince = parseFloat($("#rateprovince").val());
 
-        var rschool = parseFloat($("#rateschool").val());
-        var rm1 = parseFloat($("#ratem1").val());
-        var rgrade = parseFloat($("#rategrade").val());
-        var rcon = parseFloat($("#ratecons").val());
-        var rhobby = parseFloat($("#ratehobby").val());
+
+        var rage;
+        var rheight;
+        var rweight;
+        var rprovince;
+        var rschool;
+        var rm1;
+        var rgrade;
+        var rcon;
+        var rhobby;
+
+
+        if ($("#rateage").val() != "" || $("#rateage").val() != null){
+            rage = parseFloat($("#rateage").val());
+        }else{
+            rage = percentage['age'];
+        }
+        if ($("#rateheight").val() != "" || $("#rateheight").val() != null){
+            rheight = parseFloat($("#rateheight").val());
+        }else{
+            rheight = percentage['height'];
+        }
+
+        if ($("#rateweight").val() != "" || $("#rateweight").val() != null){
+            rweight = parseFloat($("#rateweight").val());
+        }else{
+            rweight = percentage['weight'];
+        }
+        if ($("#rateprovince").val() != "" || $("#rateprovince").val() != null){
+            rprovince = parseFloat($("#rateprovince").val());
+        }else{
+            rprovince = percentage['hometownId'];
+        }
+
+
+        if ($("#rateschool").val() != "" || $("#rateschool").val() != null){
+            rschool = parseFloat($("#rateschool").val());
+        }else{
+            rschool = percentage['universityId'];
+        }
+        if ($("#ratem1").val() != "" || $("#ratem1").val() != null){
+            rm1 = parseFloat($("#ratem1").val());
+        }else{
+            rm1 = percentage['schoolId'];
+        }
+        
+        if ($("#rategrade").val() != "" || $("#rategrade").val() != null){
+            rgrade = parseFloat($("#rategrade").val());
+        }else{
+            rgrade = percentage['gradeId'];
+        }
+        if ($("#ratecons").val() != "" || $("#ratecons").val() != null){
+            rcon = parseFloat($("#ratecons").val());
+        }else{
+            rcon = percentage['constellationId'];
+        }
+        if ($("#ratehobby").val() != "" || $("#ratehobby").val() != null){
+            rhobby = parseFloat($("#ratehobby").val());
+        }else{
+            rhobby = percentage['hobbiesId'];
+        }
+
+
+        
+        
+        
+        
+
+        
+        
+        
+        
+        
 
         var un = 1;
         var age = 1;
@@ -377,15 +499,47 @@ $(function(){
           dataType: "json", // type of returned data
           success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
           //location.reload();
-          }
+          },
+          
          });
 
-       var sum = parseFloat(rage)+rheight+rweight+rprovince+rschool+rcon+rhobby+rm1+rgrade;
+        if(rage == null) {
+            rage = 1;
+        }
+        if(rheight == null) {
+            rheight = 1;
+        }
+        if(rweight == null) {
+            rweight = 1;
+        }
+        if(rprovince == null) {
+            rprovince = 1;
+        }
+        if(rschool == null) {
+            rschool = 1;
+        }
+        if(rm1 == null) {
+            rm1 = 1;
+        }
+        if(rgrade == null) {
+            rgrade = 1;
+        }
+        if(rcon == null) {
+            rcon = 1;
+        }
+        if(rhobby == null) {
+            rhobby = 1;
+        }
+
+
+
+
+       //var sum = parseFloat(rage)+rheight+rweight+rprovince+rschool+rcon+rhobby+rm1+rgrade;
 
        $.ajax({ // JQuery ajax function
           type: "POST", // Submitting Method
           url: 'http://168.63.205.250/update_percentage',  //这里是你的api名字
-          data: {"age":rage/sum,"height":rheight/sum,"weight":rweight/sum,"hometownId":rprovince/sum,"universityId":rschool/sum,"constellationId":rcon/sum,"hobbiesId":rhobby/sum,"schoolId":rm1/sum,"gradeId":rgrade/sum}, // the data that will be sent to php processor
+          data: {"age":rage/10,"height":rheight/10,"weight":rweight/10,"hometownId":rprovince/10,"universityId":rschool/10,"constellationId":rcon/10,"hobbiesId":rhobby/10,"schoolId":rm1/10,"gradeId":rgrade/10}, // the data that will be sent to php processor
           dataType: "json", // type of returned data
           success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
           //alert(data)
