@@ -81,6 +81,7 @@ function getmatch(){
       $("#match_spot").html("");
       for (var i = 0 ; i < data["lovermatch"].length ; i++ )
       	infostring = "";
+      console.log(data)
         if (data["lovermatch"][i][0]["height"] != null){
         	infostring.concat("<p>他的身高是"+String(data["lovermatch"][i][0]["height"])+".</p>");
         }
