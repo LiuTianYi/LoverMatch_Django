@@ -357,7 +357,7 @@ $(function(){
     $("#rateweight").attr("value",tweight);
     $("#rateprovince").attr("value",tprovince);
     $("#rateschool").attr("value",tschool);
-    $("#ratem1").attr("value",tm1]);
+    $("#ratem1").attr("value",tm1);
     $("#rategrade").attr("value",tgrade);
     $("#ratecons").attr("value",tcon);
     $("#ratehobby").attr("value",thobby);
