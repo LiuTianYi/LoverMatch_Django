@@ -171,7 +171,7 @@ def update_self(request):
         else:
             return JsonResponse({"code": -3})
     else:
-        return JsonResponse({"code": type(ag)})
+        return JsonResponse({"code": str(type(ag))})
 
 
 def update_feature(request):
