@@ -82,10 +82,19 @@ $(function(){
 
 	//alert(city["province"][0]["city"][0]["country"].length);
 
+    var a1 = 1;
+    var a2 = 1;
+    var a3 = 1;
+    if (dat[hometownId] != null){
+        a1 = int(dat['hometownId'].slice(0,2))
+        a2 = int(dat['hometownId'].slice(2,4))
+        a3 = int(dat['hometownId'].slice(4,6))
+    }
 
-    loadfcity(1);
+
+    loadfcity(a1);
 	//console.log(city["province"][0]["city"][0]["country"].length)
-    loadfcounty(1,1);
+    loadfcounty(a1,a2);
 	//load city
 
 
@@ -97,7 +106,7 @@ $(function(){
         
         //alert(city["province"][provinceid]["city"][0]["c_name"]);
         loadfcity(fprovinceid);
-        loadfcounty(fprovinceid,1);
+        loadfcounty(fprovinceid,a3);
     });
 
 
