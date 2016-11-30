@@ -156,22 +156,21 @@ def update_self(request):
     grad = userUpdate.get("gradeId")
     cons = userUpdate.get("constellationId")
     hob = map(int, userUpdate.getlist("hobbiesId[]"))
+    #
+    # if isinstance(ag, int) and isinstance(ge, str) and isinstance(hei, str) and isinstance(wei, str) and isinstance(ho,
+    #                                                                                                                 str) and isinstance(
+    #     univ, int) and isinstance(scho, list) and isinstance(grad, str) and isinstance(cons, int) and isinstance(hob,
+    #                                                                                                              list):
 
-    if isinstance(ag, int) and isinstance(ge, str) and isinstance(hei, str) and isinstance(wei, str) and isinstance(ho,
-                                                                                                                    str) and isinstance(
-        univ, int) and isinstance(scho, list) and isinstance(grad, str) and isinstance(cons, int) and isinstance(hob,
-                                                                                                                 list):
+    if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
+                                         universityId=univ,
+                                         schoolId=scho, gradeId=grad, constellationId=cons, hobbiesId=hob):
 
-        if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
-                                             universityId=univ,
-                                             schoolId=scho, gradeId=grad, constellationId=cons, hobbiesId=hob):
+        return JsonResponse({"code": 0})
 
-            return JsonResponse({"code": 0})
-
-        else:
-            return JsonResponse({"code": -3})
     else:
-        return JsonResponse({"code": -4})
+        return JsonResponse({"code": -3})
+
 
 
 def update_feature(request):
