@@ -162,26 +162,15 @@ def update_self(request):
     #     univ, int) and isinstance(scho, list) and isinstance(grad, str) and isinstance(cons, int) and isinstance(hob,
     #                                                                                                              list):
 
-<<<<<<< HEAD
+
     if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
                                          universityId=univ,
                                          schoolId=scho, gradeId=grad, constellationId=cons, hobbiesId=hob):
-=======
-    if isinstance(ag, unicode) and isinstance(ge, unicode) and isinstance(hei, unicode) and isinstance(wei, unicode) and isinstance(ho,
-                                                                                                                    unicode) and isinstance(
-        univ, unicode) and isinstance(scho, list) and isinstance(grad, unicode) and isinstance(cons, unicode) and isinstance(hob,
-                                                                                                                 list):
-
-        if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
-                                             universityId=univ,
-                                             schoolId=scho, gradeId=grad, constellationId=cons, hobbiesId=hob):
->>>>>>> origin/master
 
         return JsonResponse({"code": 0})
 
     else:
         return JsonResponse({"code": -3})
-
 
 
 def update_feature(request):
