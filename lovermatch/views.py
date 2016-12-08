@@ -218,6 +218,140 @@ def update_percentage(request):
         return JsonResponse({"code": -1})
 
 
+def get_condition_template(request):
+    """provide condition templates for user"""
+
+    try:
+        age = int(request.POST.get("age"))
+        gender = int(request.POST.get("gender"))
+        hometownId = str(request.POST.get("hometownId"))
+        universityId = int(request.POST.get("universityId"))
+        schoolId = map(float, request.POST.getlist("schoolId[]"))
+        hobbiesId = map(float, request.POST.getlist("hobbiesId[]"))
+        templates = recommend_template(age, gender, hometownId, universityId, schoolId, hobbiesId)
+    except:
+        return JsonResponse({"data": []})
+    else:
+        return JsonResponse({"data": templates})
+
+
+def recommend_template(age, gender, hometownId, universityId, schoolId, hobbiesId):
+    """template candidate"""
+
+    features = {"age": [age - 2, age + 2], "height": [160, 170], "weight": [40, 60], "hometownId": [hometownId],
+                "universityId": [universityId], "schoolId": [schoolId], "hobbiesId": hobbiesId}
+    percentage = {"age": 0.1, "height": 0.1, "weight": 0.1, "hometownId": 0.1, "universityId": 0.1, "schoolId": 0.1,
+                  "hobbiesId": 0.1}
+    templates = []
+    if gender == 0:  # male
+        if age < 18:
+            features['weight'] = [40, 55]
+            percentage['age'] = 0.2
+            percentage['hobbiesId'] = 0.2
+            templates.append({"features": features, "percentage": percentage})
+
+            features['age'] = [age - 3, age + 1]
+            percentage['weight'] = [45, 60]
+            templates.append({"features": features, "percentage": percentage})
+
+        elif age >= 18 and age < 23:
+            features['age'] = [age - 3, age + 2]
+            percentage['age'] = 0.2
+            percentage['hometownId'] = 0.2
+            percentage['universityId'] = 0.2
+            percentage['schoolId'] = 0.2
+            percentage['hobbiesId'] = 0.2
+            templates.append({"features": features, "percentage": percentage})
+
+            percentage['universityId'] = 0.3
+            percentage['schoolId'] = 0.3
+            templates.append({"features": features, "percentage": percentage})
+
+        elif age >= 23 and age < 26:
+            features['age'] = [age - 3, age + 1]
+            percentage['age'] = 0.2
+            percentage['schoolId'] = 0.2
+            percentage['hobbiesId'] = 0.2
+            templates.append({"features": features, "percentage": percentage})
+
+            percentage['age'] = 0.3
+            percentage['schoolId'] = 0.3
+            percentage['hobbiesId'] = 0.3
+            templates.append({"features": features, "percentage": percentage})
+
+        else:
+            features['age'] = [age - 4, age + 2]
+            percentage['age'] = 0.3
+            percentage['schoolId'] = 0.2
+            percentage['hobbiesId'] = 0.3
+            templates.append({"features": features, "percentage": percentage})
+
+            percentage['age'] = 0.2
+            percentage['hometownId'] = 0.2
+            percentage['hobbiesId'] = 0.2
+            templates.append({"features": features, "percentage": percentage})
+    else:  # female
+        if age < 18:
+            features['height'] = [170, 190]
+            features['weight'] = [50, 90]
+            percentage['age'] = 0.2
+            percentage['height'] = 0.2
+            percentage['hobbiesId'] = 0.2
+            templates.append({"features": features, "percentage": percentage})
+
+            features['age'] = [age - 2, age + 4]
+            percentage['height'] = 0.3
+            templates.append({"features": features, "percentage": percentage})
+
+        elif age >= 18 and age < 23:
+            features['age'] = [age - 2, age + 3]
+            features['height'] = [170, 190]
+            features['weight'] = [50, 90]
+            percentage['age'] = 0.2
+            percentage['height'] = 0.2
+            percentage['hometownId'] = 0.2
+            percentage['universityId'] = 0.2
+            percentage['schoolId'] = 0.2
+            percentage['hobbiesId'] = 0.2
+            templates.append({"features": features, "percentage": percentage})
+
+            percentage['universityId'] = 0.3
+            percentage['schoolId'] = 0.3
+            templates.append({"features": features, "percentage": percentage})
+
+        elif age >= 23 and age < 26:
+            features['age'] = [age - 2, age + 3]
+            features['height'] = [170, 190]
+            features['weight'] = [50, 90]
+            percentage['age'] = 0.2
+            percentage['schoolId'] = 0.2
+            percentage['hobbiesId'] = 0.2
+            templates.append({"features": features, "percentage": percentage})
+
+            percentage['age'] = 0.3
+            percentage['hometownId'] = 0.2
+            percentage['schoolId'] = 0.3
+            percentage['hobbiesId'] = 0.3
+            templates.append({"features": features, "percentage": percentage})
+
+        else:
+            features['age'] = [age - 2, age + 5]
+            features['height'] = [170, 190]
+            features['weight'] = [50, 90]
+            percentage['age'] = 0.3
+            percentage['hometownId'] = 0.2
+            percentage['schoolId'] = 0.2
+            percentage['hobbiesId'] = 0.3
+            templates.append({"features": features, "percentage": percentage})
+
+            percentage['hometownId'] = 0.3
+            percentage['schoolId'] = 0.3
+            percentage['hobbiesId'] = 0.4
+            templates.append({"features": features, "percentage": percentage})
+
+    return templates
+
+
 # class ExampleModel(models.Model):
 #     model_pic = models.ImageField(upload_to='pic_folder/', default='pic_folder/None/no-img.jpg')
 #
