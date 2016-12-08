@@ -4,7 +4,7 @@ import simplejson
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.urls import reverse
-from lovermatch.models import UserInfo, serializeUser, Features, serializeFeatures, Percentage, serializePercentage
+from lovermatch.models import UserInfo, Log, serializeUser, Features, serializeFeatures, Percentage, serializePercentage
 from django.http import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from operator import itemgetter
@@ -27,6 +27,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib.auth.models import User
 from django.core.files.storage import default_storage
 from PIL import Image, ImageFile
+import datetime
 
 # Create your views here.
 token = Token(django_settings.SECRET_KEY)  # token is used to verify user in email link
@@ -53,6 +54,13 @@ def show_upload_photo_form(request):
     return render(request, 'lovermatch/upload_photo.html')
 
 
+def write_log(_user, _action, _status):
+    """write log into db"""
+    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    log = Log.objects.create(time=now, user=_user, action=_action, status=_status)
+    log.save()
+
+
 def signup(request):
     if request.method == 'POST':
         # assume the data is valid
@@ -62,9 +70,11 @@ def signup(request):
 
         userinfos = UserInfo.objects(user=_username)
         if len(userinfos) > 0:
+            write_log(_username, "sign up", 0)
             return JsonResponse({'code': -1})
         userinfos = UserInfo.objects(name=_nickname)
         if len(userinfos) > 0:
+            write_log(_username, "sign up", 0)
             return JsonResponse({'code': -2})
         insert_user = UserInfo.objects.create(user=_username, password=_pwd, name=_nickname,
                                               photoAddress="http://168.63.205.250/static/photos/default.jpg")
@@ -76,6 +86,7 @@ def signup(request):
                              '/'.join([django_settings.DOMAIN, 'static', 'front', 'activate.html?token=' + _token])])
         send_mail('注册用户验证信息', message, '2601112836@qq.com', [_username])
 
+        write_log(_username, "sign up", 1)
         return JsonResponse({'code': 0})
         # context = {'message': '请尽快登录你的注册邮箱，点击链接进行激活，注意有效期为1个小时', 'nickname': _nickname}
         # return render(request, 'lovermatch/signup_results.html', context)
@@ -92,6 +103,7 @@ def active_user(request):
             users = UserInfo.objects(name=nickname)
             for user in users:
                 user.delete()
+            write_log(nickname, "active user", 0)
             return JsonResponse({'code': -1})
             # message = '对不起，验证链接已经过期，请重新<a href=\"' + django_settings.DOMAIN + '/signup_form\">注册</a>'
             # context = {'message': message, 'nickname': nickname}
@@ -99,6 +111,7 @@ def active_user(request):
         try:
             user = UserInfo.objects.get(name=nickname)
         except (UserInfo.DoesNotExist, UserInfo.MultipleObjectsReturned):
+            write_log(nickname, "active user", 0)
             return JsonResponse({'code': -1})
             # message = '对不起，用户不存在，请重新<a href=\"' + django_settings.DOMAIN + '/signup_form\">注册</a>'
             # context = {'message': message, 'nickname': nickname}
@@ -106,6 +119,7 @@ def active_user(request):
 
         user.is_active = True
         user.save()
+        write_log(user.user, "active user", 1)
         return JsonResponse({'code': 0})
         # message = '验证成功，请进行<a href=\"' + django_settings.DOMAIN + '/login\">登录</a>操作'
         # context = {'message': message, 'nickname': nickname}
@@ -133,6 +147,7 @@ def update_self(request):
     try:
         usr = request.session.get('user')
     except:
+        write_log(usr, "update self info", 0)
         return JsonResponse({"code": -1})
 
     nm = userUpdate.get("name")
@@ -140,10 +155,12 @@ def update_self(request):
     if len(user_self) == 0:
         user_all = UserInfo.objects(name=nm)
         if len(user_all) >= 1:
+            write_log(usr, "update self info", 0)
             return JsonResponse({'code': -2})
     elif len(user_self) == 1:
         user_all = UserInfo.objects(name=nm)
         if len(user_all) > 1:
+            write_log(usr, "update self info", 0)
             return JsonResponse({'code': -2})
 
     ag = userUpdate.get("age")
@@ -166,10 +183,11 @@ def update_self(request):
     if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
                                          universityId=univ,
                                          schoolId=scho, gradeId=grad, constellationId=cons, hobbiesId=hob):
-
+        write_log(usr, "update self info", 1)
         return JsonResponse({"code": 0})
 
     else:
+        write_log(usr, "update self info", 0)
         return JsonResponse({"code": -3})
 
 
@@ -190,8 +208,10 @@ def update_feature(request):
                                   gradeId=gradeIdL, hobbiesId=hobbiesIdL)
 
     if UserInfo.objects(user=usr).update(features=fea):
+        write_log(usr, "update feature", 1)
         return JsonResponse({"code": 0})
     else:
+        write_log(usr, "update feature", 0)
         return JsonResponse({"code": -1})
 
 
@@ -213,8 +233,10 @@ def update_percentage(request):
                                     gradeId=gradeIdF, hobbiesId=hobbiesIdF)
     #
     if UserInfo.objects(user=usr).update(percentage=per):
+        write_log(usr, "update percentage", 1)
         return JsonResponse({"code": 0})
     else:
+        write_log(usr, "update percentage", 0)
         return JsonResponse({"code": -1})
 
 
@@ -373,6 +395,7 @@ def upload_photo(request):
         try:
             image = request.FILES['photo']
         except:
+            write_log(usr, "upload photo", 0)
             return JsonResponse({"code": -2})
         img = Image.open(image)
         img.thumbnail((500, 500), Image.ANTIALIAS)  # 对图片进行等比缩放
@@ -394,12 +417,14 @@ def upload_photo(request):
 
 
         if UserInfo.objects(user=usr).update(photoAddress=str(store_path), upsert=True):
+            write_log(usr, "upload photo", 1)
             return JsonResponse({"code": 0})
         else:
+            write_log(usr, "upload photo", 0)
             return JsonResponse({"code": -1})
 
     else:
-
+        write_log(usr, "upload photo", 0)
         return JsonResponse({"code": -3})
 
 
@@ -414,21 +439,26 @@ def login(req):
         try:
             userinfo = UserInfo.objects.get(user=usr, password=pw)
         except:
+            write_log(usr, "log in", 0)
             return JsonResponse({'code': -1})
 
         if len(userinfo) > 0:
             if userinfo.is_active == False:
+                write_log(usr, "log in", 0)
                 return JsonResponse({'code': -3})
             req.session['user'] = usr
             req.session.set_expiry(3600000)  # 1 hour timeout
             print req.session['user']
+            write_log(usr, "log in", 1)
             return JsonResponse({'code': 0})
             # return HttpResponseRedirect('/show')
         else:
+            write_log(usr, "log in", 0)
             return JsonResponse({'code': -1})
             # return JsonResponse({'code': 0})
 
     else:  # 比较失败，还在login
+        write_log("unknown", "log in", 0)
         return JsonResponse({'code': -2})
 
 
@@ -450,8 +480,10 @@ def match(request):
     try:
         user = UserInfo.objects.get(user=usr)
     except UserInfo.DoesNotExist:
+        write_log(usr, "match", 0)
         return JsonResponse({'code': -1})
     except UserInfo.MultipleObjectsReturned:
+        write_log(usr, "match", 0)
         return JsonResponse({'code': -2})
     n = int(request.POST['n'])
     lovermatch = user.loverMatch
@@ -478,6 +510,7 @@ def match(request):
         return_lovermatched.append((info, sim))
 
     context = {'code': 0, 'lovermatch': return_lovermatch, 'lovermatched': return_lovermatched}
+    write_log(usr, "match", 1)
     return JsonResponse(context)
 
 
