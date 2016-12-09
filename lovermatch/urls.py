@@ -26,5 +26,6 @@ urlpatterns = [
                   url(r'^update_percentage', views.update_percentage),
                   url(r'^match/$', views.match),
                   url(r'^upload_photo/$', views.upload_photo, name='upload_photo'),
+                  url(r'^detect_photo', views.detect_photo, name='detect_photo'),
 
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

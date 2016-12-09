@@ -27,6 +27,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib.auth.models import User
 from django.core.files.storage import default_storage
 from PIL import Image, ImageFile
+import httplib, urllib, base64
 
 # Create your views here.
 token = Token(django_settings.SECRET_KEY)  # token is used to verify user in email link
@@ -156,12 +157,6 @@ def update_self(request):
     grad = userUpdate.get("gradeId")
     cons = userUpdate.get("constellationId")
     hob = map(int, userUpdate.getlist("hobbiesId[]"))
-    #
-    # if isinstance(ag, int) and isinstance(ge, str) and isinstance(hei, str) and isinstance(wei, str) and isinstance(ho,
-    #                                                                                                                 str) and isinstance(
-    #     univ, int) and isinstance(scho, list) and isinstance(grad, str) and isinstance(cons, int) and isinstance(hob,
-    #                                                                                                              list):
-
 
     if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
                                          universityId=univ,
@@ -269,6 +264,33 @@ def upload_photo(request):
         return JsonResponse({"code": -3})
 
 
+def detect_photo(requst):
+    headers = {
+        # Request headers
+        'Content-Type': 'application/json',
+        'Ocp-Apim-Subscription-Key': '43b5b4cabde346fa92d0d8756f77ef09',
+    }
+
+    params = urllib.urlencode({
+        # Request parameters
+        'returnFaceId': 'true',
+        'returnFaceLandmarks': 'false',
+        'returnFaceRectangle': 'true',
+        'returnFaceAttributes': 'age,gender,smile',
+    })
+
+    try:
+        conn = httplib.HTTPSConnection('api.projectoxford.ai')
+        conn.request("POST", "/face/v1.0/detect?%s" % params, "{body}", headers)
+        response = conn.getresponse()
+        data = response.read()
+        print(data)
+
+        conn.close()
+    except Exception as e:
+        print("[Errno {0}] {1}".format(e.errno, e.strerror))
+
+
 def login(req):
     if req.method == 'POST':
 
@@ -301,11 +323,6 @@ def login(req):
 def logout(request):
     logout(request)
     return JsonResponse({'code': 0})
-
-
-# def results(request, username):
-#     context = {'username': username}
-#     return render(request, 'lovermatch/signup_results.html', context)
 
 
 def match(request):
