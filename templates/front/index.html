@@ -61,7 +61,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">设置 <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="#" data-toggle="modal" data-target="#edit-person">修改个人信息</a></li>
-                  <li><a href="#" data-toggle="modal" data-target="#edit-feature">我的择偶对象</a></li>
+                  <li id = "featuremodel"><a href="#" data-toggle="modal" data-target="#edit-feature">我的择偶对象</a></li>
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header">关于我们</li>
                   <li><a href="#">联系</a></li>
@@ -82,8 +82,6 @@
 
 
 
-
-
         <!-- Modal -->
 	<div class="modal fade" id="edit-feature" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
@@ -99,7 +97,6 @@
 			<fieldset>
 
 			<!-- Form Name -->
-
 			
 
 			<!-- Text input-->
@@ -116,8 +113,6 @@
 			  <input type="hidden" id="rateage" class="rating-tooltip" data-stop="10"/>
 			  </div>
 			</div>
-
-			
 
 
 			<!-- Text input-->
@@ -359,11 +354,11 @@
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
 	        <button type="button" class="btn btn-primary" id="savafeature">保存</button>
+	        <button type="button" class="btn btn-primary" id="getfeature">推荐个呗</button>
 	      </div>
 	    </div>
 	  </div>
 	</div>
-
 
 
 
