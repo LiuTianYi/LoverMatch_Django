@@ -376,7 +376,7 @@ $(function(){
      "universityId":1,
      "schoodId":[01,02,12],
      "hobbiesId":[2,3]
-    }
+    },
     success: function(data) {
         localmodel = data;
     },
