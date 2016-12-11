@@ -370,8 +370,8 @@ $(function(){
     url: 'http://168.63.205.250/get_models/',  //这里是你的api名字
     dataType: "json", // type of returned data
     data: {          
-     "age":18,            // init 0
-     "gender":0,          // init 0
+     "age":18,            
+     "gender":0,          
      "hometownId":030203,
      "universityId":1,
      "schoodId":[01,02,12],
