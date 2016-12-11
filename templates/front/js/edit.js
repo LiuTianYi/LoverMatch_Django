@@ -382,6 +382,7 @@ $(function(){
     },
     async: false
     });
+});
 
     var index = 0;
     $("#getfeature").click(function(){
