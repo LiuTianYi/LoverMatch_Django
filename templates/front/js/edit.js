@@ -363,6 +363,7 @@ $(function(){
     $("#ratehobby").attr("value",thobby);
 
     var localmodel;
+    console.log(1)
     
     $("#featuremodel").click(function(){
     $.ajax({ // JQuery ajax function
@@ -379,9 +380,11 @@ $(function(){
     },
     success: function(data) {
         localmodel = data;
+        console.log(1)
     },
     async: false
     });
+    console.log(localmodel)
 });
 
     var index = 0;
