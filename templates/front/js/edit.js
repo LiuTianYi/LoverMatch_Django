@@ -363,13 +363,13 @@ $(function(){
     $("#ratehobby").attr("value",thobby);
 
     var localmodel;
-    console.log(1)
     
     $("#featuremodel").click(function(){
     $.ajax({ // JQuery ajax function
     type: "POST", // Submitting Method
     url: 'http://168.63.205.250/get_models/',  //这里是你的api名字
     dataType: "json", // type of returned data
+    async: false，
     data: {          
      "age":18,            
      "gender":0,          
@@ -380,11 +380,8 @@ $(function(){
     },
     success: function(data) {
         localmodel = data;
-        console.log(1)
-    },
-    async: false
+    }
     });
-    console.log(localmodel)
 });
 
     var index = 0;
