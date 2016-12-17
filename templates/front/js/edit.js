@@ -429,6 +429,36 @@ $(function(){
 			},
 			success: function(data) {
 						 localmodel = data;
+						 if ( index > 1 )
+		{
+			alert('没有了！')
+		}
+						 else
+		{
+			var i = index;
+			document.getElementById("f-age").value = localmodel[i]["features"]["age"][0];
+			document.getElementById("f-height").value = localmodel[i]["features"]["height"][0];
+			document.getElementById("f-weight").value = localmodel[i]["features"]["weight"][0];
+			var hmid = localmodel[i]["features"]["hometownId"][0];
+			document.getElementById("f-selectprovince").value = int(hmid[0]) * 10 + int(hmid[1]);
+			document.getElementById("f-city").value = int(hmid[2]) * 10 + int(hmid[3]);
+			document.getElementById("f-county").value = int(hmid[4]) * 10 + int(hmid[5]);
+			document.getElementById("f-selectschool").value = localmodel[i]["features"]["universityId"][0];
+
+			document.getElementById("f-selectmajor1").value = int(localmodel[i]["features"]["schoodId"][0][0]);
+			document.getElementById("f-selectmajor2").value = int(localmodel[i]["features"]["schoodId"][0][1]);
+			document.getElementById("f-selectmajor3").value = int(localmodel[i]["features"]["schoodId"][0][2]);
+
+			document.getElementById("rateage").value = localmodel[i]["percentage"]["age"];
+			document.getElementById("rateheight").value = localmodel[i]["percentage"]["height"];
+			document.getElementById("rateweight").value = localmodel[i]["percentage"]["weight"];
+			document.getElementById("rateprovince").value = localmodel[i]["percentage"]["hometownId"];
+			document.getElementById("rateschool").value = localmodel[i]["percentage"]["universityId"];
+			document.getElementById("ratem1").value = localmodel[i]["percentage"]["schoodId"];
+			document.getElementById("ratehobby").value = localmodel[i]["percentage"]["hobbiesId"];
+			index = index + 1;
+			//     document.getElementById("f-hobby").value = int(localmodel[i]["features"]["hobbiesId"][0]);
+		}
 					 }   
 		});
 	});
