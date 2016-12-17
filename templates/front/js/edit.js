@@ -461,13 +461,13 @@ $(function(){
 				document.getElementById("f-selectmajor3").value = parseInt(localmodel.data[i]["features"]["schoolId"][0][2]);
 			}
 
-			document.getElementById("rateage").value = localmodel.data[i]["percentage"]["age"];
-			document.getElementById("rateheight").value = localmodel.data[i]["percentage"]["height"];
-			document.getElementById("rateweight").value = localmodel.data[i]["percentage"]["weight"];
-			document.getElementById("rateprovince").value = localmodel.data[i]["percentage"]["hometownId"];
-			document.getElementById("rateschool").value = localmodel.data[i]["percentage"]["universityId"];
-			document.getElementById("ratem1").value = localmodel.data[i]["percentage"]["schoodId"];
-			document.getElementById("ratehobby").value = localmodel.data[i]["percentage"]["hobbiesId"];
+			document.getElementById("rateage").value = localmodel.data[i]["percentage"]["age"] * 10;
+			document.getElementById("rateheight").value = localmodel.data[i]["percentage"]["height"] * 10;
+			document.getElementById("rateweight").value = localmodel.data[i]["percentage"]["weight"] * 10;
+			document.getElementById("rateprovince").value = localmodel.data[i]["percentage"]["hometownId"] * 10;
+			document.getElementById("rateschool").value = localmodel.data[i]["percentage"]["universityId"] * 10;
+			document.getElementById("ratem1").value = localmodel.data[i]["percentage"]["schoodId"] * 10;
+			document.getElementById("ratehobby").value = localmodel.data[i]["percentage"]["hobbiesId"] * 10;
 			index = index + 1;
 			//     document.getElementById("f-hobby").value = parseInt(localmodel[i]["features"]["hobbiesId"][0]);
 		}
