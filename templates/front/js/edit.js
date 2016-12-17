@@ -428,6 +428,8 @@ $(function(){
 			"hobbiesId":[2,3]
 			},
 			success: function(data) {
+						 alert(data);
+						 $("#f-age").text(10);
 						 localmodel = data;
 						 if ( index > 1 )
 		{
