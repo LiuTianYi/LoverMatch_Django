@@ -450,15 +450,15 @@ $(function(){
 			{
 				document.getElementById("f-selectprovince").value = parseInt(hmid[0]) * 10 + parseInt(hmid[1]); offset = offset + 2;
 			}
-			document.getElementById("f-city").value = parseInt(hmid[offset]) * 10 + parseInt(hmid[offset]); offset = offset + 2;
-			document.getElementById("f-county").value = parseInt(hmid[offset]) * 10 + parseInt(hmid[offset]); offset = offset + 2;
+			document.getElementById("f-city").value = parseInt(hmid[offset]) * 10 + parseInt(hmid[offset+1]); offset = offset + 2;
+			document.getElementById("f-county").value = parseInt(hmid[offset]) * 10 + parseInt(hmid[offset+1]); offset = offset + 2;
 
 			document.getElementById("f-selectschool").value = localmodel.data[i]["features"]["universityId"][0];
-			if ( localmodel.data[i]["features"]["schoodId"][0].length != 0 )
+			if ( localmodel.data[i]["features"]["schoolId"][0].length == 3 )
 			{
-				document.getElementById("f-selectmajor1").value = parseInt(localmodel.data[i]["features"]["schoodId"][0][0]);
-				document.getElementById("f-selectmajor2").value = parseInt(localmodel.data[i]["features"]["schoodId"][0][1]);
-				document.getElementById("f-selectmajor3").value = parseInt(localmodel.data[i]["features"]["schoodId"][0][2]);
+				document.getElementById("f-selectmajor1").value = parseInt(localmodel.data[i]["features"]["schoolId"][0][0]);
+				document.getElementById("f-selectmajor2").value = parseInt(localmodel.data[i]["features"]["schoolId"][0][1]);
+				document.getElementById("f-selectmajor3").value = parseInt(localmodel.data[i]["features"]["schoolId"][0][2]);
 			}
 
 			document.getElementById("rateage").value = localmodel.data[i]["percentage"]["age"];
