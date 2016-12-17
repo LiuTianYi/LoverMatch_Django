@@ -380,14 +380,7 @@ $(function(){
     },
     success: function(data) {
         localmodel = data;
-    }
-    });
-});
-
-    var index = 0;
-    $("#getfeature").click(function(){
-
-      if ( index > 1 )
+         if ( index > 1 )
         alert('没有了！')
       else
       {
@@ -415,8 +408,30 @@ $(function(){
         index = index + 1;
      //     document.getElementById("f-hobby").value = int(localmodel[i]["features"]["hobbiesId"][0]);
       }
-      
+    }
+    });
 });
+
+    var index = 0;
+    $("#getfeature").click(function(){
+        $.ajax({ // JQuery ajax function
+        type: "POST", // Submitting Method
+        url: 'http://168.63.205.250/get_models/',  //这里是你的api名字
+        dataType: "json", // type of returned data
+        async: false,
+        data: {          
+        "age":18,            
+        "gender":0,          
+        "hometownId":030203,
+        "universityId":1,
+        "schoodId":[01,02,12],
+        "hobbiesId":[2,3]
+        },
+        success: function(data) {
+            localmodel = data;
+        }   
+});
+    });
 
     $("#savafeature").click(function(){
         if ( fprovinceid==null){fprovinceid=1;};
