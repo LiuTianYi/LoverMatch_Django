@@ -362,7 +362,7 @@ $(function(){
     $("#ratecons").attr("value",tcon);
     $("#ratehobby").attr("value",thobby);
 
-    var localmodel;
+//    var localmodel;
 
 	//    $("#featuremodel").click(function(){
 	//    $.ajax({ // JQuery ajax function
@@ -430,7 +430,7 @@ $(function(){
 			success: function(data) {
 						 alert(data);
 						 $("#f-age").text(10);
-						 localmodel = data;
+						 var localmodel = data;
 						 if ( index > 1 )
 		{
 			alert('没有了！')
