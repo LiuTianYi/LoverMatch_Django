@@ -457,7 +457,7 @@ $(function(){
 
 				for (var j = 0 ;  j < localmodel.data[i]["features"]["hobbiesId"].length ; j++){
 					var hb = localmodel.data[i]["features"]["hobbiesId"][j];
-				//	$("#hobby").append('<label class="checkbox-inline " id="hobby-'+i+'"><input class="hobbies" type="checkbox" name="checkboxes" id="checkboxes-'+i+'" value="'+i+'">'+hb+'</label>');
+					$("#hobby").append('<label class="checkbox-inline " id="hobby-'+j+'"><input class="hobbies" type="checkbox" name="checkboxes" id="checkboxes-'+j+'" value="'+j+'">'+hb+'</label>');
 					$("#f-hobby").append('<label class="checkbox-inline " id="f-hobby-'+j+'"><input class="f-hobbies" type="checkbox" name="checkboxes" id="f-checkboxes-'+j+'" value="'+j+'">'+hb+'</label>');
 				}
 
