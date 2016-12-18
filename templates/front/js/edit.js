@@ -431,14 +431,31 @@ $(function(){
 					document.getElementById("f-selectmajor2").value = parseInt(localmodel.data[i]["features"]["schoolId"][0][1]);
 					document.getElementById("f-selectmajor3").value = parseInt(localmodel.data[i]["features"]["schoolId"][0][2]);
 				}
+//				document.getElementById("rateage").value = localmodel.data[i]["percentage"]["age"] * 10;
+//				document.getElementById("rateheight").value = localmodel.data[i]["percentage"]["height"] * 10;
+//				document.getElementById("rateweight").value = localmodel.data[i]["percentage"]["weight"] * 10;
+//				document.getElementById("rateprovince").value = localmodel.data[i]["percentage"]["hometownId"] * 10;
+//				document.getElementById("rateschool").value = localmodel.data[i]["percentage"]["universityId"] * 10;
+//				document.getElementById("ratem1").value = localmodel.data[i]["percentage"]["schoodId"] * 10;
+//				document.getElementById("ratehobby").value = localmodel.data[i]["percentage"]["hobbiesId"] * 10;
 
-				document.getElementById("rateage").value = localmodel.data[i]["percentage"]["age"] * 10;
-				document.getElementById("rateheight").value = localmodel.data[i]["percentage"]["height"] * 10;
-				document.getElementById("rateweight").value = localmodel.data[i]["percentage"]["weight"] * 10;
-				document.getElementById("rateprovince").value = localmodel.data[i]["percentage"]["hometownId"] * 10;
-				document.getElementById("rateschool").value = localmodel.data[i]["percentage"]["universityId"] * 10;
-				document.getElementById("ratem1").value = localmodel.data[i]["percentage"]["schoodId"] * 10;
-				document.getElementById("ratehobby").value = localmodel.data[i]["percentage"]["hobbiesId"] * 10;
+				var rage = localmodel.data[i]["percentage"]["age"] * 10;
+				var rheight = localmodel.data[i]["percentage"]["height"] * 10;
+				var rweight = localmodel.data[i]["percentage"]["weight"] * 10;
+				var rprovince = localmodel.data[i]["percentage"]["hometownId"] * 10;
+				var rschool = localmodel.data[i]["percentage"]["universityId"] * 10;
+				var rmajor = localmodel.data[i]["percentage"]["schoodId"] * 10;
+				var rhobby = localmodel.data[i]["percentage"]["hobbiesId"] * 10;
+
+				$("#rateage").attr("value",rage);
+				$("#rateheight").attr("value",rheight);
+				$("#rateweight").attr("value",rweight);
+				$("#rateprovince").attr("value",rprovince);
+				$("#rateschool").attr("value",rschool);
+				$("#ratem1").attr("value",rmajor);
+				$("#ratehobby").attr("value",rhobby);
+
+
 				index = index + 1;
 				//     document.getElementById("f-hobby").value = parseInt(localmodel[i]["features"]["hobbiesId"][0]);
 			}
