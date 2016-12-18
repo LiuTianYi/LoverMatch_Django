@@ -28,7 +28,7 @@ $(function(){
     }
 
     for (var i = 0 ; i < features['hobbiesId'].length ; i++){
-        $("#f-checkboxes-"+features['hobbiesId'][i]).attr("checked","checked");
+        $("#f-checkboxes-"+features['hobbiesId'][i]).attr("checked",true);
     }
 
 
