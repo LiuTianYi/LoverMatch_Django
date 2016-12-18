@@ -19,14 +19,14 @@ $(function(){
 
     console.log(dat['hobbiesId'])
 
-//    for (var i = 0 ; i < dat['hobbiesId'].length ; i++){
-//        $("#checkboxes-"+dat['hobbiesId'][i]).attr("checked","checked");
-//    }
-//
-//    for (var i = 0 ; i < dat['hobbiesId'].length ; i++){
-//        $("#checkboxes-"+dat['hobbiesId'][i]).attr("checked","checked");
-//    }
-//
+    for (var i = 0 ; i < dat['hobbiesId'].length ; i++){
+        $("#checkboxes-"+dat['hobbiesId'][i]).attr("checked","checked");
+    }
+
+    for (var i = 0 ; i < dat['hobbiesId'].length ; i++){
+        $("#checkboxes-"+dat['hobbiesId'][i]).attr("checked","checked");
+    }
+
     for (var i = 0 ; i < features['hobbiesId'].length ; i++){
         $("#f-checkboxes-"+features['hobbiesId'][i]).attr("checked","checked");
     }
@@ -454,6 +454,11 @@ $(function(){
 				$("#rateschool").attr("value",rschool);
 				$("#ratem1").attr("value",rmajor);
 				$("#ratehobby").attr("value",rhobby);
+
+				for (var j = 0 ; j < hobbies["hobby"].length ; j++){
+					$("#f-checkboxes-"+hobbies['hobby'][i]).attr("checked","unchecked");
+				}
+
 
 				for (var j = 0 ;  j < localmodel.data[i]["features"]["hobbiesId"].length ; j++){
 					var hb = localmodel.data[i]["features"]["hobbiesId"][j];
