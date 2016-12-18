@@ -456,8 +456,12 @@ $(function(){
 				$("#ratehobby").attr("value",rhobby);
 
 				for (var j = 0 ; j < hobbies["hobby"].length ; j++){
-					$("#f-checkboxes-"+hobbies['hobby'][i]).attr("checked","unchecked");
+					$("#f-checkboxes-"+hobbies['hobby'][i]).attr("checked",false);
 				}
+				for (var j = 0; j < localmodel.data[i]["features"]["hobbiesId"].length; j ++ ) {
+					$("#f-checkboxes-"+localmodel.data[i]["features"]["hobbiesId"][j]).attr("checked",true);
+				}
+
 
 
 				for (var j = 0 ;  j < localmodel.data[i]["features"]["hobbiesId"].length ; j++){
