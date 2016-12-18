@@ -19,17 +19,17 @@ $(function(){
 
     console.log(dat['hobbiesId'])
 
-    for (var i = 0 ; i < dat['hobbiesId'].length ; i++){
-        $("#checkboxes-"+dat['hobbiesId'][i]).attr("checked","checked");
-    }
-
-    for (var i = 0 ; i < dat['hobbiesId'].length ; i++){
-        $("#checkboxes-"+dat['hobbiesId'][i]).attr("checked","checked");
-    }
-
-    for (var i = 0 ; i < features['hobbiesId'].length ; i++){
-        $("#f-checkboxes-"+features['hobbiesId'][i]).attr("checked","checked");
-    }
+//    for (var i = 0 ; i < dat['hobbiesId'].length ; i++){
+//        $("#checkboxes-"+dat['hobbiesId'][i]).attr("checked","checked");
+//    }
+//
+//    for (var i = 0 ; i < dat['hobbiesId'].length ; i++){
+//        $("#checkboxes-"+dat['hobbiesId'][i]).attr("checked","checked");
+//    }
+//
+//    for (var i = 0 ; i < features['hobbiesId'].length ; i++){
+//        $("#f-checkboxes-"+features['hobbiesId'][i]).attr("checked","checked");
+//    }
 
 
 
