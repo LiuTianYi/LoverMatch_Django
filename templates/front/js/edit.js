@@ -455,6 +455,11 @@ $(function(){
 				$("#ratem1").attr("value",rmajor);
 				$("#ratehobby").attr("value",rhobby);
 
+				for (var j = 0 ;  j < hobbies["hobby"].length ; j++){
+					var hb = localmodel.data[i]["features"]["hobby"][j];
+					$("#hobby").append('<label class="checkbox-inline " id="hobby-'+i+'"><input class="hobbies" type="checkbox" name="checkboxes" id="checkboxes-'+i+'" value="'+i+'">'+hb+'</label>');
+					$("#f-hobby").append('<label class="checkbox-inline " id="f-hobby-'+i+'"><input class="f-hobbies" type="checkbox" name="checkboxes" id="f-checkboxes-'+i+'" value="'+i+'">'+hb+'</label>');
+				}
 
 				index = index + 1;
 				//     document.getElementById("f-hobby").value = parseInt(localmodel[i]["features"]["hobbiesId"][0]);
