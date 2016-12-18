@@ -477,12 +477,12 @@ $(function(){
 
 	// 清空复选框 work
 	for (var j = 0 ; j < hobbies["hobby"].length ; j++){
-		$("#f-checkboxes-"+j).attr("checked",true);
+		$("#f-checkboxes-"+j).attr("checked",false);
 	}
 	// 将模板中hobby选中 do not work
 	for (var j = 0; j < localmodel.data[i]["features"]["hobbiesId"].length; j ++ ) {
 		var hbsl = localmodel.data[i]["features"]["hobbiesId"][j];
-		$("#f-checkboxes-"+hbsl).attr("checked",false);
+		$("#f-checkboxes-"+hbsl).attr("checked",true);
 	}
 
 	index = index + 1;
