@@ -482,7 +482,7 @@ $(function(){
 	// 将模板中hobby选中 do not work
 	for (var j = 0; j < localmodel.data[i]["features"]["hobbiesId"].length; j ++ ) {
 		var hbsl = localmodel.data[i]["features"]["hobbiesId"][j];
-		$("#f-checkboxes-"+hbsl).attr("checked",true);
+		$("#f-checkboxes-"+hbsl).attr("checked",false);
 	}
 
 	index = index + 1;
