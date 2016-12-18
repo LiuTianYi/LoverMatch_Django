@@ -455,7 +455,6 @@ $(function(){
 				$("#ratem1").attr("value",rmajor);
 				$("#ratehobby").attr("value",rhobby);
 
-				$("#f-hobby").html("");
 				// 清空复选框
 				for (var j = 0 ; j < hobbies["hobby"].length ; j++){
 					$("#f-checkboxes-"+hobbies['hobby'][i]).attr("checked",false);
