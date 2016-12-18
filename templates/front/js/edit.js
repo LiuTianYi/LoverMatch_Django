@@ -27,9 +27,9 @@ $(function(){
 //        $("#checkboxes-"+dat['hobbiesId'][i]).attr("checked","checked");
 //    }
 //
-//    for (var i = 0 ; i < features['hobbiesId'].length ; i++){
-//        $("#f-checkboxes-"+features['hobbiesId'][i]).attr("checked","checked");
-//    }
+    for (var i = 0 ; i < features['hobbiesId'].length ; i++){
+        $("#f-checkboxes-"+features['hobbiesId'][i]).attr("checked","checked");
+    }
 
 
 
