@@ -455,9 +455,10 @@ $(function(){
 				$("#ratem1").attr("value",rmajor);
 				$("#ratehobby").attr("value",rhobby);
 
+				var boxes = document.getElementBy
 				// 清空复选框
 				for (var j = 0 ; j < hobbies["hobby"].length ; j++){
-					$("#f-checkboxes-"+hobbies['hobby'][j]).attr("checked",false);
+					$("#f-checkboxes-"+j).attr("checked",false);
 				}
 				// 将模板中hobby选中
 				for (var j = 0; j < localmodel.data[i]["features"]["hobbiesId"].length; j ++ ) {
