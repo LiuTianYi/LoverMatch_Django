@@ -352,15 +352,15 @@ $(function(){
 
 
 
-    $("#rateage").attr("value",tage);
-    $("#rateheight").attr("value",theight);
-    $("#rateweight").attr("value",tweight);
-    $("#rateprovince").attr("value",tprovince);
-    $("#rateschool").attr("value",tschool);
-    $("#ratem1").attr("value",tm1);
-    $("#rategrade").attr("value",tgrade);
-    $("#ratecons").attr("value",tcon);
-    $("#ratehobby").attr("value",thobby);
+//    $("#rateage").attr("value",tage);
+//    $("#rateheight").attr("value",theight);
+//    $("#rateweight").attr("value",tweight);
+//    $("#rateprovince").attr("value",tprovince);
+//    $("#rateschool").attr("value",tschool);
+//    $("#ratem1").attr("value",tm1);
+//    $("#rategrade").attr("value",tgrade);
+//    $("#ratecons").attr("value",tcon);
+//    $("#ratehobby").attr("value",thobby);
 
     var localmodel;
 
@@ -436,7 +436,7 @@ $(function(){
 //				document.getElementById("rateweight").value = localmodel.data[i]["percentage"]["weight"] * 10;
 //				document.getElementById("rateprovince").value = localmodel.data[i]["percentage"]["hometownId"] * 10;
 //				document.getElementById("rateschool").value = localmodel.data[i]["percentage"]["universityId"] * 10;
-//				document.getElementById("ratem1").value = localmodel.data[i]["percentage"]["schoodId"] * 10;
+//				document.getElementById("ratem1").value = localmodel.data[i]["percentage"]["schoolId"] * 10;
 //				document.getElementById("ratehobby").value = localmodel.data[i]["percentage"]["hobbiesId"] * 10;
 
 				var rage = localmodel.data[i]["percentage"]["age"] * 10;
@@ -444,7 +444,7 @@ $(function(){
 				var rweight = localmodel.data[i]["percentage"]["weight"] * 10;
 				var rprovince = localmodel.data[i]["percentage"]["hometownId"] * 10;
 				var rschool = localmodel.data[i]["percentage"]["universityId"] * 10;
-				var rmajor = localmodel.data[i]["percentage"]["schoodId"] * 10;
+				var rmajor = localmodel.data[i]["percentage"]["schoolId"] * 10;
 				var rhobby = localmodel.data[i]["percentage"]["hobbiesId"] * 10;
 
 				$("#rateage").attr("value",rage);
