@@ -28,7 +28,7 @@ $(function(){
     }
 
     for (var i = 0 ; i < features['hobbiesId'].length ; i++){
-        $("#f-checkboxes-"+features['hobbiesId'][i]).attr("checked",false);
+        $("#f-checkboxes-"+features['hobbiesId'][i]).attr("checked",true);
     }
 
 
@@ -352,15 +352,15 @@ $(function(){
 
 
 
-//    $("#rateage").attr("value",tage);
-//    $("#rateheight").attr("value",theight);
-//    $("#rateweight").attr("value",tweight);
-//    $("#rateprovince").attr("value",tprovince);
-//    $("#rateschool").attr("value",tschool);
-//    $("#ratem1").attr("value",tm1);
-//    $("#rategrade").attr("value",tgrade);
-//    $("#ratecons").attr("value",tcon);
-//    $("#ratehobby").attr("value",thobby);
+    $("#rateage").attr("value",tage);
+    $("#rateheight").attr("value",theight);
+    $("#rateweight").attr("value",tweight);
+    $("#rateprovince").attr("value",tprovince);
+    $("#rateschool").attr("value",tschool);
+    $("#ratem1").attr("value",tm1);
+    $("#rategrade").attr("value",tgrade);
+    $("#ratecons").attr("value",tcon);
+    $("#ratehobby").attr("value",thobby);
 
     var localmodel;
 
@@ -455,20 +455,23 @@ $(function(){
 				$("#ratem1").attr("value",rmajor);
 				$("#ratehobby").attr("value",rhobby);
 
+				$("#f-hobby").html("");
+				// 清空复选框
 				for (var j = 0 ; j < hobbies["hobby"].length ; j++){
 					$("#f-checkboxes-"+hobbies['hobby'][i]).attr("checked",false);
 				}
+				// 将模板中hobby选中
 				for (var j = 0; j < localmodel.data[i]["features"]["hobbiesId"].length; j ++ ) {
 					$("#f-checkboxes-"+localmodel.data[i]["features"]["hobbiesId"][j]).attr("checked",true);
 				}
 
 
 
-				for (var j = 0 ;  j < localmodel.data[i]["features"]["hobbiesId"].length ; j++){
-					var hb = localmodel.data[i]["features"]["hobbiesId"][j];
-					$("#hobby").append('<label class="checkbox-inline " id="hobby-'+j+'"><input class="hobbies" type="checkbox" name="checkboxes" id="checkboxes-'+j+'" value="'+j+'">'+hb+'</label>');
-					$("#f-hobby").append('<label class="checkbox-inline " id="f-hobby-'+j+'"><input class="f-hobbies" type="checkbox" name="checkboxes" id="f-checkboxes-'+j+'" value="'+j+'">'+hb+'</label>');
-				}
+				//				for (var j = 0 ;  j < localmodel.data[i]["features"]["hobbiesId"].length ; j++){
+				//					var hb = localmodel.data[i]["features"]["hobbiesId"][j];
+				//					$("#hobby").append('<label class="checkbox-inline " id="hobby-'+j+'"><input class="hobbies" type="checkbox" name="checkboxes" id="checkboxes-'+j+'" value="'+j+'">'+hb+'</label>');
+				//					$("#f-hobby").append('<label class="checkbox-inline " id="f-hobby-'+j+'"><input class="f-hobbies" type="checkbox" name="checkboxes" id="f-checkboxes-'+j+'" value="'+j+'">'+hb+'</label>');
+				//				}
 
 				index = index + 1;
 				//     document.getElementById("f-hobby").value = parseInt(localmodel[i]["features"]["hobbiesId"][0]);
