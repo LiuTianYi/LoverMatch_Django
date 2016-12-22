@@ -459,13 +459,13 @@ $(function(){
 	//				document.getElementById("ratehobby").value = localmodel.data[i]["percentage"]["hobbiesId"] * 10;
 
 	// 权值控件赋值 do not work
-	var rage = localmodel.data[i]["percentage"]["age"] * 10;
-	var rheight = localmodel.data[i]["percentage"]["height"] * 10;
-	var rweight = localmodel.data[i]["percentage"]["weight"] * 10;
-	var rprovince = localmodel.data[i]["percentage"]["hometownId"] * 10;
-	var rschool = localmodel.data[i]["percentage"]["universityId"] * 10;
-	var rmajor = localmodel.data[i]["percentage"]["schoolId"] * 10;
-	var rhobby = localmodel.data[i]["percentage"]["hobbiesId"] * 10;
+	var rage = parseInt(localmodel.data[i]["percentage"]["age"] * 10);
+	var rheight = parseInt(localmodel.data[i]["percentage"]["height"] * 10);
+	var rweight = parseInt(localmodel.data[i]["percentage"]["weight"] * 10);
+	var rprovince = parseInt(localmodel.data[i]["percentage"]["hometownId"] * 10);
+	var rschool = parseInt(localmodel.data[i]["percentage"]["universityId"] * 10);
+	var rmajor = parseInt(localmodel.data[i]["percentage"]["schoolId"] * 10);
+	var rhobby = parseInt(localmodel.data[i]["percentage"]["hobbiesId"] * 10);
 
 	$("#rateage").attr("value",rage);
 	$("#rateheight").attr("value",rheight);
