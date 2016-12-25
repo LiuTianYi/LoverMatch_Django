@@ -61,7 +61,7 @@ def decorator(func):
         try:
             _user = request.session.get('user')
         except:
-            _user = "Anonymous user"
+            _user = "anonymous user"
         _action = func.__doc__
         _status = 1
         try:
