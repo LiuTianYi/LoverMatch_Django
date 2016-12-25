@@ -7,6 +7,10 @@ $(function(){
 
 	//load hobby
     $("#username").attr("placeholder",dat["name"]);
+    $("#age").attr("placeholder",dat["age"]);
+    $("#height").attr("placeholder",dat["height"]);
+    $("#weight").attr("placeholder",dat["weight"]);
+
 
 
 	$("#hobby").html("");
