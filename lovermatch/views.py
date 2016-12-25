@@ -67,7 +67,8 @@ def decorator(func):
         try:
             log = Log.objects.create(time=now, user=_user, action=_action, status=_status)
             log.save()
-            return func(request)
+            result = func(request)
+            return result
         except:
             print 'exception occured in write_log'
     return write_log
