@@ -405,7 +405,7 @@ def recommend_template(age, gender, hometownId, universityId, schoolId, hobbiesI
 #             return HttpResponse('image upload success')
 #     return HttpResponse('image upload failed')
 
-@decorator
+
 def upload_photo(request):
     """upload photo"""
     if request.method == 'POST':
@@ -526,7 +526,7 @@ def logout(request):
     logout(request)
     return JsonResponse({'code': 0})
 
-@decorator
+
 def match(request):
     """match"""
     # match algorithm for usr to find all users who are similar to him/her based on features and weights
