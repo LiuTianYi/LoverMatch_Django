@@ -159,7 +159,7 @@ def showInfo(request):
     else:
         return JsonResponse({'code': -1})
 
-@decorator
+
 def update_self(request):
     """update self info"""
     userUpdate = request.POST
