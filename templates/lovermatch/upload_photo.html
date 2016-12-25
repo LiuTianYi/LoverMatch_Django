@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload picture</title>
+</head>
+<body>
+
+<p>Form to fill in</p>
+<form enctype="multipart/form-data" action="{% url 'upload_photo' %}" method="post">
+    {% csrf_token %}
+    <input type="file" name="photo"/>
+{#    <input type="text" name="password" title="password:"/>#}
+
+    <input type="submit" value="Submit"/>
+</form>
+
+</body>
+</html>
+
+
+
+
+</form>
+</body>
+</html>

@@ -61,7 +61,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">设置 <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="#" data-toggle="modal" data-target="#edit-person">修改个人信息</a></li>
-                  <li><a href="#" data-toggle="modal" data-target="#edit-feature">我的择偶对象</a></li>
+                  <li id = "featuremodel"><a href="#" data-toggle="modal" data-target="#edit-feature">我的择偶对象</a></li>
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header">关于我们</li>
                   <li><a href="#">联系</a></li>
@@ -82,8 +82,6 @@
 
 
 
-
-
         <!-- Modal -->
 	<div class="modal fade" id="edit-feature" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
@@ -99,14 +97,13 @@
 			<fieldset>
 
 			<!-- Form Name -->
-
 			
 
 			<!-- Text input-->
 			<div class="form-group">
-			  <label class="col-md-4 control-label" for="textinput" readonly>女/男票的年龄范围(以,分开)</label>  
+			  <label class="col-md-4 control-label" for="textinput" readonly>女/男票的年龄范围(输入但个数，我们以正负2的浮动范围给你找对象)</label>  
 			  <div class="col-md-4">
-			  <input id="f-age" name="textinput" type="text" placeholder="[18,24]" class="form-control input-md">
+			  <input id="f-age" name="textinput" type="text" placeholder="20" class="form-control input-md">
 			  </div>
 			</div>
 
@@ -117,14 +114,12 @@
 			  </div>
 			</div>
 
-			
-
 
 			<!-- Text input-->
 			<div class="form-group">
-			  <label class="col-md-4 control-label" for="textinput">女/男票的身高范围(以,分开)</label>  
+			  <label class="col-md-4 control-label" for="textinput">女/男票的身高范围(输入但个数，我们以正负2的浮动范围给你找对象)</label>  
 			  <div class="col-md-4">
-			  <input id="f-height" name="textinput" type="text" placeholder="[160,165]" class="form-control input-md">
+			  <input id="f-height" name="textinput" type="text" placeholder="160" class="form-control input-md">
 			  <span class="help-block">身高以厘米为单位</span>  
 			  </div>
 			</div>
@@ -140,9 +135,9 @@
 
 			<!-- Text input-->
 			<div class="form-group">
-			  <label class="col-md-4 control-label" for="textinput">女/男票的体重范围(以,分开)</label>  
+			  <label class="col-md-4 control-label" for="textinput">女/男票的体重范围(输入但个数，我们以正负2的浮动范围给你找对象)</label>  
 			  <div class="col-md-4">
-			  <input id="f-weight" name="textinput" type="text" placeholder="[23,65]" class="form-control input-md">
+			  <input id="f-weight" name="textinput" type="text" placeholder="45" class="form-control input-md">
 			  <span class="help-block">体重以kg为单位</span>  
 			  </div>
 			</div>
@@ -359,11 +354,11 @@
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
 	        <button type="button" class="btn btn-primary" id="savafeature">保存</button>
+	        <button type="button" class="btn btn-primary" id="getfeature">推荐个呗</button>
 	      </div>
 	    </div>
 	  </div>
 	</div>
-
 
 
 
