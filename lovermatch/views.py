@@ -58,7 +58,10 @@ def show_upload_photo_form(request):
 def decorator(func):
     def write_log(request):
         now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        _user = request.session.get('user')
+        try:
+            _user = request.session.get('user')
+        except:
+            _user = "Anonymous user"
         _action = func.__doc__
         _status = 1
         try:
