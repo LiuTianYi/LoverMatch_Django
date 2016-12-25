@@ -98,7 +98,7 @@ def signup(request):
             # write_log(_username, "sign up", 0)
             return JsonResponse({'code': -2})
         insert_user = UserInfo.objects.create(user=_username, password=_pwd, name=_nickname,
-                                              photoAddress="http://168.63.205.250/static/photos/default.jpg")
+                                              photoAddress="http://23.99.118.170/static/photos/default.jpg")
         insert_user.is_active = False  # set false here to wait further verification in email
         insert_user.save()
 
