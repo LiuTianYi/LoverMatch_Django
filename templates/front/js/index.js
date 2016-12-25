@@ -82,7 +82,7 @@ function getmatch(){
     type: "POST", // Submitting Method
     url: 'http://'+ip_adder+'/match/',  //这里是你的api名字
     dataType: "json", // type of returned data
-    data: {"n":2},
+    data: {"n":10},
     success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
       var infostring = "";
       //infostring.concat("<p></p>")
@@ -136,7 +136,7 @@ function getmatch2(){
     type: "POST", // Submitting Method
     url: 'http://'+ip_adder+'/match/',  //这里是你的api名字
     dataType: "json", // type of returned data
-    data: {"n":2},
+    data: {"n":10},
     success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
       var infostring = "";
       //infostring.concat("<p></p>")
