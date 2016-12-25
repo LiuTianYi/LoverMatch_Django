@@ -48,6 +48,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="./js/jquery.min.js"></script>
+    <script src="./js/config.js"></script>
     <script>window.jQuery || document.write('<script src="./js/jquery.min.js"><\/script>')</script>
     <script src="./js/bootstrap.min.js"></script>
     <script>
@@ -68,7 +69,7 @@
 //         alert(token)
           $.ajax({ // JQuery ajax function
             type: "POST", // Submitting Method
-            url: 'http://168.63.205.250/active_user/',  //这里是你的api名字
+            url: 'http://'+ip_adder+'/active_user/',  //这里是你的api名字
             data: {"token":token}, // the data that will be sent to php processor
             dataType: "json", // type of returned data
             success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
