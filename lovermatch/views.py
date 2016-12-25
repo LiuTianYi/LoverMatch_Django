@@ -198,8 +198,8 @@ def update_self(request):
     hob = map(int, userUpdate.getlist("hobbiesId[]"))
 
     if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
-                                         universityId=univ,
-                                         schoolId=scho, gradeId=grad, constellationId=cons, hobbiesId=hob):
+                                         universityId=univ, schoolId=scho, gradeId=grad, constellationId=cons,
+                                         hobbiesId=hob):
         # write_log(usr, "update self info", 1)
         return JsonResponse({"code": 0})
 
