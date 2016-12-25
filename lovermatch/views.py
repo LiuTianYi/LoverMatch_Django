@@ -422,7 +422,7 @@ def upload_photo(request):
         image_path = "/home/yyj/LoverMatch_Django/templates/photos/" + str(
             usr) + ".jpg"
 
-        store_path = "http://168.63.205.250/static/photos/" + str(usr) + ".jpg"
+        store_path = "http://23.99.118.170/static/photos/" + str(usr) + ".jpg"
 
         # image_path = "/Users/yangyuji/Documents/Coding/PycharmProjects/LoverMatch_Django/LoverMatch/" + str(
         #     usr) + ".jpg"
@@ -467,7 +467,7 @@ def detect_photo(req):
 
     body = {
         # "url": str(usr + ".jpg")
-        "url": "http://168.63.205.250/static/photos/" + usr + ".jpg"
+        "url": "http://23.99.118.170/static/photos/" + usr + ".jpg"
     }
 
     try:
