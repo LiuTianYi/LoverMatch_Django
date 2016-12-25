@@ -67,10 +67,10 @@ class UserInfo(Document):
 
 
 class Log(Document):
-    time = DateTimeField(required=True)  # 时间
-    user = StringField(required=True)  # 用户
-    action = StringField(required=True)  # 行为
-    status = IntField(required=True)  # 标志是否成功，1代表成功，0代表失败
+    time = DateTimeField(required=False)  # 时间
+    user = StringField(required=False)  # 用户
+    action = StringField(required=False)  # 行为
+    status = IntField(required=False)  # 标志是否成功，1代表成功，0代表失败
 
 
 def unicode__(self):
