@@ -224,6 +224,8 @@ $(function(){
     }
 
 
+
+
     loadmajor1(1);
     //console.log(city["province"][0]["city"][0]["country"].length)
     loadmajor2(1,1);
@@ -407,7 +409,7 @@ $(function(){
 			data: {          
 				"age":age,            
 			"gender":sex,          
-			"hometownId":format2(2)+format2(5)+format2(7),
+			"hometownId":format2(provinceid)+format2(cityid)+format2(countyid),
 			"universityId":schoolid,
 			"schoodId":[m1,m2,m3],
 			"hobbiesId":hb
@@ -421,7 +423,7 @@ $(function(){
 
 	var index = 0;
 	$("#getfeature").click(function(){
-		if ( index > localmodel.data.length )
+		if ( index >= localmodel.data.length )
 	{
 		alert('没有了！')
 	}
@@ -474,7 +476,7 @@ $(function(){
 	$("#rateschool").rating("rate",rschool);
 	$("#ratem1").rating("rate",rmajor);
 	$("#ratehobby").rating("rate",rhobby);
-	
+
 
 	// 清空复选框 work
 	for (var j = 0 ; j < hobbies["hobby"].length ; j++){
@@ -483,7 +485,7 @@ $(function(){
 	// 将模板中hobby选中 do not work
 	for (var j = 0; j < localmodel.data[i]["features"]["hobbiesId"].length; j ++ ) {
 		var hbsl = localmodel.data[i]["features"]["hobbiesId"][j];
-		$("#f-checkboxes-"+hbsl).attr("checked",true);
+		$("#f-checkboxes-"+hbsl).prop("checked",true);
 	}
 
 	index = index + 1;
