@@ -8,7 +8,7 @@ var percentage;
 $(function() {
 
   $("#uploadphoto").click(function(){
-    window.location="http://168.63.205.250/photo_form.html"
+    window.location="http://"+ip_adder+"/photo_form.html"
   });
 
  
@@ -18,7 +18,7 @@ $(function() {
 
    $.ajax({ // JQuery ajax function
       type: "POST", // Submitting Method
-      url: 'http://168.63.205.250/showInfo',  //这里是你的api名字
+      url: 'http://'+ip_adder+'/showInfo',  //这里是你的api名字
       //data: {"username":"te"}, // the data that will be sent to php processor
       dataType: "json", // type of returned data
       success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
@@ -70,7 +70,7 @@ var matchli;
 function getmatch(){
   $.ajax({ // JQuery ajax function
     type: "POST", // Submitting Method
-    url: 'http://168.63.205.250/match/',  //这里是你的api名字
+    url: 'http://'+ip_adder+'/match/',  //这里是你的api名字
     dataType: "json", // type of returned data
     data: {"n":2},
     success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
@@ -124,7 +124,7 @@ function getmatch(){
 function getmatch2(){
   $.ajax({ // JQuery ajax function
     type: "POST", // Submitting Method
-    url: 'http://168.63.205.250/match/',  //这里是你的api名字
+    url: 'http://'+ip_adder+'/match/',  //这里是你的api名字
     dataType: "json", // type of returned data
     data: {"n":2},
     success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息

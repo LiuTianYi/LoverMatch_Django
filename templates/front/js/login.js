@@ -12,7 +12,7 @@ null
   
     $.ajax({ // JQuery ajax function
       type: "POST", // Submitting Method
-      url: 'http://168.63.205.250/login',  //这里是你的api名字
+      url: 'http://'+ip_adder+'/login',  //这里是你的api名字
       // url: 'http://localhost:8000/detect_photo',  //这里是你的api名字
       // url: 'http://localhost:8000/update',  //这里是你的api名字
       // url: 'http://localhost:8000/login',  //这里是你的api名字

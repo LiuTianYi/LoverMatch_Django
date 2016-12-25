@@ -150,7 +150,7 @@ $(function() {
     		$("#password2label").text("确认密码");
 			$.ajax({ 
 		      type: "POST", 
-		      url: 'http://168.63.205.250/signup/',  
+		      url: 'http://'+ip_adder+'/signup/',  
 		      data: {"name":un1,"username":em1,"password":pw1},
 		      dataType: "json", 
 		      success: function(data) { 
