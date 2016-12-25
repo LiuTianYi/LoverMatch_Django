@@ -200,11 +200,9 @@ def update_self(request):
     if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
                                          universityId=univ, schoolId=scho, gradeId=grad, constellationId=cons,
                                          hobbiesId=hob):
-        # write_log(usr, "update self info", 1)
         return JsonResponse({"code": 0})
 
     else:
-        # write_log(usr, "update self info", 0)
         return JsonResponse({"code": -3})
 
 @decorator
