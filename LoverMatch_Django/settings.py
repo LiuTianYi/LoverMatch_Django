@@ -158,7 +158,7 @@ SESSION_ENGINE = 'mongoengine.django.sessions'
 # SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
 
-DOMAIN = 'http://168.63.205.250'
+DOMAIN = 'http://23.99.118.170'
 EMAIL_HOST = 'smtp.qq.com'
 EMAIL_HOST_USER = '2601112836@qq.com'
 EMAIL_HOST_PASSWORD = 'apmolwxbualmecbi'  # replace by password or identifier
