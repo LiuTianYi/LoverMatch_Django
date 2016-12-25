@@ -224,6 +224,8 @@ $(function(){
     }
 
 
+
+
     loadmajor1(1);
     //console.log(city["province"][0]["city"][0]["country"].length)
     loadmajor2(1,1);
@@ -483,7 +485,7 @@ $(function(){
 	// 将模板中hobby选中 do not work
 	for (var j = 0; j < localmodel.data[i]["features"]["hobbiesId"].length; j ++ ) {
 		var hbsl = localmodel.data[i]["features"]["hobbiesId"][j];
-		$("#f-checkboxes-"+hbsl).attr("checked",true);
+		$("#f-checkboxes-"+hbsl).prop("checked",true);
 	}
 
 	index = index + 1;
