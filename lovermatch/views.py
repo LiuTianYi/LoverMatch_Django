@@ -98,7 +98,7 @@ def signup(request):
             # write_log(_username, "sign up", 0)
             return JsonResponse({'code': -2})
         insert_user = UserInfo.objects.create(user=_username, password=_pwd, name=_nickname,
-                                              photoAddress="http://168.63.205.250/static/photos/default.jpg")
+                                              photoAddress="http://23.99.118.170/static/photos/default.jpg")
         insert_user.is_active = False  # set false here to wait further verification in email
         insert_user.save()
 
@@ -422,7 +422,7 @@ def upload_photo(request):
         image_path = "/home/yyj/LoverMatch_Django/templates/photos/" + str(
             usr) + ".jpg"
 
-        store_path = "http://168.63.205.250/static/photos/" + str(usr) + ".jpg"
+        store_path = "http://23.99.118.170/static/photos/" + str(usr) + ".jpg"
 
         # image_path = "/Users/yangyuji/Documents/Coding/PycharmProjects/LoverMatch_Django/LoverMatch/" + str(
         #     usr) + ".jpg"
@@ -467,7 +467,7 @@ def detect_photo(req):
 
     body = {
         # "url": str(usr + ".jpg")
-        "url": "http://168.63.205.250/static/photos/" + usr + ".jpg"
+        "url": "http://23.99.118.170/static/photos/" + usr + ".jpg"
     }
 
     try:
