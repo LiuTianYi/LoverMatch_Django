@@ -555,7 +555,8 @@ def match(request):
                 'hometownId': u.hometownId, 'universityId': u.universityId, 'schoolId': u.schoolId,
                 'gradeId': u.gradeId, 'constellationId': u.constellationId, 'hobbiesId': u.hobbiesId,
                 'photoAddress': u.photoAddress}
-        return_lovermatch.append((info, sim))
+        if u.gender != user.gender:
+            return_lovermatch.append((info, sim))
 
     for nickname, sim in sorted_lovermatched:
         u = UserInfo.objects.get(name=nickname)
@@ -563,7 +564,8 @@ def match(request):
                 'hometownId': u.hometownId, 'universityId': u.universityId, 'schoolId': u.schoolId,
                 'gradeId': u.gradeId, 'constellationId': u.constellationId, 'hobbiesId': u.hobbiesId,
                 'photoAddress': u.photoAddress}
-        return_lovermatched.append((info, sim))
+        if u.gender != user.gender:
+            return_lovermatched.append((info, sim))
 
     context = {'code': 0, 'lovermatch': return_lovermatch, 'lovermatched': return_lovermatched}
     # write_log(usr, "match", 1)
