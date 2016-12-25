@@ -23,6 +23,9 @@ $(function() {
       dataType: "json", // type of returned data
       success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
         //console.log(data)
+		if (data['code']==-1){
+			window.location="http://"+ip_adder+"/static/front/login.html";
+		}
         dat = data['data'];
         features = data['features'];
         percentage = data['percentage'];
