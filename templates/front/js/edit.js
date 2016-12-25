@@ -401,7 +401,7 @@ $(function(){
 
 		$.ajax({ // JQuery ajax function
 			type: "POST", // Submitting Method
-			url: 'http://168.63.205.250/get_models/',  //这里是你的api名字
+			url: 'http://'+ip_adder+'/get_models/',  //这里是你的api名字
 			dataType: "json", // type of returned data
 			async: false,
 			data: {          
@@ -459,13 +459,13 @@ $(function(){
 	//				document.getElementById("ratehobby").value = localmodel.data[i]["percentage"]["hobbiesId"] * 10;
 
 	// 权值控件赋值 do not work
-	var rage = localmodel.data[i]["percentage"]["age"] * 10;
-	var rheight = localmodel.data[i]["percentage"]["height"] * 10;
-	var rweight = localmodel.data[i]["percentage"]["weight"] * 10;
-	var rprovince = localmodel.data[i]["percentage"]["hometownId"] * 10;
-	var rschool = localmodel.data[i]["percentage"]["universityId"] * 10;
-	var rmajor = localmodel.data[i]["percentage"]["schoolId"] * 10;
-	var rhobby = localmodel.data[i]["percentage"]["hobbiesId"] * 10;
+	var rage = parseInt(localmodel.data[i]["percentage"]["age"] * 10);
+	var rheight = parseInt(localmodel.data[i]["percentage"]["height"] * 10);
+	var rweight = parseInt(localmodel.data[i]["percentage"]["weight"] * 10);
+	var rprovince = parseInt(localmodel.data[i]["percentage"]["hometownId"] * 10);
+	var rschool = parseInt(localmodel.data[i]["percentage"]["universityId"] * 10);
+	var rmajor = parseInt(localmodel.data[i]["percentage"]["schoolId"] * 10);
+	var rhobby = parseInt(localmodel.data[i]["percentage"]["hobbiesId"] * 10);
 
 	$("#rateage").attr("value",rage);
 	$("#rateheight").attr("value",rheight);
@@ -617,7 +617,7 @@ $(function(){
 
 		$.ajax({ // JQuery ajax function
 			type: "POST", // Submitting Method
-			url: 'http://168.63.205.250/update_feature',  //这里是你的api名字
+			url: 'http://'+ip_adder+'/update_feature',  //这里是你的api名字
 			data: {"age":[parseInt(fage)-2,parseInt(fage)+2],"height":[parseInt(fheight)-2,parseInt(fheight)+2],"weight":[parseInt(fweight)-2,parseInt(fweight)+2],"hometownId":[format2(fprovinceid)+format2(fcityid)+format2(fcountyid)],"universityId":[fschoolid],"constellationId":[fcostell],"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]],"gradeId":[fyear]}, // the data that will be sent to php processor
 			//data: {"age":[18,23],"height":[176,189],"weight":[45,54],"hometownId":[[fprovinceid,fcityid,fcountyid]],"universityId":fschoolid,"constellationId":fcostell,"hobbiesId":fhb,"schoolId":[[fm1,fm2,fm3]],"gradeId":fyear}, // the data that will be sent to php processor
 			dataType: "json", // type of returned data
@@ -662,7 +662,7 @@ $(function(){
 
 		$.ajax({ // JQuery ajax function
 			type: "POST", // Submitting Method
-		url: 'http://168.63.205.250/update_percentage',  //这里是你的api名字
+		url: 'http://'+ip_adder+'/update_percentage',  //这里是你的api名字
 			data: {"age":rage/10,"height":rheight/10,"weight":rweight/10,"hometownId":rprovince/10,"universityId":rschool/10,"constellationId":rcon/10,"hobbiesId":rhobby/10,"schoolId":rm1/10,"gradeId":rgrade/10}, // the data that will be sent to php processor
 		dataType: "json", // type of returned data
 		success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
@@ -748,7 +748,7 @@ $(function(){
 
 		$.ajax({ // JQuery ajax function
 			type: "POST", // Submitting Method
-			url: 'http://168.63.205.250/update_self',  //这里是你的api名字
+			url: 'http://'+ip_adder+'/update_self',  //这里是你的api名字
 			//data: {"name":un},
 			data: {"name":un,"age":age,"gender":sex,"height":height,"weight":weight,"hometownId":format2(2)+format2(5)+format2(7),"universityId":schoolid,"schoolId":[m1,m2,m3],"constellationId":costell,"hobbiesId":hb,"gradeId":year}, // the data that will be sent to php processor
 			dataType: "json", // type of returned data

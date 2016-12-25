@@ -447,7 +447,9 @@ def upload_photo(request):
         return JsonResponse({"code": -3})
 
 
-def detect_photo(requst):
+def detect_photo(req):
+    usr = req.session.get('user')
+
     headers = {
         # Request headers
         'Content-Type': 'application/json',
@@ -457,16 +459,28 @@ def detect_photo(requst):
     params = urllib.urlencode({
         # Request parameters
         'returnFaceId': 'true',
-        'returnFaceLandmarks': 'false',
+        'returnFaceLandmarks': 'true',
         'returnFaceRectangle': 'true',
         'returnFaceAttributes': 'age,gender,smile',
     })
 
+    body = {
+        # "url": str(usr + ".jpg")
+        "url": "http://168.63.205.250/static/photos/" + usr + ".jpg"
+    }
+
     try:
         conn = httplib.HTTPSConnection('api.projectoxford.ai')
-        conn.request("POST", "/face/v1.0/detect?%s" % params, "{body}", headers)
+        conn.request("POST", "/face/v1.0/detect?%s" % params, str(body), headers)
         response = conn.getresponse()
         data = response.read()
+        if len(data) == 2:
+            return JsonResponse({"code": -1})
+            # print("11")
+        else:
+            return JsonResponse({"code": 0})
+
+        print(len(data))
         print(data)
 
         conn.close()
@@ -735,3 +749,6 @@ def calculate_match_at_backend():
                     matchedlist[u2.name] = u2.loverMatch[u1.name]
         u1.loverMatched = matchedlist
         u1.save()
+
+
+# detect_photo()
