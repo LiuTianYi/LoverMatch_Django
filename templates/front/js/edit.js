@@ -467,13 +467,14 @@ $(function(){
 	var rmajor = parseInt(localmodel.data[i]["percentage"]["schoolId"] * 10);
 	var rhobby = parseInt(localmodel.data[i]["percentage"]["hobbiesId"] * 10);
 
-	$("#rateage").attr("value",rage);
-	$("#rateheight").attr("value",rheight);
-	$("#rateweight").attr("value",rweight);
-	$("#rateprovince").attr("value",rprovince);
-	$("#rateschool").attr("value",rschool);
-	$("#ratem1").attr("value",rmajor);
-	$("#ratehobby").attr("value",rhobby);
+	$("#rateage").rating("rate",rage);
+	$("#rateheight").rating("rate",rheight);
+	$("#rateweight").rating("rate",rweight);
+	$("#rateprovince").rating("rate",rprovince);
+	$("#rateschool").rating("rate",rschool);
+	$("#ratem1").rating("rate",rmajor);
+	$("#ratehobby").rating("rate",rhobby);
+	
 
 	// 清空复选框 work
 	for (var j = 0 ; j < hobbies["hobby"].length ; j++){
