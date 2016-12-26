@@ -147,22 +147,22 @@ function getmatch2(){
       	infostring = "";
       //console.log(data["lovermatch"][0][0]["height"])
         if (data["lovermatched"][i][0]["height"] != null){
-        	infostring = infostring.concat("<p>他的身高是"+String(data["lovermatch"][parseInt(i)][0]["height"])+"厘米.</p>");
+        	infostring = infostring.concat("<p>他的身高是"+String(data["lovermatched"][parseInt(i)][0]["height"])+"厘米.</p>");
         }
         if (data["lovermatched"][parseInt(i)][0]["weight"] != null){
-        	infostring = infostring.concat("<p>他的体重是"+String(data["lovermatch"][parseInt(i)][0]["weight"])+"千克.</p>");
+        	infostring = infostring.concat("<p>他的体重是"+String(data["lovermatched"][parseInt(i)][0]["weight"])+"千克.</p>");
         }
         if (data["lovermatched"][parseInt(i)][0]["age"] != null){
-        	infostring = infostring.concat("<p>他的今年"+String(data["lovermatch"][parseInt(i)][0]["age"])+"岁.</p>");
+        	infostring = infostring.concat("<p>他的今年"+String(data["lovermatched"][parseInt(i)][0]["age"])+"岁.</p>");
         }
         if (data["lovermatched"][parseInt(i)][0]["gradeId"] != null){
-        	infostring = infostring.concat("<p>他现在在上"+grade["grade"][parseInt(data["lovermatch"][parseInt(i)][0]["gradeId"])]+".</p>");
+        	infostring = infostring.concat("<p>他现在在上"+grade["grade"][parseInt(data["lovermatched"][parseInt(i)][0]["gradeId"])]+".</p>");
         }
         if (data['lovermatched'][i][0]['universityId'] != null){
-        	infostring = infostring.concat("<p>他现在"+school["school"][parseInt(data["lovermatch"][parseInt(i)][0]["universityId"])]['name']+"上学.</p>");
+        	infostring = infostring.concat("<p>他现在"+school["school"][parseInt(data["lovermatched"][parseInt(i)][0]["universityId"])]['name']+"上学.</p>");
         }
         if (data['lovermatched'][i][0]['constellationId'] != null){
-        	infostring = infostring.concat("<p>他是"+cons["constellation"][parseInt(data["lovermatch"][parseInt(i)][0]["constellationId"])]+"星座的.</p>");
+        	infostring = infostring.concat("<p>他是"+cons["constellation"][parseInt(data["lovermatched"][parseInt(i)][0]["constellationId"])]+"星座的.</p>");
         }
 
         if (data["lovermatched"][i][0]["hobbiesId"].length != 0){
