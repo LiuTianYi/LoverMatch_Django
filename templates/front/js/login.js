@@ -4,11 +4,6 @@ $(function() {
     //lert(username)
     var password = $("#login-pass").val(); // define password variable
     //alert(password)
-
-null
-
-
-
   
     $.ajax({ // JQuery ajax function
       type: "POST", // Submitting Method
@@ -31,7 +26,7 @@ null
       }
       }
      });
-    return false;
+    //return false;
     });
   $('#reg-btn').click(function(){window.location="./reg.html"});
 });
