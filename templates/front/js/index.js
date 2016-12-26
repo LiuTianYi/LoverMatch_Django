@@ -45,7 +45,7 @@ $(function() {
    
    $.ajax({
 	   type: "POST",
-	   url: "http://"+ip_adder+"detect_photo/",
+	   url: "http://"+ip_adder+"/detect_photo/",
 	   dataType: "json",
 	   success: function(data){
 		   console.log(data);
