@@ -197,6 +197,8 @@ def update_self(request):
     cons = userUpdate.get("constellationId")
     hob = map(int, userUpdate.getlist("hobbiesId[]"))
 
+
+
     if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
                                          universityId=univ, schoolId=scho, gradeId=grad, constellationId=cons,
                                          hobbiesId=hob):
@@ -477,7 +479,7 @@ def detect_photo(req):
             return JsonResponse({"code": -1})
             # print("11")
         else:
-            return JsonResponse({"code": 0})
+            return JsonResponse({"code": 0, "content":data})
 
         print(len(data))
         print(data)
