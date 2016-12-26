@@ -70,8 +70,8 @@ $(function() {
     //alert("change color");
     $("#nav-match").css({"background-color":"#f8f8f8"});
     $("#nav-matched").css({"background-color":"#e7e7e7"});
-    $('#th11').text('也许...你喜欢')
-    $('#d11').text('通过我们的匹配算法，这些人可能是你喜欢的.')
+    $('#th11').text('也许...他们宣你')
+    $('#d11').text('通过我们的匹配算法，这些人可能喜欢你.')
     getmatch2();
 
 
@@ -82,8 +82,8 @@ $(function() {
     //alert("change color");
     $("#nav-matched").css({"background-color":"#f8f8f8"});
     $("#nav-match").css({"background-color":"#e7e7e7"});
-    $('#th11').text('也许...他们宣你')
-    $('#d11').text('通过我们的匹配算法，这些人可能喜欢你.')
+    $('#th11').text('也许...你喜欢')
+    $('#d11').text('通过我们的匹配算法，这些人可能是你喜欢的.')
     getmatch();
 
   });
