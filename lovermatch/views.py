@@ -468,7 +468,7 @@ def detect_photo(req):
     body = {
         # "url": str(usr + ".jpg")
         "url": "http://23.99.118.170/static/photos/" + usr + ".jpg"
-        # "url": "http://23.99.118.170/static/photos/1224152938.qq.com.jpg"
+        # "url": "http://23.99.118.170/static/photos/1224152938@qq.com.jpg"
     }
     print ("usr: " + usr)
 
@@ -481,7 +481,7 @@ def detect_photo(req):
             return JsonResponse({"code": -1})
             # print("11")
         else:
-            return JsonResponse({"code": 0, "content":data})
+            return JsonResponse({"code": 0, "usr":usr, "content":data})
 
         print(len(data))
         print(data)
@@ -783,4 +783,4 @@ def calculate_match_at_backend():
         u1.save()
 
 
-# detect_photo()
+detect_photo()
