@@ -50,8 +50,24 @@ $(function() {
 	   success: function(data){
 		   //console.log(data);
 		   if (data['code']==0){
-		   	    var jj = JSON.stringify(eval("(" + data['content'] + ")"));
-		   		console.log(jj)
+		   	    var jj = JSON.parse(data['content']);
+		   	    var des = ''
+		   	    if (jj[0]['faceAttributes']){
+		   	    	var ttt = jj[0]['faceAttributes'];
+		   	    	if (ttt['age']):
+		   	    		des = des+'你的照片年龄是'+ ttt['age'].toString()+'<br/>';
+		   	    	if (ttt['smile'])
+		   	    		if (parseFloat(ttt['smile'])>0.5){
+		   	    			des = des+'照片有笑容，加分。笑容值为'+ttt['smile'].toString()+'<br/>';
+		   	    		}else{
+		   	    			des = des+'照片笑容比较小，加油。笑容值为'+ttt['smile'].toString()+'<br/>';
+		   	    		}
+		   	    	if (ttt['gender'])
+		   	    		des = des+'照片性别为'+ttt['gender']
+
+		   	    }
+		   		
+		   		$('#userinfo').text(des);
 		   }
 	   }
    });
