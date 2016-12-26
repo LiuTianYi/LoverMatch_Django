@@ -73,6 +73,8 @@ $(function() {
     getmatch();
 
   });
+
+  $('#about_us').click(function(){alert('我们是钟东来，杨玉基，刘天毅，许平和徐春伟')})
 });
 
 var matchli;
