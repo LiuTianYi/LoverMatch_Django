@@ -48,7 +48,11 @@ $(function() {
 	   url: "http://"+ip_adder+"/detect_photo/",
 	   dataType: "json",
 	   success: function(data){
-		   console.log(data);
+		   //console.log(data);
+		   if (data['code']==0){
+		   	    var jj = JSON.stringify(eval("(" + data['content'] + ")"));
+		   		console.log(jj)
+		   }
 	   }
    });
 
