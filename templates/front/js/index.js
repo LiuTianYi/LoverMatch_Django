@@ -37,10 +37,7 @@ $(function() {
       async: false
      });
 
-   $.ajax({
-   	type: "POST",
-   	url: ""
-   });
+
    
    
    $.ajax({
@@ -54,7 +51,7 @@ $(function() {
 		   	    var des = ''
 		   	    if (jj[0]['faceAttributes']){
 		   	    	var ttt = jj[0]['faceAttributes'];
-		   	    	if (ttt['age']):
+		   	    	if (ttt['age'])
 		   	    		des = des+'你的照片年龄是'+ ttt['age'].toString()+'<br/>';
 		   	    	if (ttt['smile'])
 		   	    		if (parseFloat(ttt['smile'])>0.5){
