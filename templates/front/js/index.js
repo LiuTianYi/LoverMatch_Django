@@ -41,6 +41,16 @@ $(function() {
    	type: "POST",
    	url: ""
    });
+   
+   
+   $.ajax({
+	   type: "POST",
+	   url: "http://"+ip_adder+"detect_photo/",
+	   dataType: "json",
+	   success: function(data){
+		   console.log(data);
+	   }
+   });
 
 
 
