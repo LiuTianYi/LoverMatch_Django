@@ -467,7 +467,7 @@ def detect_photo(req):
 
     body = {
         # "url": str(usr + ".jpg")
-        "url": "http://23.99.118.170/static/photos/" + usr + ".jpg"
+        "url": str("http://23.99.118.170/static/photos/" + str(usr) + ".jpg")
         # "url": "http://23.99.118.170/static/photos/1224152938@qq.com.jpg"
     }
     print ("usr: " + usr)
