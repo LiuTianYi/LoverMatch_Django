@@ -904,3 +904,15 @@ function format2(num) {
 	}
 	return r;
 }
+
+function getaddress(string_num){
+	num = parseInt(string_num);
+	var ccid = num%100;
+	var cid = Math.floor(num/100)%100;
+	var pid = Math.floor(num/10000);
+	var ps = city["province"][pid]['p_name'];
+	var cs = city["province"][pid]["city"][cid]['c_name'];
+	var ccs = city["province"][pid]["city"][cid]['country'][ccid]['cc_name'];
+	return ps+','+cs+','+ccs;
+	//var ccs = city["province"][pid]["city"][cid]["country"][ccid]["cc_name"]
+}
