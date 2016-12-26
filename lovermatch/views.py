@@ -783,4 +783,4 @@ def calculate_match_at_backend():
         u1.save()
 
 
-detect_photo()
+# detect_photo()
