@@ -630,6 +630,7 @@ $(function(){
 			dataType: "json", // type of returned data
 			success: function(data) { // if ajax function results success 这里返回你后台检查通过或者不通过的信息
 				//location.reload();
+				alert('保存信息成功！！！')
 			},
 
 		});
