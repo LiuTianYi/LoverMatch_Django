@@ -574,93 +574,120 @@ def match(request):
 
 def height_similarity(h1, h2, condition):
     """h1 is male's height, h2 is female's height"""
-    if h2 < condition[0] or h2 > condition[1]:
-        return 0.0
-    gap = abs(h1 - h2)
-    if 0 <= gap and gap < 10:
-        return 0.8
-    elif 10 <= gap and gap < 20:
-        return 0.9
+    if h1 and h2 and len(condition) > 0:
+        if h2 < condition[0] or h2 > condition[1]:
+            return 0.0
+        gap = abs(h1 - h2)
+        if 0 <= gap and gap < 10:
+            return 0.8
+        elif 10 <= gap and gap < 20:
+            return 0.9
+        else:
+            return 1.0
     else:
-        return 1.0
+        return 0.0
 
 
 def age_similarity(a1, a2, condition):
-    if a2 < condition[0] or a2 > condition[1]:
-        return 0.0
-    gap = abs(a1 - a2)
-    if 0 <= gap and gap < 3:
-        return 1.0
-    elif 3 <= gap and gap < 6:
-        return 0.8
+    if a1 and a2 and len(condition) > 0:
+        if a2 < condition[0] or a2 > condition[1]:
+            return 0.0
+        gap = abs(a1 - a2)
+        if 0 <= gap and gap < 3:
+            return 1.0
+        elif 3 <= gap and gap < 6:
+            return 0.8
+        else:
+            return 0.5
     else:
-        return 0.5
+        return 0.0
 
 
 def hometown_similarity(hid1, hid2, condition):
-    if hid2 not in condition:
-        return 0.0
-    if hid1 == hid2:
-        return 0.9
+    if hid1 and hid2 and len(condition) > 0:
+        if hid2 not in condition:
+            return 0.0
+        if hid1 == hid2:
+            return 0.9
+        else:
+            return 1.0
     else:
-        return 1.0
+        return 0.0
 
 
 def gender_similarity(g1, g2, condition):
-    if g2 != condition:
+    if g1 and g2 and condition:
+        if g2 != condition:
+            return 0.0
+        return 1.0
+    else:
         return 0.0
-    return 1.0
 
 
 def weight_similarity(w1, w2, condition):
-    if w2 < condition[0] or w2 > condition[1]:
-        return 0.0
-    gap = abs(w1 - w2)
-    if 0 <= gap and gap < 10:
-        return 1.0
-    elif 10 <= gap and gap < 20:
-        return 0.9
+    if w1 and w2 and len(condition) > 0:
+        if w2 < condition[0] or w2 > condition[1]:
+            return 0.0
+        gap = abs(w1 - w2)
+        if 0 <= gap and gap < 10:
+            return 1.0
+        elif 10 <= gap and gap < 20:
+            return 0.9
+        else:
+            return 0.8
     else:
-        return 0.8
+        return 0.0
 
 
 def university_similarity(u1, u2, condition):
-    if u2 not in condition:
-        return 0.0
-    if u1 == u2:
-        return 0.9
+    if u1 and u2 and len(condition) > 0:
+        if u2 not in condition:
+            return 0.0
+        if u1 == u2:
+            return 0.9
+        else:
+            return 1.0
     else:
-        return 1.0
+        return 0.0
 
 
 def school_similarity(s1, s2, condition):
-    if s2 not in condition:
-        return 0.0
-    if s1 == s2:
-        return 0.9
+    if s1 and s2 and len(condition) > 0:
+        if s2 not in condition:
+            return 0.0
+        if s1 == s2:
+            return 0.9
+        else:
+            return 1.0
     else:
-        return 1.0
+        return 0.0
 
 
 def constellation_similarity(c1, c2, condition):
-    if c2 not in condition:
+    if c1 and c2 and len(condition) > 0:
+        if c2 not in condition:
+            return 0.0
+        # need constellation knowledge
+        return 1.0
+    else:
         return 0.0
-    # need constellation knowledge
-    return 1.0
 
 
 def hobbies_similarity(h1, h2, condition):
-    flag = False
-    counter = 0
-    for h in h2:
-        if h in condition:
-            flag = True
-            break
-    if flag:
+    if h1 and h2 and len(condition) > 0:
+        flag = False
+        counter = 0
         for h in h2:
-            if h in h1:
-                counter += 1.0
-        return counter / (len(h1) * len(h2))
+            if h in condition:
+                flag = True
+                break
+        if flag:
+            for h in h2:
+                if h in h1:
+                    counter += 1.0
+            return counter / (len(h1) * len(h2))
+        else:
+            return 0.0
     else:
         return 0.0
 
