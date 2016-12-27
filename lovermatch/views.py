@@ -33,7 +33,8 @@ import threading
 
 # Create your views here.
 token = Token(django_settings.SECRET_KEY)  # token is used to verify user in email link
-lock = threading.RLock()    #调用threading模块中的RLock()
+lock = threading.RLock()  # 调用threading模块中的RLock()
+
 
 def index(request):
     return HttpResponse("Hello, world. You are at the lovermatch app's index.")
@@ -72,6 +73,7 @@ def decorator(func):
             return result
         except:
             print 'exception occured in write_log'
+
     return write_log
 
 
@@ -117,6 +119,7 @@ def signup(request):
         # context = {'message': '请尽快登录你的注册邮箱，点击链接进行激活，注意有效期为1个小时', 'nickname': _nickname}
         # return render(request, 'lovermatch/signup_results.html', context)
         # return HttpResponseRedirect(reverse('lovermatch:results', args=(usr,)))
+
 
 @decorator
 def active_user(request):
@@ -171,9 +174,6 @@ def update_self(request):
     lock.acquire()  # 开始给线程加锁
     userUpdate = request.POST
 
-    # usr = userUpdate["user"]
-    # nm = userUpdate["name"]
-    # UserInfo.objects(user=usr).update(name=nm)
     try:
         usr = request.session.get('user')
     except:
@@ -207,7 +207,10 @@ def update_self(request):
     cons = userUpdate.get("constellationId")
     hob = map(int, userUpdate.getlist("hobbiesId[]"))
 
-
+    zero = len(ag) * len(ge) * len(hei) * len(wei) * len(ho) * len(univ) * len(scho) * len(grad) * len(cons) * len(hob)
+    if zero == 0:
+        lock.release()  # 给线程解锁
+        return JsonResponse({"code": -4})
 
     if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
                                          universityId=univ, schoolId=scho, gradeId=grad, constellationId=cons,
@@ -218,6 +221,7 @@ def update_self(request):
     else:
         lock.release()  # 给线程解锁
         return JsonResponse({"code": -3})
+
 
 @decorator
 def update_feature(request):
@@ -246,6 +250,7 @@ def update_feature(request):
         # write_log(usr, "update feature", 0)
         lock.release()  # 给线程解锁
         return JsonResponse({"code": -1})
+
 
 @decorator
 def update_percentage(request):
@@ -486,7 +491,7 @@ def detect_photo(req):
         'returnFaceId': 'true',
         'returnFaceLandmarks': 'true',
         'returnFaceRectangle': 'true',
-        'returnFaceAttributes': 'age,gender,smile',
+        'returnFaceAttributes': 'age,gender,smile,headPose,facialHair,glasses',
     })
 
     body = {
@@ -507,7 +512,7 @@ def detect_photo(req):
             # print("11")
         else:
             lock.release()  # 给线程解锁
-            return JsonResponse({"code": 0, "usr":usr, "content":data})
+            return JsonResponse({"code": 0, "usr": usr, "content": data})
 
         print(len(data))
         print(data)
@@ -515,6 +520,7 @@ def detect_photo(req):
         conn.close()
     except Exception as e:
         print("[Errno {0}] {1}".format(e.errno, e.strerror))
+
 
 @decorator
 def login(req):
@@ -569,6 +575,7 @@ def logout(request):
     lock.release()  # 给线程解锁
     return JsonResponse({'code': 0})
 
+
 # 注销
 def writeoff(request):
     lock.acquire()  # 开始给线程加锁
@@ -578,7 +585,7 @@ def writeoff(request):
         request.session['user'] = None
     except:
         lock.release()  # 给线程解锁
-        return JsonResponse({'code': -1, 'content':userinfo})
+        return JsonResponse({'code': -1, 'content': userinfo})
     lock.release()  # 给线程解锁
     return JsonResponse({'code': 0})
 
@@ -833,6 +840,5 @@ def calculate_match_at_backend():
                     matchedlist[u2.name] = u2.loverMatch[u1.name]
         u1.loverMatched = matchedlist
         u1.save()
-
 
 # detect_photo()
