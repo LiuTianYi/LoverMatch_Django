@@ -196,18 +196,21 @@ def update_self(request):
             lock.release()  # 给线程解锁
             return JsonResponse({'code': -2})
 
-    ag = userUpdate.get("age")
-    ge = userUpdate.get("gender")
-    hei = userUpdate.get("height")
-    wei = userUpdate.get("weight")
-    ho = userUpdate.get("hometownId")
-    univ = userUpdate.get("universityId")
-    scho = map(int, userUpdate.getlist("schoolId[]"))
-    grad = userUpdate.get("gradeId")
-    cons = userUpdate.get("constellationId")
-    hob = map(int, userUpdate.getlist("hobbiesId[]"))
-
-    zero = len(ag) * len(ge) * len(hei) * len(wei) * len(ho) * len(univ) * len(scho) * len(grad) * len(cons) * len(hob)
+    try:
+        ag = userUpdate.get("age")
+        ge = userUpdate.get("gender")
+        hei = userUpdate.get("height")
+        wei = userUpdate.get("weight")
+        ho = userUpdate.get("hometownId")
+        univ = userUpdate.get("universityId")
+        scho = map(int, userUpdate.getlist("schoolId[]"))
+        grad = userUpdate.get("gradeId")
+        cons = userUpdate.get("constellationId")
+        hob = map(int, userUpdate.getlist("hobbiesId[]"))
+        zero = len(ag) * len(ge) * len(hei) * len(wei) * len(ho) * len(univ) * len(scho) * len(grad) * len(cons) * len(hob)
+    except:
+        lock.release()  # 给线程解锁
+        return JsonResponse({"code": -4})
     if zero == 0:
         lock.release()  # 给线程解锁
         return JsonResponse({"code": -4})
