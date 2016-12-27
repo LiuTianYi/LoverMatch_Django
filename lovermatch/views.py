@@ -207,10 +207,10 @@ def update_self(request):
         grad = userUpdate.get("gradeId")
         cons = userUpdate.get("constellationId")
         hob = map(int, userUpdate.getlist("hobbiesId[]"))
-        zero = len(ag) * len(ge) * len(hei) * len(wei) * len(ho) * len(univ) * len(scho) * len(grad) * len(cons) * len(hob)
     except:
         lock.release()  # 给线程解锁
         return JsonResponse({"code": -4})
+    zero = len(ag) * len(ge) * len(hei) * len(wei) * len(ho) * len(univ) * len(scho) * len(grad) * len(cons) * len(hob)
     if zero == 0:
         lock.release()  # 给线程解锁
         return JsonResponse({"code": -4})
