@@ -522,7 +522,7 @@ def detect_photo(req):
 
         conn.close()
     except Exception as e:
-        print("[Errno {0}] {1}".format(e.errno, e.strerror))
+        return JsonResponse({"code": -2, "content": str("[Errno {0}] {1}".format(e.errno, e.strerror))})
 
 
 @decorator
