@@ -29,10 +29,11 @@ from django.core.files.storage import default_storage
 from PIL import Image, ImageFile
 import httplib, urllib, base64
 import datetime
+import threading
 
 # Create your views here.
 token = Token(django_settings.SECRET_KEY)  # token is used to verify user in email link
-
+lock = threading.RLock()    #调用threading模块中的RLock()
 
 def index(request):
     return HttpResponse("Hello, world. You are at the lovermatch app's index.")
@@ -83,6 +84,7 @@ def decorator(func):
 @decorator
 def signup(request):
     """sign up"""
+    lock.acquire()  # 开始给线程加锁
     if request.method == 'POST':
         # assume the data is valid
         _username = request.POST['username']  # _username is an email address in fact
@@ -92,10 +94,12 @@ def signup(request):
         userinfos = UserInfo.objects(user=_username)
         if len(userinfos) > 0:
             # write_log(_username, "sign up", 0)
+            lock.release()  # 给线程解锁
             return JsonResponse({'code': -1})
         userinfos = UserInfo.objects(name=_nickname)
         if len(userinfos) > 0:
             # write_log(_username, "sign up", 0)
+            lock.release()  # 给线程解锁
             return JsonResponse({'code': -2})
         insert_user = UserInfo.objects.create(user=_username, password=_pwd, name=_nickname,
                                               photoAddress="http://23.99.118.170/static/photos/default.jpg")
@@ -108,6 +112,7 @@ def signup(request):
         send_mail('注册用户验证信息', message, '2601112836@qq.com', [_username])
 
         # write_log(_username, "sign up", 1)
+        lock.release()  # 给线程解锁
         return JsonResponse({'code': 0})
         # context = {'message': '请尽快登录你的注册邮箱，点击链接进行激活，注意有效期为1个小时', 'nickname': _nickname}
         # return render(request, 'lovermatch/signup_results.html', context)
@@ -142,26 +147,28 @@ def active_user(request):
         user.is_active = True
         user.save()
         # write_log(user.user, "active user", 1)
+        lock.release()  # 给线程解锁
         return JsonResponse({'code': 0})
-        # message = '验证成功，请进行<a href=\"' + django_settings.DOMAIN + '/login\">登录</a>操作'
-        # context = {'message': message, 'nickname': nickname}
-        # return render(request, 'lovermatch/signup_results.html', context)
 
 
 def showInfo(request):
+    lock.acquire()  # 开始给线程加锁
     usr = request.session.get('user')
     if usr:
         cursor = UserInfo.objects(user=usr)
-
+        lock.release()  # 给线程解锁
         return JsonResponse({'code': 0, 'data': serializeUser(cursor[0]), "features": serializeFeatures(
             cursor[0].features), "percentage": serializePercentage(cursor[0].percentage)})
 
     else:
+        lock.release()  # 给线程解锁
         return JsonResponse({'code': -1})
 
 
 def update_self(request):
     """update self info"""
+
+    lock.acquire()  # 开始给线程加锁
     userUpdate = request.POST
 
     # usr = userUpdate["user"]
@@ -171,6 +178,7 @@ def update_self(request):
         usr = request.session.get('user')
     except:
         # write_log(usr, "update self info", 0)
+        lock.release()  # 给线程解锁
         return JsonResponse({"code": -1})
 
     nm = userUpdate.get("name")
@@ -179,11 +187,13 @@ def update_self(request):
         user_all = UserInfo.objects(name=nm)
         if len(user_all) >= 1:
             # write_log(usr, "update self info", 0)
+            lock.release()  # 给线程解锁
             return JsonResponse({'code': -2})
     elif len(user_self) == 1:
         user_all = UserInfo.objects(name=nm)
         if len(user_all) > 1:
             # write_log(usr, "update self info", 0)
+            lock.release()  # 给线程解锁
             return JsonResponse({'code': -2})
 
     ag = userUpdate.get("age")
@@ -202,13 +212,16 @@ def update_self(request):
     if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
                                          universityId=univ, schoolId=scho, gradeId=grad, constellationId=cons,
                                          hobbiesId=hob):
+        lock.release()  # 给线程解锁
         return JsonResponse({"code": 0})
 
     else:
+        lock.release()  # 给线程解锁
         return JsonResponse({"code": -3})
 
 @decorator
 def update_feature(request):
+    lock.acquire()  # 开始给线程加锁
     """update feature"""
     usr = request.session.get('user')
     ageL = map(float, request.POST.getlist("age[]"))
@@ -227,13 +240,16 @@ def update_feature(request):
 
     if UserInfo.objects(user=usr).update(features=fea):
         # write_log(usr, "update feature", 1)
+        lock.release()  # 给线程解锁
         return JsonResponse({"code": 0})
     else:
         # write_log(usr, "update feature", 0)
+        lock.release()  # 给线程解锁
         return JsonResponse({"code": -1})
 
 @decorator
 def update_percentage(request):
+    lock.acquire()  # 开始给线程加锁
     """update percentage"""
     usr = request.session.get('user')
 
@@ -253,9 +269,11 @@ def update_percentage(request):
     #
     if UserInfo.objects(user=usr).update(percentage=per):
         # write_log(usr, "update percentage", 1)
+        lock.release()  # 给线程解锁
         return JsonResponse({"code": 0})
     else:
         # write_log(usr, "update percentage", 0)
+        lock.release()  # 给线程解锁
         return JsonResponse({"code": -1})
 
 
@@ -410,12 +428,14 @@ def recommend_template(age, gender, hometownId, universityId, schoolId, hobbiesI
 
 def upload_photo(request):
     """upload photo"""
+    lock.acquire()  # 开始给线程加锁
     if request.method == 'POST':
         usr = request.session.get('user')
         try:
             image = request.FILES['photo']
         except:
             # write_log(usr, "upload photo", 0)
+            lock.release()  # 给线程解锁
             return JsonResponse({"code": -2})
         img = Image.open(image)
         img.thumbnail((500, 500), Image.ANTIALIAS)  # 对图片进行等比缩放
@@ -438,17 +458,21 @@ def upload_photo(request):
 
         if UserInfo.objects(user=usr).update(photoAddress=str(store_path), upsert=True):
             # write_log(usr, "upload photo", 1)
+            lock.release()  # 给线程解锁
             return JsonResponse({"code": 0})
         else:
             # write_log(usr, "upload photo", 0)
+            lock.release()  # 给线程解锁
             return JsonResponse({"code": -1})
 
     else:
         # write_log(usr, "upload photo", 0)
+        lock.release()  # 给线程解锁
         return JsonResponse({"code": -3})
 
 
 def detect_photo(req):
+    lock.acquire()  # 开始给线程加锁
     usr = req.session.get('user')
 
     headers = {
@@ -478,9 +502,11 @@ def detect_photo(req):
         response = conn.getresponse()
         data = response.read()
         if len(data) == 2:
+            lock.release()  # 给线程解锁
             return JsonResponse({"code": -1})
             # print("11")
         else:
+            lock.release()  # 给线程解锁
             return JsonResponse({"code": 0, "usr":usr, "content":data})
 
         print(len(data))
@@ -493,6 +519,7 @@ def detect_photo(req):
 @decorator
 def login(req):
     """log in"""
+    lock.acquire()  # 开始给线程加锁
     if req.method == 'POST':
 
         # 获取表单用户密码
@@ -504,30 +531,55 @@ def login(req):
             userinfo = UserInfo.objects.get(user=usr, password=pw)
         except:
             # write_log(usr, "log in", 0)
+            lock.release()  # 给线程解锁
             return JsonResponse({'code': -1})
 
         if len(userinfo) > 0:
             if userinfo.is_active == False:
                 # write_log(usr, "log in", 0)
+                lock.release()  # 给线程解锁
                 return JsonResponse({'code': -3})
             req.session['user'] = usr
             req.session.set_expiry(3600000)  # 1 hour timeout
             print req.session['user']
             # write_log(usr, "log in", 1)
+            lock.release()  # 给线程解锁
             return JsonResponse({'code': 0})
             # return HttpResponseRedirect('/show')
         else:
             # write_log(usr, "log in", 0)
+            lock.release()  # 给线程解锁
             return JsonResponse({'code': -1})
             # return JsonResponse({'code': 0})
 
     else:  # 比较失败，还在login
         # write_log("unknown", "log in", 0)
+        lock.release()  # 给线程解锁
         return JsonResponse({'code': -2})
 
 
+# 登出
 def logout(request):
-    logout(request)
+    lock.acquire()  # 开始给线程加锁
+    try:
+        request.session['user'] = None
+    except:
+        lock.release()  # 给线程解锁
+        return JsonResponse({'code': -1})
+    lock.release()  # 给线程解锁
+    return JsonResponse({'code': 0})
+
+# 注销
+def writeoff(request):
+    lock.acquire()  # 开始给线程加锁
+    usr = request.session['user']
+    try:
+        userinfo = UserInfo.objects(user=usr).delete()
+        request.session['user'] = None
+    except:
+        lock.release()  # 给线程解锁
+        return JsonResponse({'code': -1, 'content':userinfo})
+    lock.release()  # 给线程解锁
     return JsonResponse({'code': 0})
 
 

@@ -17,6 +17,7 @@ urlpatterns = [
                   url(r'^active_user/$', views.active_user, name='active_user'),
                   # url(r'^(?P<username>[\w]+)/results/$', views.results, name='results'),
                   url(r'^login', views.login),
+                  url(r'^logout', views.logout),
                   url(r'^login/$', views.login, name='login'),
                   url(r'^hello', views.helloworld),
                   url(r'^showInfo', views.showInfo),
