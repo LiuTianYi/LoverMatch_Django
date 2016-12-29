@@ -47,20 +47,22 @@ $(function() {
 	   success: function(data){
 		   //console.log(data);
 		   if (data['code']==0){
-		   	    var jj = JSON.parse(data['content']);
-		   	    var des = ''
-		   	    if (jj[0]['faceAttributes']){
-		   	    	var ttt = jj[0]['faceAttributes'];
-		   	    	if (ttt['age'])
-		   	    		des = des+'<p>你的照片年龄是'+ ttt['age'].toString()+'</p>';
-		   	    	if (ttt['smile'])
-		   	    		if (parseFloat(ttt['smile'])>0.5){
-		   	    			des = des+'<p>照片有笑容，加分。笑容值为'+ttt['smile'].toString()+'</p>';
-		   	    		}else{
-		   	    			des = des+'<p>照片笑容比较小，加油。笑容值为'+ttt['smile'].toString()+'</p>';
-		   	    		}
-		   	    	if (ttt['gender'])
-		   	    		des = des+'<p>照片性别为'+ttt['gender']+'</p>'
+				try{   
+					var jj = JSON.parse(data['content']);
+					var des = ''
+					if (jj[0]['faceAttributes']){
+						var ttt = jj[0]['faceAttributes'];
+						if (ttt['age'])
+							des = des+'<p>你的照片年龄是'+ ttt['age'].toString()+'</p>';
+						if (ttt['smile'])
+							if (parseFloat(ttt['smile'])>0.5){
+								des = des+'<p>照片有笑容，加分。笑容值为'+ttt['smile'].toString()+'</p>';
+							}else{
+								des = des+'<p>照片笑容比较小，加油。笑容值为'+ttt['smile'].toString()+'</p>';
+							}
+						if (ttt['gender'])
+							des = des+'<p>照片性别为'+ttt['gender']+'</p>'
+					}catch(err){}
 
 		   	    }
 		   		
