@@ -213,7 +213,7 @@ def update_self(request):
     zero = len(ag) * len(ge) * len(hei) * len(wei) * len(ho) * len(univ) * len(scho) * len(grad) * len(cons) * len(hob)
     if zero == 0:
         lock.release()  # 给线程解锁
-        return JsonResponse({"code": -4})
+        # return JsonResponse({"code": -4})
 
     if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
                                          universityId=univ, schoolId=scho, gradeId=grad, constellationId=cons,
