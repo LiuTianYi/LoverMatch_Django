@@ -749,6 +749,13 @@ $(function(){
 		var fm3 = 1;
 
 		//console.log("post");
+		
+		if (sex == '' || sex == null ){
+			sex = 0;
+		}
+		if ( height == null || height == '') {height=160;}
+		if ( weight == null || weight =='') {weight=50;}
+		if ( age == null || age =='') {age=20;}
 
 
 

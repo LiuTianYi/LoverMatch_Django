@@ -6,6 +6,16 @@ var features;
 var percentage;
 
 $(function() {
+	
+	$('#log_out').click(function(){
+	  $.ajax({ // JQuery ajax function
+      type: "POST", // Submitting Method
+      url: 'http://'+ip_adder+'/logout',  //这里是你的api名字
+     });
+	  window.location="http://"+ip_adder+"/static/front/login.html";
+	});
+	
+	
 
   $("#uploadphoto").click(function(){
     window.location="http://"+ip_adder+"/photo_form.html"
