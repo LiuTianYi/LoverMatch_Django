@@ -28,5 +28,5 @@ $(function() {
      });
     return false;
     });
-  $('#reg-btn').click(function(){window.location="./reg.html";});
+  $('#reg-btn').click(function(){window.location.assign("./reg.html");return false;});
 });
