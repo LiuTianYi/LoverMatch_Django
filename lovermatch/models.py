@@ -62,7 +62,6 @@ class UserInfo(Document):
     features = ReferenceField(Features)  # json
     # percentage = DictField(required=False)  # json
     percentage = ReferenceField(Percentage)  # json
-
     is_active = BooleanField(required=False, default=False)  # 是否激活
 
 

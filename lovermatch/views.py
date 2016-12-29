@@ -209,7 +209,7 @@ def update_self(request):
         hob = map(int, userUpdate.getlist("hobbiesId[]"))
     except:
         lock.release()  # 给线程解锁
-        return JsonResponse({"code": -4})
+        # return JsonResponse({"code": -4})
     zero = len(ag) * len(ge) * len(hei) * len(wei) * len(ho) * len(univ) * len(scho) * len(grad) * len(cons) * len(hob)
     if zero == 0:
         lock.release()  # 给线程解锁
