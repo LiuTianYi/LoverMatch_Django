@@ -195,7 +195,6 @@ def update_self(request):
             # write_log(usr, "update self info", 0)
             lock.release()  # 给线程解锁
             return JsonResponse({'code': -2})
-
     try:
         ag = userUpdate.get("age")
         ge = userUpdate.get("gender")
@@ -209,11 +208,23 @@ def update_self(request):
         hob = map(int, userUpdate.getlist("hobbiesId[]"))
     except:
         lock.release()  # 给线程解锁
-        # return JsonResponse({"code": -4})
+        return JsonResponse({"code": -5})
+    if len(ge)==0:
+        ge = '1'
+    if len(ho)==0:
+        ho = '020507'
+    if len(univ)==0:
+        univ = '0'
+    if len(scho)==0:
+        scho = '1'
+    if len(grad)==0:
+        grad = '0'
+    if len(cons)==0:
+        cons = '0'
     zero = len(ag) * len(ge) * len(hei) * len(wei) * len(ho) * len(univ) * len(scho) * len(grad) * len(cons) * len(hob)
     if zero == 0:
         lock.release()  # 给线程解锁
-        # return JsonResponse({"code": -4})
+        return JsonResponse({"code": -4})
 
     if UserInfo.objects(user=usr).update(name=nm, age=ag, gender=ge, height=hei, weight=wei, hometownId=ho,
                                          universityId=univ, schoolId=scho, gradeId=grad, constellationId=cons,
