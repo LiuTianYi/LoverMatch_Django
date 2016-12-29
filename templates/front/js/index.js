@@ -72,10 +72,10 @@ $(function() {
 							}
 						if (ttt['gender'])
 							des = des+'<p>照片性别为'+ttt['gender']+'</p>'
-					}catch(err){}
+					
 
 		   	    }
-		   		
+		   		}catch(err){}
 		   		$('#userinfo').html(des);
 		   }
 	   }
